@@ -1,0 +1,26 @@
+[
+  {
+    "image": "images/Samsung.jpeg",
+    "brand": "Samsung",
+    "price": 24.99,
+    "quantity": 2
+  },
+  {
+    "image": "images/Huawei.jpeg",
+    "brand": "Huawei",
+    "price": 127.95,
+    "quantity": 2
+  },
+  {
+    "image": "images/Apple.jpeg",
+    "brand": "Apple",
+    "price": 33,
+    "quantity": 1
+  },
+  {
+    "image": "images/Motorola.jpeg",
+    "brand": "Motorola",
+    "price": 26.99,
+    "quantity": 3
+  }
+]
