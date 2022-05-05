@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/favicon.ico">
+    <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/signin/">
+
+    <title>Reset password</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/examples/signin/signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form id="reset_form" class="form-signin">
+        <h2 class="form-signin-heading">Reset password</h2>
+        <label for="inputEmail" class="sr-only">new Password</label>
+        <input type="password" name="password" class="form-control" placeholder="New password" required autofocus>
+		<label for="inputEmail" class="sr-only">confirmation Password</label>
+		<input type="password" name="Cpassword" class="form-control" placeholder="New password" required autofocus>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Reset Password</button>
+      </form>
+
+    </div> <!-- /container -->
+	
+	<script src="../public/lib/jquery-3.4.1.min.js"></script>
+	<script>
+	  $('#reset_form').on('submit',function(e){
+		  e.preventDefault()
+		  var formData= $(this).serialize()
+		  $.ajax({
+			  url: '/reset',
+			  type: 'post',
+			  data: formData,
+			  dataType: 'json',
+			  success: function (data) {
+				  var err_code = data.err_code
+				  if(err_code=== 0){
+					  window.alert('reset success!')
+					  window.location.href='/login'
+				  }else if(err_code===1){
+					  window.alert('the two password should be same!')
+				  }else if(err_code === 500){
+					  window.alert('server busy!')
+				  }
+			  }
+		  })
+	  })
+	
+	</script>
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
+
