@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,14 +13,10 @@
     <title>Index</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/dist/css/bootstrap.min.css" rel="stylesheet">
 	
     <!-- Custom styles for this template -->
-    <link href="/public/css/index.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/ie-emulation-modes-warning.js"></script>
+    <link href="index.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -32,99 +28,196 @@
   <body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
+      <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only"></span>
+            <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">SellPhone</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
           <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
+            <button type="submit" class="btn btn-success">Sign in</button>
           </form>
-        </div>
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search...">
+              <button type="button" class="btn btn-info">Search</button>
+            </div>
+            <div class="form-group">
+              <select class="form-control" id="brandSelect">
+                <option>All brand</option>
+                <option>Apple</option>
+                <option>BlackBerry</option>
+                <option>HTC</option>
+                <option>Huawei</option>
+                <option>LG</option>
+                <option>Motorola</option>
+                <option>Nokia</option>
+                <option>Samsung</option>
+                <option>Sony</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select class="form-control" id="priceSelect">
+                <option>All price</option>
+                <option>Below $2000</option>
+                <option>Below $1500</option>
+                <option>Below $1000</option>
+                <option>Below $500</option>
+              </select>
+            </div>
+          </form>
+        </div><!--/.navbar-collapse -->
       </div>
     </nav>
 
-    <div class="container-fluid">
-      
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Hello, customer!</h1>
+        <p>This is an e-shop for mobile phone sales. Here you can find the phone you want at a great price, see all the real reviews from customers and make a deal with the seller. All transactions are guaranteed by the store, so you can shop with confidence. Click the button below to create an account and start your shopping!</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Get start &raquo;</a></p>
+      </div>
+    </div>
 
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Sold out soon</h2>
+          <div class="row">
+            <div class="col-xs-3">
+              <img src="/phone_default_images/Apple.jpeg" class="img-responsive">
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+            <div class="col-xs-4">
+              <p>1 quantity available</p>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+            <div class="col-xs-5">
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
             </div>
           </div>
-
-          <h2 class="sub-header">Section title</h2>
-		  {{ if user}}
-		  
-		  <span class="btn btn-success" >{{ user.firstname }},Welcome</span>
-		  <a id="logout" href="/logout">logout</a>
-		  
-		  {{ else }}
-		  
-		  <a class="btn btn-success" href="/register">Register</a>
-		  <a class="btn btn-success" href="/login">Login</a>
-		  
-		  {{ /if}}
-		  
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>first name</th>
-                  <th>last name</th>
-                  <th>email</th>
-				  <th>password</th>
-                </tr>
-              </thead>
-              <tbody>
-				  {{ each users }}
-                <tr>
-                  <td>{{ $index+1 }}</td>
-                  <td>{{ $value.firstname }}</td>
-                  <td>{{ $value.lastname }}</td>
-                  <td>{{ $value.email }}</td>
-                  <td>{{ $value.password }}</td>
-                </tr>
-				{{ /each }}
-              </tbody>
-            </table>
+          <hr>
+          <div class="row">
+            <div class="col-xs-3">
+              <img src="/phone_default_images/Apple.jpeg" class="img-responsive">
+            </div>
+            <div class="col-xs-4">
+              <p>1 quantity available</p>
+            </div>
+            <div class="col-xs-5">
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-3">
+              <img src="/phone_default_images/Apple.jpeg" class="img-responsive">
+            </div>
+            <div class="col-xs-4">
+              <p>1 quantity available</p>
+            </div>
+            <div class="col-xs-5">
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-3">
+              <img src="/phone_default_images/Apple.jpeg" class="img-responsive">
+            </div>
+            <div class="col-xs-4">
+              <p>1 quantity available</p>
+            </div>
+            <div class="col-xs-5">
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-3">
+              <img src="/phone_default_images/Apple.jpeg" class="img-responsive">
+            </div>
+            <div class="col-xs-4">
+              <p>1 quantity available</p>
+            </div>
+            <div class="col-xs-5">
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h2>Best sellers</h2>
+          <div class="row">
+            <div class="col-xs-3">
+              <img src="/phone_default_images/Apple.jpeg" class="img-responsive">
+            </div>
+            <div class="col-xs-4">
+              <p>Rating: 5</p>
+            </div>
+            <div class="col-xs-5">
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-3">
+              <img src="/phone_default_images/Apple.jpeg" class="img-responsive">
+            </div>
+            <div class="col-xs-4">
+              <p>Rating: 5</p>
+            </div>
+            <div class="col-xs-5">
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-3">
+              <img src="/phone_default_images/Apple.jpeg" class="img-responsive">
+            </div>
+            <div class="col-xs-4">
+              <p>Rating: 5</p>
+            </div>
+            <div class="col-xs-5">
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-3">
+              <img src="/phone_default_images/Apple.jpeg" class="img-responsive">
+            </div>
+            <div class="col-xs-4">
+              <p>Rating: 5</p>
+            </div>
+            <div class="col-xs-5">
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-3">
+              <img src="/phone_default_images/Apple.jpeg" class="img-responsive">
+            </div>
+            <div class="col-xs-4">
+              <p>Rating: 5</p>
+            </div>
+            <div class="col-xs-5">
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; dev-39-Assignment2</p>
+      </footer>
+    </div> <!-- /container -->
 	
 	<script src="../public/lib/jquery-3.4.1.min.js"></script>
 	<script>
@@ -147,8 +240,6 @@
     <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/dist/js/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
