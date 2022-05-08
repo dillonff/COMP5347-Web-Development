@@ -1,0 +1,37 @@
+[{
+  "_id": {
+    "$oid": "626b40c13e6d2c15e846803f"
+  },
+  "image": "public/images/Samsung.jpeg",
+  "brand": "Samsung",
+  "price": 24.99,
+  "quantity": 2,
+  "uid": "test"
+},{
+  "_id": {
+    "$oid": "626b40c13e6d2c15e8468040"
+  },
+  "image": "public/images/Huawei.jpeg",
+  "brand": "Huawei",
+  "price": 127.95,
+  "quantity": 2,
+  "uid": "test"
+},{
+  "_id": {
+    "$oid": "626b40c13e6d2c15e8468041"
+  },
+  "image": "public/images/Apple.jpeg",
+  "brand": "Apple",
+  "price": 33,
+  "quantity": 1,
+  "uid": "test"
+},{
+  "_id": {
+    "$oid": "626b40c13e6d2c15e8468042"
+  },
+  "image": "public/images/Motorola.jpeg",
+  "brand": "Motorola",
+  "price": 26.99,
+  "quantity": 3,
+  "uid": "test"
+}]
