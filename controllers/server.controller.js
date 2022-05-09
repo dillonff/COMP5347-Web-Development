@@ -1,5 +1,5 @@
-var UserInfo = require('../model/userModel');
-var PhoneListing = require('../model/phoneModel');
+const UserInfo = require('../model/userModel');
+const PhoneListing = require('../model/phoneModel');
 
 module.exports.updateListingInfo = function(req, res) {
   newInfo = {

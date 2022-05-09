@@ -1,5 +1,6 @@
 const express = require('express');
 const controller = require('../controllers/server.controller');
+
 const router = express.Router();
 
 router.get('/userPage', function(reg, res, next) {

@@ -226,10 +226,10 @@ function changePassword() {
 }
 
 function addNewListing() {
-  let newBrand = document.getElementById('create-brand').value;
-  let newTitle = document.getElementById('create-title').value;
-  let newStock = document.getElementById('create-stock').value;
-  let newPrice = document.getElementById('create-price').value;
+  const newBrand = document.getElementById('create-brand').value;
+  const newTitle = document.getElementById('create-title').value;
+  const newStock = document.getElementById('create-stock').value;
+  const newPrice = document.getElementById('create-price').value;
 
   if (!isNumber(newStock) || !isNumber(newPrice)) {
     alert('The stock and price must be a number!');
@@ -241,7 +241,7 @@ function addNewListing() {
     newStock != '' &&
     newPrice != ''
   ) {
-    let data =
+    const data =
       'title=' +
       newTitle +
       '&brand=' +
