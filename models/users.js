@@ -1,6 +1,4 @@
-var mongoose = require('mongoose')
-
-mongoose.connect('mongodb://localhost/userlist')
+const mongoose = require('./db');
 
 var Schema = mongoose.Schema
 
@@ -22,5 +20,9 @@ var userSchema = new Schema({
 		required: true
 	}
 })
+
+userSchema.statics.getUsernameById = function (id, callback) {
+	return this.findOne({_id: id}).exec(callback);
+}
 
 module.exports = mongoose.model("User",userSchema)

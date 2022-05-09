@@ -2,6 +2,9 @@
 //1.引包
 var express =require('express')
 var router=require('./routes/session')
+
+var mainPageRoute = require('./routes/mainPage');
+
 var bodyParser=require('body-parser')
 //2.创建你的服务器应用程序，也就是原来的http.createServer
 var session =require('express-session')
@@ -29,6 +32,9 @@ app.use(session({
 
 //把路由容器挂载到app服务中
 app.use(router)
+
+app.use(mainPageRoute);
+
 //4.相当于server.listen
 
 app.listen(3000,function(){

@@ -84,27 +84,27 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6" id="image">
       <img src="/public/phone_default_images/Samsung.jpeg" class="img-responsive img-thumbnail">
     </div>
     <div class="col-md-6">
-      <h3>Galaxy s III mini SM-G730V Verizon Cell Phone BLUE</h3>
+      <h3 id="title">Galaxy s III mini SM-G730V Verizon Cell Phone BLUE</h3>
       <table class="table">
         <tr>
           <td>Brand</td>
-          <td>Samsung</td>
+          <td id="brand">Samsung</td>
         </tr>
         <tr>
           <td>Available Stock</td>
-          <td>9</td>
+          <td id="stock">9</td>
         </tr>
         <tr>
           <td>Seller</td>
-          <td>Xinrui Chen</td>
+          <td id="seller">Xinrui Chen</td>
         </tr>
         <tr>
           <td>Price</td>
-          <td>$56.0</td>
+          <td id="price">$56.0</td>
         </tr>
       </table>
       <div class="row">
@@ -143,30 +143,32 @@
 </div>
 <div class="container">
   <h2>Reviews</h2>
-  <div class="row bg-info">
-    <div class="container">
-      <h3>Xinrui Chen</h3>
-      <p>Rating: 3</p>
-      <p>Got phone yesterday all ... pleased now!</p>
+  <div class="container" id="reviews">
+    <div class="row bg-info">
+      <div class="container">
+        <h3>Xinrui Chen</h3>
+        <p>Rating: 3</p>
+        <p>Got phone yesterday all ... pleased now!</p>
+      </div>
     </div>
-  </div>
-  <hr>
-  <div class="row bg-info">
-    <div class="container">
-      <h3>Xinrui Chen</h3>
-      <p>Rating: 3</p>
-      <p>Got phone yesterday all ... pleased now!</p>
+    <hr>
+    <div class="row bg-info">
+      <div class="container">
+        <h3>Xinrui Chen</h3>
+        <p>Rating: 3</p>
+        <p>Got phone yesterday all ... pleased now!</p>
+      </div>
     </div>
-  </div>
-  <hr>
-  <div class="row bg-info">
-    <div class="container">
-      <h3>Xinrui Chen</h3>
-      <p>Rating: 3</p>
-      <p>Got phone yesterday all ... pleased now!</p>
+    <hr>
+    <div class="row bg-info">
+      <div class="container">
+        <h3>Xinrui Chen</h3>
+        <p>Rating: 3</p>
+        <p>Got phone yesterday all ... pleased now!</p>
+      </div>
     </div>
+    <hr>
   </div>
-  <hr>
 </div>
 
 <hr>
@@ -177,6 +179,7 @@
 </div> <!-- /container -->
 
 <script src="../public/lib/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="./public/dist/item.js"></script>
 <script>
     $('#logout').on('click',function(e){
         e.preventDefault()
