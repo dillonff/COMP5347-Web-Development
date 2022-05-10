@@ -2,63 +2,20 @@ const express = require('express');
 const router = express.Router();
 const cartItems = require('../models/cartItem');
 
+var checkoutController = require('../controllers/checkoutController');
+const {changeQuantity, deleteItems} = require("../controllers/checkoutController");
+
 /* Checkout page. */
-router.get('/', function (req, res, next) {
-    // console.log(1);
-    res.render('CheckoutPage.html');
-})
+router.get('/', checkoutController.preview);
 
 // load the shopping cart items info
-router.get('/load', function (req, res, next) {
-    console.log(req)
-    const uid= req.query.uid
-    cartItems.find({'uid': uid}, function (err, result) {
-        if (err) {
-            res.send(err);
-        } else {
-            console.log("Load successfully!");
-            res.send({item: result});
-        }
-    })
-})
+router.get('/load', checkoutController.load);
 
 // change the quantity of items
-router.post('/changeQuantity', function (req, res, next) {
-    console.log(req)
-    const uid= req.body.uid
-    const brand = req.body.brand
-    const newQuantity = req.body.quantity
-    console.log(uid);
-    console.log(brand);
-    console.log(newQuantity);
-
-    cartItems.findOneAndUpdate({'uid': uid,'brand':brand}, {'quantity':newQuantity},function (err, result) {
-        if (err) {
-            res.send(err);
-        } else {
-            console.log("Change successfully!");
-            console.log(result);
-            res.send(result);
-        }
-    })
-})
+router.post('/changeQuantity', changeQuantity);
 
 // delete items
-router.post('/deleteItems', function (req, res, next) {
-    console.log(req);
-    const uid= req.body.uid;
-    const brand = req.body.brand;
-    console.log(uid);
-    console.log(brand);
-
-
-    cartItems.deleteOne({'uid': uid,'brand':brand}, function (err) {
-        if (err) {
-            res.send(err);
-        }
-    })
-})
-
+router.post('/deleteItems', deleteItems);
 
 module.exports = router;
 
