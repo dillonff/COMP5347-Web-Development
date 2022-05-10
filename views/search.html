@@ -36,38 +36,47 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">SellPhone</a>
+            <a class="navbar-brand" href="/index">SellPhone</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right">
+                <button type="submit" class="btn btn-danger">Log out</button>
+            </form>
+            <form class="navbar-form navbar-right">
+                <button type="submit" class="btn btn-default">Profile</button>
+            </form>
             <form class="navbar-form navbar-right">
                 <button type="submit" class="btn btn-success">Sign in</button>
             </form>
             <form class="navbar-form navbar-right">
+                <button type="submit" class="btn btn-info">Checkout</button>
+            </form>
+            <form class="navbar-form navbar-right">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <button type="button" class="btn btn-info">Search</button>
+                    <input type="text" class="form-control" placeholder="Search..." id="keyWord">
+                    <button type="button" class="btn btn-info" onclick="getSearchResult()">Search</button>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" id="brandSelect">
-                        <option>All brand</option>
-                        <option>Apple</option>
-                        <option>BlackBerry</option>
-                        <option>HTC</option>
-                        <option>Huawei</option>
-                        <option>LG</option>
-                        <option>Motorola</option>
-                        <option>Nokia</option>
-                        <option>Samsung</option>
-                        <option>Sony</option>
+                    <select class="form-control" id="brand">
+                        <option value="All">All brand</option>
+                        <option value="Apple">Apple</option>
+                        <option value="BlackBerry">BlackBerry</option>
+                        <option value="HTC">HTC</option>
+                        <option value="Huawei">Huawei</option>
+                        <option value="LG">LG</option>
+                        <option value="Motorola">Motorola</option>
+                        <option value="Nokia">Nokia</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="Sony">Sony</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" id="priceSelect">
-                        <option>All price</option>
-                        <option>Below $2000</option>
-                        <option>Below $1500</option>
-                        <option>Below $1000</option>
-                        <option>Below $500</option>
+                    <select class="form-control" id="price">
+                        <option value="All">All price</option>
+                        <option value="200">Below $200</option>
+                        <option value="100">Below $100</option>
+                        <option value="50">Below $50</option>
+                        <option value="25">Below $25</option>
                     </select>
                 </div>
             </form>
@@ -78,51 +87,13 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-        <h1>Searching Result</h1>
-        <p>We have found these phones for you!</p>
+        <h1 id="title">Searching Result</h1>
+        <p id="hint">We have found these phones for you!</p>
     </div>
 </div>
 
 <div class="container" id="phoneList">
-    <div class="row">
-        <div class="col-xs-2">
-            <img src="/public/phone_default_images/Samsung.jpeg" class="img-responsive">
-        </div>
-        <div class="col-xs-7 center-block">
-            <h4>Galaxy s III mini SM-G730V Verizon Cell Phone BLUE</h4>
-            <p>Price: $56.0</p>
-        </div>
-        <div class="col-xs-3">
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-xs-2">
-            <img src="/public/phone_default_images/Samsung.jpeg" class="img-responsive">
-        </div>
-        <div class="col-xs-7 center-block">
-            <h4>Galaxy s III mini SM-G730V Verizon Cell Phone BLUE</h4>
-            <p>Price: $56.0</p>
-        </div>
-        <div class="col-xs-3">
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-xs-2">
-            <img src="/public/phone_default_images/Samsung.jpeg" class="img-responsive">
-        </div>
-        <div class="col-xs-7 center-block">
-            <h4>Galaxy s III mini SM-G730V Verizon Cell Phone BLUE</h4>
-            <p>Price: $56.0</p>
-        </div>
-        <div class="col-xs-3">
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-    </div>
-    <hr>
+
 </div>
 
 <hr>
@@ -133,7 +104,7 @@
 </div> <!-- /container -->
 
 <script src="../public/lib/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="./public/dist/search.js"></script>
+<script type="text/javascript" src="./public/js/search.js"></script>
 
 <script>
     $('#logout').on('click',function(e){

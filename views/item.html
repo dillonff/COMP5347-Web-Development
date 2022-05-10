@@ -36,40 +36,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">SellPhone</a>
+      <a class="navbar-brand" href="/index">SellPhone</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
+      <form class="navbar-form navbar-right">
+        <button type="submit" class="btn btn-danger">Log out</button>
+      </form>
+      <form class="navbar-form navbar-right">
+        <button type="submit" class="btn btn-default">Profile</button>
+      </form>
       <form class="navbar-form navbar-right">
         <button type="submit" class="btn btn-success">Sign in</button>
       </form>
       <form class="navbar-form navbar-right">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search...">
-          <button type="button" class="btn btn-info">Search</button>
-        </div>
-        <div class="form-group">
-          <select class="form-control" id="brandSelect">
-            <option>All brand</option>
-            <option>Apple</option>
-            <option>BlackBerry</option>
-            <option>HTC</option>
-            <option>Huawei</option>
-            <option>LG</option>
-            <option>Motorola</option>
-            <option>Nokia</option>
-            <option>Samsung</option>
-            <option>Sony</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <select class="form-control" id="priceSelect">
-            <option>All price</option>
-            <option>Below $2000</option>
-            <option>Below $1500</option>
-            <option>Below $1000</option>
-            <option>Below $500</option>
-          </select>
-        </div>
+        <button type="submit" class="btn btn-info">Checkout</button>
       </form>
     </div>
   </div>
@@ -123,11 +103,17 @@
                   <h4 class="modal-title" id="myModalLabel">Please enter the quantity</h4>
                 </div>
                 <div class="modal-body">
-                  <input type="number" class="form-control">
+                  <form>
+                    <div class="form-group">
+                      <label for="quantity"></label>
+                      <input type="number" class="form-control" id="quantity" max="3">
+                      <span id="helpBlock" class="help-block">Quantity must not larger than stock!</span>
+                    </div>
+                  </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Add to cart</button>
+                  <button type="button" class="btn btn-primary" onclick="addToCart()">Add to cart</button>
                 </div>
               </div>
             </div>
@@ -144,31 +130,36 @@
 <div class="container">
   <h2>Reviews</h2>
   <div class="container" id="reviews">
-    <div class="row bg-info">
-      <div class="container">
-        <h3>Xinrui Chen</h3>
-        <p>Rating: 3</p>
-        <p>Got phone yesterday all ... pleased now!</p>
-      </div>
-    </div>
-    <hr>
-    <div class="row bg-info">
-      <div class="container">
-        <h3>Xinrui Chen</h3>
-        <p>Rating: 3</p>
-        <p>Got phone yesterday all ... pleased now!</p>
-      </div>
-    </div>
-    <hr>
-    <div class="row bg-info">
-      <div class="container">
-        <h3>Xinrui Chen</h3>
-        <p>Rating: 3</p>
-        <p>Got phone yesterday all ... pleased now!</p>
-      </div>
-    </div>
-    <hr>
   </div>
+</div>
+<div class="container">
+  <h2>Make a review</h2>
+  <form class="form-horizontal" method="post" action="/item/makeReview">
+    <div class="form-group">
+      <label for="rating" class="col-md-2 control-label">Rating</label>
+      <div class="col-md-10">
+          <select class="form-control" id="rating">
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
+            <option>0</option>
+          </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="comment" class="col-md-2 control-label">Comment</label>
+      <div class="col-md-10">
+        <textarea class="form-control" rows="3" id="comment"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-10 col-md-2">
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </form>
 </div>
 
 <hr>
@@ -179,7 +170,7 @@
 </div> <!-- /container -->
 
 <script src="../public/lib/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="./public/dist/item.js"></script>
+<script type="text/javascript" src="./public/js/item.js"></script>
 <script>
     $('#logout').on('click',function(e){
         e.preventDefault()

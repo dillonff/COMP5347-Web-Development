@@ -1,5 +1,3 @@
-const axios = require("axios");
-
 function getQueryString(name) {
     let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     let r = window.location.search.substr(1).match(reg);
@@ -35,10 +33,11 @@ function loadPage(phone) {
     brand.innerText = phone.brand;
     stock.innerText = phone.stock;
     fillUsername(phone.seller, seller);
-    price.innerText = phone.price;
+    price.innerText = '$' + phone.price;
 
     let str = '';
     for (let i = 0; i < phone.reviews.length; ++i) {
+        console.log(typeof phone);
         str += '<div class="row bg-info">\n' +
             '      <div class="container">\n' +
             '        <h3 id="reviewer' + i + '"></h3>\n' +
@@ -55,15 +54,23 @@ function loadPage(phone) {
 }
 
 function fillUsername(id, htmlElement) {
-    axios
-        .get('http://localhost:3000/item/getUsernameById?id=' + id)
-        .then(function (response) {
-            let user = response.data;
+    getRequest(
+        'http://localhost:3000/item/getUsernameById?id=' + id,
+        function (data) {
+            let user = data;
             htmlElement.innerText = user.firstname + ' ' + user.lastname;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        },
+        function (xhr) {
+            console.log(xhr);
+        }
+    )
+}
+
+function addToCart() {
+    let quantity = document.getElementById('quantity').value;
+    let phoneId = getQueryString('id');
+
+    //TODO
 }
 
 function getRequest(path, success, error) {

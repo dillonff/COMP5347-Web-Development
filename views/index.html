@@ -27,200 +27,67 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">SellPhone</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search...">
-              <button type="button" class="btn btn-info">Search</button>
-            </div>
-            <div class="form-group">
-              <select class="form-control" id="brandSelect">
-                <option>All brand</option>
-                <option>Apple</option>
-                <option>BlackBerry</option>
-                <option>HTC</option>
-                <option>Huawei</option>
-                <option>LG</option>
-                <option>Motorola</option>
-                <option>Nokia</option>
-                <option>Samsung</option>
-                <option>Sony</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <select class="form-control" id="priceSelect">
-                <option>All price</option>
-                <option>Below $2000</option>
-                <option>Below $1500</option>
-                <option>Below $1000</option>
-                <option>Below $500</option>
-              </select>
-            </div>
-          </form>
-        </div><!--/.navbar-collapse -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">SellPhone</a>
       </div>
-    </nav>
+      <div id="navbar" class="navbar-collapse collapse">
+        <form class="navbar-form navbar-right">
+          <button type="submit" class="btn btn-danger">Log out</button>
+        </form>
+        <form class="navbar-form navbar-right">
+          <button type="submit" class="btn btn-default">Profile</button>
+        </form>
+        <form class="navbar-form navbar-right">
+          <button type="submit" class="btn btn-success">Sign in</button>
+        </form>
+        <form class="navbar-form navbar-right">
+          <button type="submit" class="btn btn-info">Checkout</button>
+        </form>
+      </div><!--/.navbar-collapse -->
+    </div>
+  </nav>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Hello, customer!</h1>
-        <p>This is an e-shop for mobile phone sales. Here you can find the phone you want at a great price, see all the real reviews from customers and make a deal with the seller. All transactions are guaranteed by the store, so you can shop with confidence. Click the button below to create an account and start your shopping!</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Get start &raquo;</a></p>
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Hello, customer!</h1>
+      <p>This is an e-shop for mobile phone sales. Here you can find the phone you want at a great price, see all the real reviews from customers and make a deal with the seller. All transactions are guaranteed by the store, so you can shop with confidence. Click the button below to create an account and start your shopping!</p>
+      <p><a class="btn btn-primary btn-lg" href="/search" role="button">Find your phone &raquo;</a></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Sold out soon</h2>
+        <div id="soldOutSoon">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h2>Best sellers</h2>
+        <div id="bestSeller">
+        </div>
       </div>
     </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h2>Sold out soon</h2>
-          <div class="row">
-            <div class="col-xs-3">
-              <img src="/public/phone_default_images/Apple.jpeg" class="img-responsive">
-            </div>
-            <div class="col-xs-4">
-              <p>1 quantity available</p>
-            </div>
-            <div class="col-xs-5">
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-3">
-              <img src="/public/phone_default_images/Apple.jpeg" class="img-responsive">
-            </div>
-            <div class="col-xs-4">
-              <p>1 quantity available</p>
-            </div>
-            <div class="col-xs-5">
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-3">
-              <img src="/public/phone_default_images/Apple.jpeg" class="img-responsive">
-            </div>
-            <div class="col-xs-4">
-              <p>1 quantity available</p>
-            </div>
-            <div class="col-xs-5">
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-3">
-              <img src="/public/phone_default_images/Apple.jpeg" class="img-responsive">
-            </div>
-            <div class="col-xs-4">
-              <p>1 quantity available</p>
-            </div>
-            <div class="col-xs-5">
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-3">
-              <img src="/public/phone_default_images/Apple.jpeg" class="img-responsive">
-            </div>
-            <div class="col-xs-4">
-              <p>1 quantity available</p>
-            </div>
-            <div class="col-xs-5">
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <h2>Best sellers</h2>
-          <div class="row">
-            <div class="col-xs-3">
-              <img src="/public/phone_default_images/Apple.jpeg" class="img-responsive">
-            </div>
-            <div class="col-xs-4">
-              <p>Rating: 5</p>
-            </div>
-            <div class="col-xs-5">
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-3">
-              <img src="/public/phone_default_images/Apple.jpeg" class="img-responsive">
-            </div>
-            <div class="col-xs-4">
-              <p>Rating: 5</p>
-            </div>
-            <div class="col-xs-5">
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-3">
-              <img src="/public/phone_default_images/Apple.jpeg" class="img-responsive">
-            </div>
-            <div class="col-xs-4">
-              <p>Rating: 5</p>
-            </div>
-            <div class="col-xs-5">
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-3">
-              <img src="/public/phone_default_images/Apple.jpeg" class="img-responsive">
-            </div>
-            <div class="col-xs-4">
-              <p>Rating: 5</p>
-            </div>
-            <div class="col-xs-5">
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-3">
-              <img src="/public/phone_default_images/Apple.jpeg" class="img-responsive">
-            </div>
-            <div class="col-xs-4">
-              <p>Rating: 5</p>
-            </div>
-            <div class="col-xs-5">
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <hr>
 
-      <hr>
-
-      <footer>
-        <p>&copy; dev-39-Assignment2</p>
-      </footer>
-    </div> <!-- /container -->
+    <footer>
+      <p>&copy; dev-39-Assignment2</p>
+    </footer>
+  </div> <!-- /container -->
 	
 	<script src="../public/lib/jquery-3.4.1.min.js"></script>
-	<script>
+  <script type="text/javascript" src="./public/js/index.js"></script>
+  <script>
 	$('#logout').on('click',function(e){
 		e.preventDefault()
 		var answer = confirm("Are you sure to logout?");
