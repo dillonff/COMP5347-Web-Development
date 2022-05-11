@@ -2,19 +2,20 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const cart_item_schema = new schema({
     img_url: {
-        type: String,
-        required: true
+        type: String
     },
     brand: {
-        type: String,
-        required: true
+        type: String
     },
     price: {
-        type: Number,
-        required: true
+        type: Number
     },
     quantity: {
         type: Number,
+        required: true
+    },
+    phoneId: {
+        type: String,
         required: true
     },
     uid: {

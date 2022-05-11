@@ -1,4 +1,5 @@
 const phones = require('../models/phones');
+const cartItem = require('../models/cartItem');
 
 module.exports.getPhones = function (req, res) {
     phones.getPhones(function (err, result) {
@@ -67,6 +68,26 @@ module.exports.getHighRatingPhones = function (req, res) {
         }
     });
 };
+
+module.exports.insertItem = function (req, res) {
+    let userId = req.session.user._id;
+    let phoneId = req.query.phoneId;
+    let quantity = req.query.quantity;
+    let item = new cartItem({
+        quantity: quantity,
+        uid: userId,
+        phoneId: phoneId
+    });
+
+    item.save(function (err, res) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log(res);
+        }
+    });
+}
 
 module.exports.insertReview = function (req, res) {
     //TODO
