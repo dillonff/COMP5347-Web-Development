@@ -6,6 +6,12 @@ const sessionController = require('../controllers/sessionController');
 
 const router = express.Router();
 
+router.get('/', function(req, res, next) {
+    res.render('index.html',{
+        user:req.session.user
+    });
+});
+
 router.get('/index', function(req, res, next) {
     res.render('index.html',{
         user:req.session.user
