@@ -154,12 +154,10 @@ function updateProfile() {
     axios
       .post("http://localhost:3000/userPage/checkPwd", pwd)
       .then(function (response) {
-        console.log("pppppppppppwwwwwwwwwwwwwwwddddddddddd", response);
         if (response.data == "correctpwd") {
           axios
             .post("http://localhost:3000/userPage/updateUserInfo", data)
             .then(function (response) {
-              console.log("after click update profile bt - response↓");
               console.log(response);
               if (response.data == "successProfile") {
                 alert("Updated!");
@@ -275,20 +273,20 @@ function addNewListing() {
 }
 
 function saveChanges() {
-  let disableInfo = [];
-  let notDis = [];
-  let deleteInfo = [];
+  let disableInfo = {};
+  let notDis = {};
+  let deleteInfo = {};
   let disableCB_tags = document.getElementsByName("disableCBName");
   let deleteCB_tags = document.getElementsByName("deleteCBName");
 
   for (let i = 0; i < relatedPhongListings.length; i++) {
     if (disableCB_tags[i].checked == true) {
-      disableInfo.push(relatedPhongListings[i]._id);
+      disableInfo["disableId"] = relatedPhongListings[i]._id;
     } else {
-      notDis.push(relatedPhongListings[i]._id);
+      notDis["notDisableId"] = relatedPhongListings[i]._id;
     }
     if (deleteCB_tags[i].checked == true) {
-      deleteInfo.push(relatedPhongListings[i]._id);
+      deleteInfo["deleteId"] = relatedPhongListings[i]._id;
     }
   }
 

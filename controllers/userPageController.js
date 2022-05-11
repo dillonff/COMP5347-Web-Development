@@ -128,8 +128,8 @@ module.exports.getRelatedPhoneListings = function (req, res) {
 };
 
 module.exports.deletePhoneListings = function (req, res) {
-  deleteId = req.body;
-
+  deleteId = req.body.deleteId;
+  console.log(deleteId);
   PhoneListing.deletePhoneListings(deleteId, function (err, result) {
     if (err) {
       console.log(err);
@@ -140,7 +140,7 @@ module.exports.deletePhoneListings = function (req, res) {
 };
 
 module.exports.disablePhoneListings = function (req, res) {
-  disableId = req.body;
+  disableId = req.body.disableId;
 
   PhoneListing.disablePhoneListings(disableId, function (err, result) {
     if (err) {
@@ -153,7 +153,7 @@ module.exports.disablePhoneListings = function (req, res) {
 };
 
 module.exports.notDisablePhoneListings = function (req, res) {
-  notdisableId = req.body;
+  notdisableId = req.body.notdisableId;
   PhoneListing.notDisablePhoneListings(notdisableId, function (err, result) {
     if (err) {
       console.log(err);
