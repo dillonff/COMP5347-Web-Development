@@ -1,40 +1,67 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 // mongoose.connect('mongodb://localhost:27017/mydb')
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-	firstname: {
-		type: String,
-		required: true
-	},
-	lastname: {
-		type: String,
-		required: true
-	},
-	email: {
-		type: String,
-		required: true
-	},
-	password: {
-		type: String,
-		required: true
-	}
+  firstname: {
+    type: String,
+    required: true,
+  },
+  lastname: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
 });
 
 userSchema.statics.getUsernameById = function (id, callback) {
-	return this.findOne({_id: id}).exec(callback);
-}
+  return this.findOne({ _id: id }).exec(callback);
+};
+
+userSchema.statics.getUserInfo = function (id, callback) {
+  return this.find({ _id: id }).exec(callback);
+};
+
+userSchema.statics.updateUserInfo = function (data, callback) {
+  return this.update(
+    { _id: data.id },
+    {
+      $set: {
+        firstname: data.firstname,
+        lastname: data.lastname,
+        email: data.email,
+      },
+    },
+    { multi: false }
+  ).exec(callback);
+};
+
+userSchema.statics.changePassword = function (data, callback) {
+  return this.update(
+    { _id: data.id },
+    { $set: { password: data.password } },
+    { multi: false }
+  ).exec(callback);
+};
 
 // module.exports = mongoose.model("User",userSchema)
-const userList = mongoose.model('userlist', userSchema, 'userlist');
+const userList = mongoose.model("userlist", userSchema, "userlist");
 
-mongoose.connect('mongodb://localhost:27017/mydb', (err) => {
-	if(err) {
-		console.log("user Connect failed!");
-	}else {
-		console.log("user Connect successfully!");
-	}
+mongoose.connect("mongodb://localhost:27017/mydb", (err) => {
+  if (err) {
+    console.log("user Connect failed!");
+  } else {
+    console.log("user Connect successfully!");
+  }
 });
-module.exports = userList
+
+module.exports = userList;
