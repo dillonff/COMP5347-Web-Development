@@ -83,20 +83,55 @@ module.exports.getHighRatingPhones = function (req, res) {
 
 module.exports.insertItem = function (req, res) {
     let userId = req.session.user._id;
-    let phoneId = req.query.phoneId;
-    let quantity = req.query.quantity;
-    let item = new cartItem({
-        quantity: quantity,
-        uid: userId,
-        phoneId: phoneId
-    });
+    let phoneId = req.body.phoneId;
+    let quantity = req.body.quantity;
 
-    item.save(function (err, res) {
+    cartItem.getCartItemByUserIdAndPhoneId(userId, phoneId, function (err, result) {
         if (err) {
             console.log(err);
         }
         else {
-            console.log(res);
+            if(!result) {
+                let item = new cartItem({
+                    quantity: quantity,
+                    uid: userId,
+                    phoneId: phoneId
+                });
+
+                item.save(function (err, res) {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            }
+            else {
+                cartItem.updateQuantity(userId, phoneId, quantity, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        }
+    });
+};
+
+module.exports.getCartItemByUserIdAndPhoneId = function (req, res) {
+    let userId;
+    let phoneId = req.query.phoneId;
+
+    if (req.session.user) {
+        userId = req.session.user._id;
+    }
+    else {
+        userId = '0';
+    }
+
+    cartItem.getCartItemByUserIdAndPhoneId(userId, phoneId, function (err, result) {
+        if (err) {
+            res.json();
+        }
+        else {
+            res.json(result);
         }
     });
 }
