@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/favicon.ico">
+  <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/dashboard/">
+
+  <title>Index</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../public/css/search.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/index">SellPhone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+
+      {{ if user }}
+
+      <form class="navbar-form navbar-right">
+        <a class="btn btn-danger" id="logout" href="/logout">Log out</a>
+      </form>
+      <form class="navbar-form navbar-right">
+        <button type="submit" class="btn btn-default">Profile</button>
+      </form>
+      <form class="navbar-form navbar-right">
+        <button type="submit" class="btn btn-info">Checkout</button>
+      </form>
+
+      {{ else }}
+
+      <form class="navbar-form navbar-right">
+        <a class="btn btn-success" href="/register">Register</a>
+        <a class="btn btn-success" href="/login">Login</a>
+      </form>
+
+      {{ /if }}
+
+      <form class="navbar-form navbar-right">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search..." id="keyWord">
+          <button type="button" class="btn btn-info" onclick="getSearchResult()">Search</button>
+        </div>
+        <div class="form-group">
+          <select class="form-control" id="brand">
+            <option value="All">All brand</option>
+            <option value="Apple">Apple</option>
+            <option value="BlackBerry">BlackBerry</option>
+            <option value="HTC">HTC</option>
+            <option value="Huawei">Huawei</option>
+            <option value="LG">LG</option>
+            <option value="Motorola">Motorola</option>
+            <option value="Nokia">Nokia</option>
+            <option value="Samsung">Samsung</option>
+            <option value="Sony">Sony</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-control" id="price">
+            <option value="All">All price</option>
+            <option value="200">Below $200</option>
+            <option value="100">Below $100</option>
+            <option value="50">Below $50</option>
+            <option value="25">Below $25</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <h1 id="title">Searching Result</h1>
+    <p id="hint">We have found these phones for you!</p>
+  </div>
+</div>
+
+<div class="container" id="phoneList">
+
+</div>
+
+<hr>
+
+<footer>
+  <p>&copy; dev-39-Assignment2</p>
+</footer>
+</div> <!-- /container -->
+
+<script src="../public/lib/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="./public/js/search.js"></script>
+
+<script>
+    $('#logout').on('click',function(e){
+        e.preventDefault()
+        var answer = confirm("Are you sure to logout?");
+        if (answer == true) {
+            window.location.href='/logout'
+        } else {
+            return;
+        }
+    })
+
+
+</script>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/dist/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

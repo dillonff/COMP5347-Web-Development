@@ -1,6 +1,7 @@
 const express =require('express')
 const router=require('./routes/session')
 const checkoutRouter = require('./routes/checkout')
+const mainPageRoute = require('./routes/mainPage');
 const bodyParser=require('body-parser')
 
 const session =require('express-session')
@@ -27,6 +28,8 @@ app.use(session({
 app.use(router)
 
 app.use('/checkout', checkoutRouter);
+
+app.use(mainPageRoute);
 
 app.listen(3000,function(){
 	console.log('app is running at port 3000')

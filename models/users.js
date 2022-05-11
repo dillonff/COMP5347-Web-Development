@@ -23,6 +23,10 @@ const userSchema = new Schema({
 	}
 });
 
+userSchema.statics.getUsernameById = function (id, callback) {
+	return this.findOne({_id: id}).exec(callback);
+}
+
 // module.exports = mongoose.model("User",userSchema)
 const userList = mongoose.model('userlist', userSchema, 'userlist');
 
