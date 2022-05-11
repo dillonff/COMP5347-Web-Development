@@ -42,6 +42,10 @@ phoneSchema.statics.getPhoneById = function (id, callback) {
     return this.findById(id).exec(callback);
 };
 
+phoneSchema.statics.getPhoneByTitle = function (title, callback) {
+    return this.find({title: title}).exec(callback);
+};
+
 phoneSchema.statics.insertReview = function (phoneId, userId, rating, comment, callback) {
     this.update(
         {_id: phoneId},

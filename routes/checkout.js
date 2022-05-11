@@ -3,6 +3,7 @@ const router = express.Router();
 const cartItems = require('../models/cartItem');
 
 var checkoutController = require('../controllers/checkoutController');
+const phoneController = require('../controllers/phoneController');
 const {changeQuantity, deleteItems} = require("../controllers/checkoutController");
 
 /* Checkout page. */
@@ -10,6 +11,8 @@ router.get('/', checkoutController.preview);
 
 // load the shopping cart items info
 router.get('/load', checkoutController.load);
+
+router.get('/getPhoneByTitle', phoneController.getPhoneByTitle);
 
 // change the quantity of items
 router.post('/changeQuantity', changeQuantity);
