@@ -1,16 +1,16 @@
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost/userlist')
+// mongoose.connect('mongodb://localhost:27017/mydb')
 
-var Schema = mongoose.Schema
+const Schema = mongoose.Schema
 
-var userSchema = new Schema({
+const userSchema = new Schema({
 	firstname: {
-		type:String,
+		type: String,
 		required: true
 	},
 	lastname: {
-		type:String,
+		type: String,
 		required: true
 	},
 	email: {
@@ -18,9 +18,19 @@ var userSchema = new Schema({
 		required: true
 	},
 	password: {
-		type:String,
+		type: String,
 		required: true
 	}
-})
+});
 
-module.exports = mongoose.model("User",userSchema)
+// module.exports = mongoose.model("User",userSchema)
+const userList = mongoose.model('userlist', userSchema, 'userlist');
+
+mongoose.connect('mongodb://localhost:27017/mydb', (err) => {
+	if(err) {
+		console.log("user Connect failed!");
+	}else {
+		console.log("user Connect successfully!");
+	}
+});
+module.exports = userList

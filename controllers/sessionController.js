@@ -1,8 +1,7 @@
 var fs =require('fs')
 
 var express =require('express')
-// //创建一个路由容器
-// var router =express.Router()
+
 
 var Users =require('../models/users')
 
