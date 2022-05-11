@@ -49,6 +49,7 @@ phoneSchema.statics.getPhoneById = function (id, callback) {
   return this.findById(id).exec(callback);
 };
 
+<<<<<<< HEAD
 phoneSchema.statics.insertReview = function (
   phoneId,
   userId,
@@ -62,6 +63,26 @@ phoneSchema.statics.insertReview = function (
       $push: {
         reviews: { reviewer: userId, rating: rating, comment: comment },
       },
+=======
+phoneSchema.statics.getPhoneByTitle = function (title, callback) {
+    return this.find({title: title}).exec(callback);
+};
+
+phoneSchema.statics.insertReview = function (phoneId, userId, rating, comment, callback) {
+    this.update(
+        {_id: phoneId},
+        {$push: {reviews: {reviewer: userId, rating: rating, comment: comment}}}
+    ).exec(callback);
+};
+
+module.exports = mongoose.model('phones', phoneSchema, 'phonelist');
+
+mongoose.connect('mongodb://localhost:27017/mydb', (err) => {
+    if(err) {
+        console.log("phonelist Connect failed!");
+    }else {
+        console.log("phonelist Connect successfully!");
+>>>>>>> b9e8c13d5dbb9ce7fa0e7c214edad7c9606cda83
     }
   ).exec(callback);
 };

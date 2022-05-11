@@ -25,7 +25,7 @@ const cart_item_schema = new schema({
 
 });
 
-const cartItems = mongoose.model('cart_items', cart_item_schema);
+const cartItems = mongoose.model('cart_items', cart_item_schema, 'cart_items');
 
 mongoose.connect('mongodb://localhost:27017/mydb', (err) => {
     if(err) {

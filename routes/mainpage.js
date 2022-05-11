@@ -5,10 +5,23 @@ const sessionController = require("../controllers/sessionController");
 
 const router = express.Router();
 
+<<<<<<< HEAD
 router.get("/index", function (req, res, next) {
   res.render("index.html", {
     user: req.session.user,
   });
+=======
+router.get('/', function(req, res, next) {
+    res.render('index.html',{
+        user:req.session.user
+    });
+});
+
+router.get('/index', function(req, res, next) {
+    res.render('index.html',{
+        user:req.session.user
+    });
+>>>>>>> b9e8c13d5dbb9ce7fa0e7c214edad7c9606cda83
 });
 
 router.get("/search", function (req, res, next) {
