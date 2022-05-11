@@ -38,6 +38,18 @@ module.exports.getPhoneById = function (req, res) {
     });
 };
 
+module.exports.getPhoneByTitle = function (req, res) {
+    let title = req.query.title;
+    phones.getPhoneByTitle(title, function (err, result) {
+        if (err) {
+            console.log('can not find the phone');
+        }
+        else {
+            res.json(result);
+        }
+    });
+}
+
 module.exports.getHighRatingPhones = function (req, res) {
     phones.getPhones(function (err, result) {
         if(err) {
