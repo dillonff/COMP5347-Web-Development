@@ -142,7 +142,7 @@ function fillPhoneReviews() {
       for (let k = 0; k < userReview.length; k++) {
         str +=
           '<div class="row bg-info">\n' +
-          '      <div class="container">\n' +
+          '      <div class="box">\n' +
           '        <h3 id="reviewer:' +
           relatedPhoneListings[i].reviews[k].reviewer +
           '"></h3>\n' +
@@ -155,7 +155,7 @@ function fillPhoneReviews() {
           '        <p>Rating: ' +
           relatedPhoneListings[i].reviews[k].rating +
           '</p>\n' +
-          '        <p>' +
+          '        <p>Comment: ' +
           relatedPhoneListings[i].reviews[k].comment +
           '</p>\n' +
           '      </div>\n' +
