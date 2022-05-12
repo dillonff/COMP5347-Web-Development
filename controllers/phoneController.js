@@ -28,14 +28,12 @@ module.exports.getFilteredPhones = function (req, res) {
 
 module.exports.getPhoneById = function (req, res) {
     let id = req.query.id;
-    // console.log(id);
     phones.getPhoneById(id, function (err, result) {
         if (err) {
             console.log('can not find the phone');
         }
         else {
             res.json(result);
-            console.log(result);
         }
     });
 };
@@ -76,8 +74,6 @@ module.exports.getHighRatingPhones = function (req, res) {
                 }
                 return avgA - avgB;
             }).slice(0, 5);
-
-            console.log(phoneList);
 
             res.json(phoneList);
         }
