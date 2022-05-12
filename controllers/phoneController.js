@@ -93,15 +93,26 @@ module.exports.insertItem = function (req, res) {
         }
         else {
             if(!result) {
-                let item = new cartItem({
-                    quantity: quantity,
-                    uid: userId,
-                    phoneId: phoneId
-                });
-
-                item.save(function (err, res) {
+                phones.getPhoneById(phoneId, function (err, phone) {
                     if (err) {
                         console.log(err);
+                    }
+                    else {
+                        let item = new cartItem({
+                            quantity: quantity,
+                            uid: userId,
+                            phoneId: phoneId,
+                            img_url: '/images/' + phone.brand + '.jpeg',
+                            brand: phone.brand,
+                            price: phone.price,
+                            title: phone.title
+                        });
+
+                        item.save(function (err, res) {
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
                     }
                 });
             }
