@@ -34,10 +34,10 @@ function loadUserPage() {
         contents[this.index].className + ' show-contents';
     };
   }
-
+  //  get user info
   const userReqUrl = 'http://localhost:3000/userPage/getUserInfo/' + userId;
   getRequest(
-    userReqUrl, //get basic user info
+    userReqUrl,
     function (data) {
       initialInfo = data;
       fillInfo();
@@ -46,19 +46,20 @@ function loadUserPage() {
       console.error(xhr);
     }
   );
-
+  //change phone image routes
   getRequest(
-    'http://localhost:3000/userPage/changeImageRoutes/hellochangeimage', //change db image routes
+    'http://localhost:3000/userPage/changeImageRoutes/changeimage',
     function (data) {
-      console.log('change image routes↓');
-      console.log(data);
+      console.log('change image routes successed');
+      // console.log(data);
     },
     function (xhr) {
       console.error(xhr);
     }
   );
 
-  const phoneReqUrl = 'http://localhost:3000/userPage/phoneListings/' + userId; //get related phone listings
+  //get related phone listings
+  const phoneReqUrl = 'http://localhost:3000/userPage/phoneListings/' + userId;
   axios
     .get(phoneReqUrl)
     .then(function (response) {
@@ -136,7 +137,7 @@ function fillPhoneReviews() {
 
   for (let i = 0; i < relatedPhoneListings.length; i++) {
     let userReview = relatedPhoneListings[i].reviews;
-    console.log(userReview);
+
     if (userReview != undefined) {
       for (let k = 0; k < userReview.length; k++) {
         str +=
@@ -163,22 +164,9 @@ function fillPhoneReviews() {
       }
     }
   }
-  console.log('str', str);
+
   reviews.innerHTML = str;
 }
-
-// function fillUsername(id, htmlElement) {
-//   getRequest(
-//     'http://localhost:3000/item/getUsernameById?id=' + id,
-//     function (data) {
-//       let user = data;
-//       htmlElement.innerText = user.firstname + ' ' + user.lastname;
-//     },
-//     function (xhr) {
-//       console.log(xhr);
-//     }
-//   );
-// }
 
 function updateProfile() {
   let firstName = document.getElementById('firstName').value;
@@ -193,9 +181,8 @@ function updateProfile() {
     email +
     '&id=' +
     userId;
-  console.log('will send to server: ' + data);
+  console.log('Sending server: ' + data);
   let initialPwd = prompt('please input the your password: ');
-  // console.log(121212121212,pwd);
   if (initialPwd == null) {
     console.log('cancel to input current password!');
   } else {
@@ -209,7 +196,7 @@ function updateProfile() {
             .post('http://localhost:3000/userPage/updateUserInfo', data)
             .then(function (response) {
               console.log(response);
-              if (response.data == 'successProfile') {
+              if (response.status == 200) {
                 alert('Updated!');
                 loadUserPage();
               }
@@ -231,7 +218,6 @@ function updateProfile() {
 function changePassword() {
   let curPasswordInitial = document.getElementById('cur-pwd').value;
   let newPassword = document.getElementById('new-pwd').value;
-  // console.log(66666666666,curPasswordInitial)
   if (curPasswordInitial == '') {
     alert('please input your current password!');
   } else {
@@ -240,7 +226,6 @@ function changePassword() {
     axios
       .post('http://localhost:3000/userPage/checkPwd', curPassword)
       .then(function (response) {
-        console.log(response, 77777777777777777);
         if (response.data == 'correctpwd') {
           let newPassword2 = md5(newPassword);
           let data = 'password=' + newPassword2 + '&id=' + userId;
@@ -248,7 +233,7 @@ function changePassword() {
             .post('http://localhost:3000/userPage/userInfo/pwd', data)
             .then(function (response) {
               console.log(response);
-              if (response.data == 'successPwd') {
+              if (response.status == 200) {
                 alert('Password changed successfully!');
                 loadUserPage();
                 document.getElementById('cur-pwd').value = '';
@@ -279,7 +264,7 @@ function addNewListing() {
   const newStock = document.getElementById('create-stock').value;
   const newPrice = document.getElementById('create-price').value;
 
-  if (!isNumber(newStock) || !isNumber(newPrice)) {
+  if (isNaN(newStock) || isNaN(newPrice)) {
     alert('The stock and price must be a number!');
     document.getElementById('create-stock').value = '';
     document.getElementById('create-price').value = '';
@@ -304,7 +289,7 @@ function addNewListing() {
       .post('http://localhost:3000/userPage/userInfo/newlisting', data)
       .then(function (response) {
         console.log(response);
-        if (response.data == 'successAddListing') {
+        if (response.status == 200) {
           alert('Add new listing successfully!');
           loadUserPage();
           fillPhoneListings();
@@ -332,14 +317,12 @@ function saveChanges() {
   for (let i = 0; i < relatedPhoneListings.length; i++) {
     if (disableCB_tags[i].checked == true) {
       disableInfo = 'disableId=' + relatedPhoneListings[i]._id;
-      console.log('disableInfo:', disableInfo);
     } else {
       notDis = 'notDisableId=' + relatedPhoneListings[i]._id;
-      console.log('notdisableInfo', notDis);
+      // console.log(notDis);
     }
     if (deleteCB_tags[i].checked == true) {
       deleteInfo = 'deleteId=' + relatedPhoneListings[i]._id;
-      console.log('Deleteinfo', deleteInfo);
     }
   }
 
@@ -389,15 +372,4 @@ function signOut() {
     .catch(function (error) {
       console.log(error);
     });
-}
-
-function isNumber(val) {
-  let regPos = /^\d+(\.\d+)?$/;
-  let regNeg =
-    /^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$/;
-  if (regPos.test(val) || regNeg.test(val)) {
-    return true;
-  } else {
-    return false;
-  }
 }

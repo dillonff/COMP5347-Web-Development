@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const phoneSchema = new mongoose.Schema(
   {
@@ -33,14 +33,14 @@ phoneSchema.statics.getFilteredPhones = function (
   callback
 ) {
   let predicate = { disabled: { $ne: true }, stock: { $ne: 0 } };
-  if (keyWord !== "") {
-    predicate["title"] = { $regex: keyWord, $options: "$i" };
+  if (keyWord !== '') {
+    predicate['title'] = { $regex: keyWord, $options: '$i' };
   }
-  if (brand !== "All") {
-    predicate["brand"] = brand;
+  if (brand !== 'All') {
+    predicate['brand'] = brand;
   }
-  if (price !== "All") {
-    predicate["price"] = { $lt: price };
+  if (price !== 'All') {
+    predicate['price'] = { $lt: price };
   }
   return this.find(predicate).exec(callback);
 };
@@ -91,10 +91,10 @@ phoneSchema.statics.addNewListing = function (data, callback) {
 };
 
 phoneSchema.statics.changeImageRoutes = function (data, callback) {
-  console.log("change image route", data);
+  // console.log('change image route', data);
   return this.updateMany(
     {},
-    [{ $set: { image: { $concat: ["public/images/", "$brand", ".jpeg"] } } }],
+    [{ $set: { image: { $concat: ['public/images/', '$brand', '.jpeg'] } } }],
     { multi: true },
     callback
   );
@@ -109,7 +109,7 @@ phoneSchema.statics.deletePhoneListings = function (deleteId, callback) {
 };
 
 phoneSchema.statics.disablePhoneListings = function (disableId, callback) {
-  console.log("disableId:", disableId);
+  // console.log("disableId:", disableId);
   return this.update(
     { _id: { $in: disableId } },
     { $set: { disabled: true } },
@@ -121,7 +121,7 @@ phoneSchema.statics.notDisablePhoneListings = function (
   notDisableId,
   callback
 ) {
-  console.log("notDisableId:", notDisableId);
+  // console.log('notDisableId:', notDisableId);
   return this.update(
     { _id: { $in: notDisableId } },
     { $set: { disabled: false } },
@@ -129,12 +129,12 @@ phoneSchema.statics.notDisablePhoneListings = function (
   ).exec(callback);
 };
 
-module.exports = mongoose.model("phones", phoneSchema, "phonelist");
+module.exports = mongoose.model('phones', phoneSchema, 'phonelist');
 
-mongoose.connect("mongodb://localhost:27017/mydb", (err) => {
+mongoose.connect('mongodb://localhost:27017/mydb', (err) => {
   if (err) {
-    console.log("phonelist Connect failed!");
+    console.log('phonelist Connect failed!');
   } else {
-    console.log("phonelist Connect successfully!");
+    console.log('phonelist Connect successfully!');
   }
 });

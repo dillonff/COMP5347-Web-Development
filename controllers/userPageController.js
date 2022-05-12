@@ -1,5 +1,5 @@
-const UserInfo = require("../models/users");
-const PhoneListing = require("../models/phones");
+const UserInfo = require('../models/users');
+const PhoneListing = require('../models/phones');
 
 module.exports.updateListingInfo = function (req, res) {
   newInfo = {
@@ -11,30 +11,30 @@ module.exports.updateListingInfo = function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.send("success updating");
+      res.send('success updating');
     }
   });
 };
 
 module.exports.getUserId = function (req, res) {
   userId = req.session.user._id;
-  console.log("session", req.session.user._id);
+  console.log('session', req.session.user._id);
   res.send(userId);
 };
 
 module.exports.getUserStatus = function (req, res) {
   if (req.session.isLogin) {
-    res.send("loged");
+    res.send('loged');
   } else {
-    res.send("unloged");
+    res.send('unloged');
   }
 };
 
 module.exports.checkPwd = function (req, res) {
   if (req.body.userPwd == req.session.password) {
-    res.send("correctpwd");
+    res.send('correctpwd');
   } else {
-    res.send("incorrectpwd");
+    res.send('incorrectpwd');
   }
 };
 
@@ -42,7 +42,7 @@ module.exports.getUserInfo = function (req, res) {
   userId = req.params.id;
   UserInfo.getUserInfo(userId, function (err, result) {
     if (err) {
-      console.log("can not find info of " + id);
+      console.log('can not find user of this ID:' + id);
     } else {
       res.json(result);
     }
@@ -62,7 +62,7 @@ module.exports.updateUserInfo = function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.send("successProfile");
+      res.json(result);
     }
   });
 };
@@ -78,7 +78,7 @@ module.exports.changePassword = function (req, res) {
       console.log(err);
     } else {
       req.session.password = req.body.password;
-      res.send("successPwd");
+      res.json(result);
     }
   });
 };
@@ -87,7 +87,7 @@ module.exports.addNewListing = function (req, res) {
   newListingInfo = {
     title: req.body.title,
     brand: req.body.brand,
-    image: "imageurl",
+    image: 'imageurl',
     stock: req.body.stock,
     seller: req.body.id,
     price: req.body.price,
@@ -98,7 +98,7 @@ module.exports.addNewListing = function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.send("successAddListing");
+      res.json(result);
     }
   });
 };
@@ -110,7 +110,7 @@ module.exports.changeImageRoutes = function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.send("successChangeImageRoutes");
+      res.json(result);
     }
   });
 };
@@ -134,7 +134,8 @@ module.exports.deletePhoneListings = function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.send("successDelete");
+      res.json(result);
+      // res.send('successDelete');
     }
   });
 };
@@ -146,8 +147,9 @@ module.exports.disablePhoneListings = function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log("disabled!!");
-      res.send("successDisable");
+      // console.log('disabled!!');
+
+      res.json(result);
     }
   });
 };
@@ -158,8 +160,9 @@ module.exports.notDisablePhoneListings = function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log("not disabled!!");
-      res.send("successNotDisable");
+      // console.log('not disabled!!');
+
+      res.json(result);
     }
   });
 };
