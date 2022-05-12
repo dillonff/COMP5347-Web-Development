@@ -50,6 +50,7 @@ module.exports.getPhoneByTitle = function (req, res) {
     });
 }
 
+//not use
 module.exports.getHighRatingPhones = function (req, res) {
     phones.getPhones(function (err, result) {
         if(err) {
@@ -134,7 +135,7 @@ module.exports.getCartItemByUserIdAndPhoneId = function (req, res) {
             res.json(result);
         }
     });
-}
+};
 
 module.exports.insertReview = function (req, res) {
     //TODO

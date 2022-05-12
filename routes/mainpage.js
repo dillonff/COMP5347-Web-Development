@@ -40,8 +40,9 @@ router.get("/item/getUsernameById", userController.getUsernameById);
 router.get("/index/getHighRatingPhones", phoneController.getHighRatingPhones);
 router.get("/index/getPhones", phoneController.getPhones);
 router.get("/search/getFilteredPhones", phoneController.getFilteredPhones);
-router.get("/item/insertItem", phoneController.insertItem);
+router.get("/item/getCartItemByUserIdAndPhoneId", phoneController.getCartItemByUserIdAndPhoneId);
 
+router.post("/item/insertItem", phoneController.insertItem);
 router.post("/item/insertReview", phoneController.insertReview);
 
 module.exports = router;
