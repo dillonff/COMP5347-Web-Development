@@ -14,11 +14,11 @@ const cart_item_schema = new schema({
         type: Number,
         required: true
     },
-    phoneId: {
+    uid: {
         type: String,
         required: true
     },
-    uid: {
+    title:{
         type: String,
         required: true
     }

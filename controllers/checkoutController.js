@@ -9,7 +9,7 @@ module.exports ={
     },
 
     load: function (req, res, next) {
-        console.log(req)
+        // console.log(req)
         const uid= req.query.uid
         cartItems.find({'uid': uid}, function (err, result) {
             if (err) {
@@ -24,13 +24,13 @@ module.exports ={
     changeQuantity: function (req, res, next) {
         console.log(req)
         const uid= req.body.uid
-        const brand = req.body.brand
+        const title = req.body.title
         const newQuantity = req.body.quantity
-        console.log(uid);
-        console.log(brand);
-        console.log(newQuantity);
+        console.log("backend receive uid: "+ uid);
+        console.log("backend receive title: "+ title);
+        console.log("backend receive quantity: "+ newQuantity);
 
-        cartItems.findOneAndUpdate({'uid': uid,'brand':brand}, {'quantity':newQuantity},function (err, result) {
+        cartItems.findOneAndUpdate({uid: uid,title:title}, {quantity:newQuantity},function (err, result) {
             if (err) {
                 res.send(err);
             } else {
@@ -44,12 +44,13 @@ module.exports ={
     deleteItems: function (req, res, next) {
         console.log(req);
         const uid= req.body.uid;
-        const brand = req.body.brand;
+        const title = req.body.title;
+        console.log("backend received: ")
         console.log(uid);
-        console.log(brand);
+        console.log(title);
 
 
-        cartItems.deleteOne({'uid': uid,'brand':brand}, function (err) {
+        cartItems.deleteOne({'uid': uid,'title':title}, function (err) {
             if (err) {
                 res.send(err);
             }

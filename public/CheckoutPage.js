@@ -208,13 +208,12 @@
 
 
 const refreshPage = function (defaultPhoneList) {
-    console.log("Default: ", defaultPhoneList)
+    // console.log("Default: ", defaultPhoneList)
 
     let elementsToBeRefreshed =document.getElementsByClassName("toBeRefreshed");
     for (let i = elementsToBeRefreshed.length - 1; i >= 0; i--) {
         elementsToBeRefreshed[i].parentNode.removeChild(elementsToBeRefreshed[i]);
     }
-
 
     const location = document.getElementById("cartBody");
     const listTitle = Object.keys(defaultPhoneList[0]);
@@ -233,10 +232,11 @@ const refreshPage = function (defaultPhoneList) {
 
 
     for (let i = 0; i < defaultPhoneList.length; i++) {
+        console.log(i);
         const itemRow = document.createElement("div");
         itemRow.setAttribute("class", "row main align-items-center");
         const cartRow = document.createElement("div");
-        if (i === 0) {
+        if (i == 0) {
             cartRow.setAttribute("class", "row border-top border bottom toBeRefreshed");
         } else {
             cartRow.setAttribute("class", "row border bottom toBeRefreshed");
@@ -245,7 +245,7 @@ const refreshPage = function (defaultPhoneList) {
         location.appendChild(cartRow);
 
         for (let item of listTitle) {
-            if (item === "image") {
+            if (item == "image") {
                 const phoneImage = document.createElement("img");
                 phoneImage.setAttribute("class", "img-fluid");
                 const address = defaultPhoneList[i][item];
@@ -254,14 +254,20 @@ const refreshPage = function (defaultPhoneList) {
                 imageCol.setAttribute("class", "col-2");
                 imageCol.appendChild(phoneImage);
                 itemRow.appendChild(imageCol);
-            } else if (item === "brand") {
-                const brandValue = defaultPhoneList[i][item];
+            } else if (item == "brand") {
+                const brandValue = defaultPhoneList[i]["brand"];
+                const titleValue = defaultPhoneList[i]["title"];
                 const priceValue = defaultPhoneList[i]["price"];
 
                 const brandNode = document.createTextNode(brandValue);
                 const brandName = document.createElement("div");
-                brandName.setAttribute("class", "row text-muted");
+                brandName.setAttribute("class", "row");
                 brandName.appendChild(brandNode);
+
+                const titleNode = document.createTextNode(titleValue);
+                const titleName = document.createElement("div");
+                titleName.setAttribute("class","row text-muted");
+                titleName.appendChild(titleNode);
 
                 const priceNode = document.createTextNode("$" + priceValue);
                 const priceName = document.createElement("div");
@@ -271,24 +277,24 @@ const refreshPage = function (defaultPhoneList) {
                 const textCol = document.createElement("div");
                 textCol.setAttribute("class", "col");
                 textCol.appendChild(brandName);
+                textCol.appendChild(titleName);
                 textCol.appendChild(priceName);
                 itemRow.appendChild(textCol);
-            } else if (item === "quantity") {
+            } else if (item == "quantity") {
                 const quantityCol = document.createElement("div");
                 quantityCol.setAttribute("class", "col quantity")
-
 
                 const decrease = document.createElement("a");
                 decrease.setAttribute("href", "#");
                 decrease.addEventListener("click", decreaseQuantity);
-                decrease.markTag = "decrease"+ defaultPhoneList[i]["brand"];
+                decrease.markTag = "decrease"+ defaultPhoneList[i]["title"];
                 const decreaseNode = document.createTextNode("-");
                 decrease.appendChild(decreaseNode);
                 quantityCol.appendChild(decrease);
 
                 const quantity = document.createElement("a");
                 // quantity.setAttribute("href", "#");
-                quantity.setAttribute("id",defaultPhoneList[i]["brand"]);
+                quantity.setAttribute("id",defaultPhoneList[i]["title"]);
                 quantity.setAttribute("class", "border");
 
                 const quantityValue = defaultPhoneList[i][item];
@@ -299,7 +305,7 @@ const refreshPage = function (defaultPhoneList) {
                 const increase = document.createElement("a");
                 increase.setAttribute("href", "#");
                 increase.addEventListener("click", increaseQuantity);
-                increase.markTag = "increase" + defaultPhoneList[i]["brand"];
+                increase.markTag = "increase" + defaultPhoneList[i]["title"];
                 const increaseNode = document.createTextNode("+");
                 increase.appendChild(increaseNode);
                 quantityCol.appendChild(increase);
@@ -311,7 +317,7 @@ const refreshPage = function (defaultPhoneList) {
 
                 const phonePrice = Number(defaultPhoneList[i]["price"]);
                 const phoneQuantity = Number(defaultPhoneList[i]["quantity"]);
-                const totalPrice = phonePrice * phoneQuantity;
+                const totalPrice = (phonePrice * phoneQuantity).toFixed(2);
                 const totalPriceNode = document.createTextNode("$" + totalPrice);
                 totalPriceCol.appendChild(totalPriceNode);
 
@@ -328,7 +334,7 @@ const refreshPage = function (defaultPhoneList) {
                 deleteButton.appendChild(deleteSpan);
 
                 deleteButton.addEventListener("click", deleteItem);
-                deleteSpan.markTag = "delete" + defaultPhoneList[i]["brand"];
+                deleteSpan.markTag = "delete" + defaultPhoneList[i]["title"];
 
                 itemRow.appendChild(totalPriceCol);
             }
@@ -353,6 +359,7 @@ const refreshPage = function (defaultPhoneList) {
     for (let i = 0; i < defaultPhoneList.length; i++) {
         allTotalPrice = allTotalPrice + Number(defaultPhoneList[i]["price"] * Number(defaultPhoneList[i]["quantity"]));
     }
+    allTotalPrice = allTotalPrice.toFixed(2);
     const priceText = document.createTextNode("$" + allTotalPrice);
     priceCol.appendChild(priceText);
     allTotal.appendChild(priceCol);
@@ -399,35 +406,147 @@ window.onload = function () {
         success: function (res) {
             console.log(res.item);
             refreshPage(res.item);
-            // let brand1 = document.getElementById("Samsung");
-            // console.log(brand1.innerText);
         }
     })
 }
 
 
-function increaseQuantity(sender){
-    let brandName = (sender.target.markTag).slice(8);
-    // console.log(brandName);
 
-    let brand = document.getElementById(brandName);
-    let originalQuantity = Number(brand.innerText);
-    let newQuantity = originalQuantity + 1;
+async function increaseQuantity(sender){
 
-    let data = {uid: "test",brand: brandName, quantity: newQuantity};
-    // console.log(data);
+    let titleName = (sender.target.markTag).slice(8);
+    let phoneData = {uid: "test", title: titleName};
 
     $.ajax({
+        url:'/item/getPhoneByTitle',
+        type:'get',
+        data:phoneData,
+        dataType:'json',
+        success:async function (res) {
+            console.log("test successfully!")
+            const stock = res[0].stock;
+            console.log(stock);
+
+            let title = document.getElementById(titleName);
+            let originalQuantity = Number(title.innerText);
+
+            if (stock > originalQuantity) {
+
+                let newQuantity = originalQuantity + 1;
+
+                let data = {uid: "test", title: titleName, quantity: newQuantity};
+                console.log("frontend send data:");
+                console.log(data);
+                try {
+                    const res = await changeQuantity(data);
+                    title.innerText = newQuantity.toString();
+                } catch (err) {
+
+                }
+
+                let userdata = {uid: "test"};
+                console.log(userdata);
+
+                $.ajax({
+                    url: '/checkout/load',
+                    type: 'get',
+                    data: userdata,
+                    dataType: 'json',
+                    success: function (res) {
+                        console.log("Reload successfully!")
+                        console.log(res.item);
+                        refreshPage(res.item);
+                    }
+                })
+            }else {
+                alert("There is no stock for this product!");
+            }
+        }
+    })
+
+
+}
+
+
+async function decreaseQuantity(sender){
+
+    let titleName = (sender.target.markTag).slice(8);
+    let title = document.getElementById(titleName);
+
+    let originalQuantity = Number(title.innerText);
+    if (originalQuantity > 1){
+        let newQuantity = originalQuantity - 1;
+        console.log(newQuantity);
+
+        let data = {uid: "test",title: titleName, quantity: newQuantity};
+        console.log("frontend send to backend: ")
+        console.log(data);
+
+        try {
+            const res = await changeQuantity(data);
+            title.innerText = newQuantity.toString();
+        } catch (err){}
+
+        let userdata = {uid: "test"};
+
+        $.ajax({
+            url: '/checkout/load',
+            type: 'get',
+            data: userdata,
+            dataType: 'json',
+            success: function (res) {
+                console.log("Reload successfully!")
+                refreshPage(res.item);
+            }
+        })
+    }
+    else{
+        let deleteData = {uid: "test",title: titleName};
+
+        try {
+            const res = await deletePhone(deleteData);
+        } catch (err){}
+
+        let userdata = {uid: "test"};
+
+        $.ajax({
+            url: '/checkout/load',
+            type: 'get',
+            data: userdata,
+            dataType: 'json',
+            success: function (res) {
+                console.log("Reload successfully!")
+                refreshPage(res.item);
+            }
+        })
+    }
+
+}
+
+function changeQuantity(data) {
+    return $.ajax({
         url: '/checkout/changeQuantity',
         type: 'post',
         data: data,
         dataType: 'json',
         success: function (res) {
-            console.log(" Frontend Increase successfully!")
-            brand.innerText = newQuantity;
+            console.log(" Frontend quantity is changed successfully!");
         }
     })
+}
 
+
+
+async function deleteItem(sender){
+    let titleName = (sender.target.markTag).slice(6);
+
+    let deleteData = {uid: "test",title: titleName};
+    console.log("frontend send to backend:")
+    console.log(deleteData);
+
+    try {
+        const res = await deletePhone(deleteData);
+    } catch (err){}
 
     let userdata = {uid: "test"};
 
@@ -437,95 +556,22 @@ function increaseQuantity(sender){
         data: userdata,
         dataType: 'json',
         success: function (res) {
-            console.log("Reload successfully!")
+            // console.log("Reload successfully!")
+            console.log(res)
             refreshPage(res.item);
         }
     })
 }
 
-function decreaseQuantity(sender){
-    // console.log(sender.target.markTag);
-    let brandName = (sender.target.markTag).slice(8);
-    // console.log(brandName);
-
-    let brand = document.getElementById(brandName);
-    // console.log(brand);
-    let originalQuantity = Number(brand.innerText);
-    if (originalQuantity > 1){
-        let newQuantity = originalQuantity - 1;
-        // console.log(newQuantity);
-
-        let data = {uid: "test",brand: brandName, quantity: newQuantity};
-        // console.log(data);
-
-        $.ajax({
-            url: '/checkout/changeQuantity',
-            type: 'post',
-            data: data,
-            dataType: 'json',
-            success: function (res) {
-                console.log(" Frontend quantity is changed successfully!")
-                brand.innerText = newQuantity;
-            }
-        })
-    }
-    else{
-        let deleteData = {uid: "test",brand: brandName};
-
-        $.ajax({
-            url: '/checkout/deleteItems',
-            type: 'post',
-            data: deleteData,
-            dataType: 'json',
-            success: function () {}
-        })
-    }
-    let userdata = {uid: "test"};
-
-    $.ajax({
-        url: '/checkout/load',
-        type: 'get',
-        data: userdata,
-        dataType: 'json',
-        success: function (res) {
-            console.log("Reload successfully!")
-            refreshPage(res.item);
-        }
-    })
-}
-
-function deleteItem(sender){
-    console.log(sender.target.markTag);
-    let brandName = (sender.target.markTag).slice(6);
-    console.log(brandName);
-
-    let deleteData = {uid: "test",brand: brandName};
-
-    $.ajax({
+function deletePhone(deleteData){
+    return $.ajax({
         url: '/checkout/deleteItems',
         type: 'post',
         data: deleteData,
         dataType: 'json',
         success: function () {}
     })
-
-    let userdata = {uid: "test"};
-
-    $.ajax({
-        url: '/checkout/load',
-        type: 'get',
-        data: userdata,
-        dataType: 'json',
-        success: function (res) {
-            console.log("Reload successfully!")
-            refreshPage(res.item);
-        }
-    })
-
 }
-
-
-
 
 
 
