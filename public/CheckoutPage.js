@@ -391,37 +391,67 @@ function returnButton(){
 }
 
 
-// function checkoutButton(){
-//     //title quantity
-//     let userdata = {uid: "test"};
-//
-//     $.ajax({
-//         url: '/checkout/load',
-//         type: 'get',
-//         data: userdata,
-//         dataType: 'json',
-//         success: function (res) {
-//             console.log("Find user's items successfully!")
-//             console.log(res.item.length)
-//             const cartLength = res.item.length
-//             let checkoutDataList = []
-//
-//             for (let i = 0; i < cartLength; i++) {
-//                 let currentQuantity = res[i].quantity;
-//                 let currentTitle = res[i].title;
-//                 let tempData = {title: currentTitle, quantity: currentQuantity};
-//                 checkoutDataList.push(tempData);
-//             }
-//
-//             $.ajax({
-//                 url: '/checkout/finalCheckout',
-//                 type: 'post',
-//                 data: checkoutDataList,
-//                 dataType: 'list',
-//                 success: function () {}
-//             })
-//
-//         }
-//     })
-// }
+async function checkoutButton(){
+    try {
+        const res = await checkout();
+        // const res = checkout();
+    } catch (err){}
+
+    let userdata = {uid: "test"};
+    $.ajax({
+        url:'/checkout/empty',
+        type:'post',
+        data:userdata,
+        dataType:'json',
+        success:function(){}
+    })
+    // window.location.href = "http://localhost:3000/";
+}
+
+function checkout(){
+    let userdata = {uid: "test"};
+    $.ajax({
+        url: '/checkout/load',
+        type: 'get',
+        data: userdata,
+        dataType: 'json',
+        success: function (res) {
+            console.log("Find user's items successfully!")
+
+            const cartLength = res.item.length
+
+            for (let i = 0; i < cartLength; i++) {
+                // console.log(res.item[i]);
+                let currentQuantity = res.item[i].quantity;
+                let currentId = res.item[i].phoneId;
+                let phoneIdData = {id: currentId}
+                // console.log("frontend:")
+                // console.log(phoneIdData)
+
+                $.ajax({
+                    url:'/item/getPhoneById',
+                    type:'get',
+                    data: phoneIdData,
+                    dataType: 'json',
+                    success: function(res){
+                        // console.log(res);
+                        // console.log(res.stock);
+                        let databaseStock = res.stock
+                        let newStock = databaseStock - currentQuantity
+                        console.log(newStock);
+                        let changedStock = {phoneId: currentId, newStock:newStock}
+                        console.log(changedStock);
+                        $.ajax({
+                            url:'/checkout/finalCheckout',
+                            type: 'post',
+                            data: changedStock,
+                            dataType: 'json',
+                            success: function(){}
+                        })
+                    }
+                })
+            }
+        }
+    })
+}
 

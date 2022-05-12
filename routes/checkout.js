@@ -13,12 +13,14 @@ router.get('/', checkoutController.preview);
 router.get('/load', checkoutController.load);
 
 // change the quantity of items
-router.post('/changeQuantity', changeQuantity);
+router.post('/changeQuantity', checkoutController.changeQuantity);
 
 // delete items
-router.post('/deleteItems', deleteItems);
+router.post('/deleteItems', checkoutController.deleteItems);
 
-// router.post('/checkout/finalCheckout', finalCheckout);
+router.post('/finalCheckout', checkoutController.finalCheckout);
+
+router.post('/empty', checkoutController.emptyCart)
 
 module.exports = router;
 

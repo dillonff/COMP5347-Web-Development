@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const cartItems = require('../models/cartItem');
+const phonesList = require('../models/phones')
 
 module.exports ={
     preview: function (req, res, next) {
@@ -19,7 +20,7 @@ module.exports ={
             if (err) {
                 res.send(err);
             } else {
-                console.log("Load successfully!");
+                console.log("Load successfully!!");
                 res.send({item: result});
             }
         })
@@ -53,7 +54,6 @@ module.exports ={
         console.log(uid);
         console.log(phoneId);
 
-
         cartItems.deleteOne({'uid': uid,'phoneId':phoneId}, function (err) {
             if (err) {
                 res.send(err);
@@ -63,9 +63,36 @@ module.exports ={
         })
     },
 
-    // finalCheckout: function(req, res, next){
-    //     console.log(req);
-    //
-    // },
+    finalCheckout: function(req, res, next){
+        // console.log(req.body);
+        const phoneId = req.body.phoneId;
+        const newStock = req.body.newStock;
+        // console.log(phoneId);
+        // console.log(newStock);
+
+        phonesList.findOneAndUpdate({_id:phoneId},{stock:newStock}, function (err, result){
+            if(err){
+                res.send(err);
+            }else{
+                console.log(result);
+            }
+        })
+
+    },
+
+    emptyCart:function(req,res,next){
+        const uid = req.body.uid;
+        console.log(uid);
+
+        cartItems.deleteMany({uid:uid},function(err,result){
+            if(err){
+                res.send(err);
+            }else{
+                console.log(result);
+            }
+        })
+
+
+    }
 
 }
