@@ -43,20 +43,16 @@
       {{ if user }}
 
       <form class="navbar-form navbar-right">
-        <a class="btn btn-danger" id="logout" href="/logout">Log out</a>
-      </form>
-      <form class="navbar-form navbar-right">
-        <button type="submit" class="btn btn-default">Profile</button>
-      </form>
-      <form class="navbar-form navbar-right">
         <a class="btn btn-info" href="/checkout">Checkout</a>
+        <a class="btn btn-default" href="/userPage">Profile</a>
+        <a class="btn btn-danger" id="logout" href="/logout">Log out</a>
       </form>
 
       {{ else }}
 
       <form class="navbar-form navbar-right">
-        <a class="btn btn-success" href="/register">Register</a>
-        <a class="btn btn-success" href="/login">Login</a>
+        <a class="btn btn-success" onclick="register()">Register</a>
+        <a class="btn btn-success" onclick="login()">Login</a>
       </form>
 
       {{ /if }}
@@ -78,66 +74,70 @@
       <img src="/public/images/Samsung.jpeg" class="img-responsive img-thumbnail">
     </div>
     <div class="col-md-6">
-      <h3 id="title">Galaxy s III mini SM-G730V Verizon Cell Phone BLUE</h3>
+      <h3 id="title">Sample Phone</h3>
       <table class="table">
         <tr>
           <td>Brand</td>
-          <td id="brand">Samsung</td>
+          <td id="brand"></td>
         </tr>
         <tr>
           <td>Available Stock</td>
-          <td id="stock">9</td>
+          <td id="stock"></td>
         </tr>
         <tr>
           <td>Seller</td>
-          <td id="seller">Xinrui Chen</td>
+          <td id="seller"></td>
         </tr>
         <tr>
           <td>Price</td>
-          <td id="price">$56.0</td>
+          <td id="price"></td>
         </tr>
       </table>
-
-      {{ if user }}
-
       <div class="row">
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            Add to cart <span class="badge" id="amountInCart">0</span>
-          </button>
 
-          <!-- Modal -->
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Please enter the quantity</h4>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="form-group" id="formGroup">
-                      <label for="quantity"></label>
-                      <input type="number" class="form-control" id="quantity">
-                      <span id="hint" class="help-block"></span>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" onclick="addToCart()">Add to cart</button>
-                </div>
+        {{ if user }}
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+          Add to cart <span class="badge" id="amountInCart">0</span>
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Please enter the quantity</h4>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group" id="formGroup">
+                    <label for="quantity"></label>
+                    <input type="number" class="form-control" id="quantity">
+                    <span id="hint" class="help-block"></span>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addToCart()">Add to cart</button>
               </div>
             </div>
           </div>
         </div>
 
-      {{ /if }}
+        {{ else }}
 
-      </div>
+        <a class="btn btn-primary btn-lg" onclick="login()">
+          Add to cart <span class="badge">0</span>
+        </a>
+
+        {{ /if }}
+
+        </div>
     </div>
   </div>
-
 </div>
 <div class="container">
   <h2>Reviews</h2>

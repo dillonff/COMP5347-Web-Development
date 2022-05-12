@@ -43,20 +43,16 @@
       {{ if user }}
 
       <form class="navbar-form navbar-right">
+        <a class="btn btn-info" href="/checkout">Checkout</a>
+        <a class="btn btn-default" href="/userPage">Profile</a>
         <a class="btn btn-danger" id="logout" href="/logout">Log out</a>
-      </form>
-      <form class="navbar-form navbar-right">
-        <button type="submit" class="btn btn-default">Profile</button>
-      </form>
-      <form class="navbar-form navbar-right">
-        <button type="submit" class="btn btn-info">Checkout</button>
       </form>
 
       {{ else }}
 
       <form class="navbar-form navbar-right">
-        <a class="btn btn-success" href="/register">Register</a>
-        <a class="btn btn-success" href="/login">Login</a>
+        <a class="btn btn-success" onclick="register()">Register</a>
+        <a class="btn btn-success" onclick="login()">Login</a>
       </form>
 
       {{ /if }}

@@ -53,6 +53,7 @@ function loadPage(data) {
     let seller = document.getElementById('seller');
     let price = document.getElementById('price');
     let reviews = document.getElementById('reviews');
+    let more = document.getElementById('more');
 
     image.innerHTML = '<img src="/public/images/' + phone.brand + '.jpeg" class="img-responsive img-thumbnail">\n'
     title.innerText = phone.title;
@@ -64,14 +65,31 @@ function loadPage(data) {
     let str = '';
     let reviewsLength = phone.reviews.length > 3 ? 3 : phone.reviews.length;
     for (let i = 0; i < reviewsLength; ++i) {
-        str += '<div class="row bg-info">\n' +
-            '      <div class="container review">\n' +
-            '        <h3 id="reviewer' + i + '"></h3>\n' +
-            '        <p>Rating: ' + phone.reviews[i].rating + '</p>\n' +
-            '        <p>' + phone.reviews[i].comment + '</p>\n' +
-            '      </div>\n' +
-            '    </div>\n' +
-            '    <hr>';
+        let comment = phone.reviews[i].comment;
+        if (comment.length < 200) {
+            str += '<div class="row bg-info">\n' +
+                '      <div class="container review" id="review' + i + '">\n' +
+                '        <h3 id="reviewer' + i + '"></h3>\n' +
+                '        <p>Rating: ' + phone.reviews[i].rating + '</p>\n' +
+                '        <p id="comment' + i + '">' + comment + '</p>\n' +
+                '      </div>\n' +
+                '    </div>\n' +
+                '    <hr>';
+        }
+        else {
+            str += '<div class="row bg-info">\n' +
+                '      <div class="container review" id="review' + i + '">\n' +
+                '        <h3 id="reviewer' + i + '"></h3>\n' +
+                '        <p>Rating: ' + phone.reviews[i].rating + '</p>\n' +
+                '        <p id="comment' + i + '">' + comment.substr(0, 200) + '...' +
+                '        <a onclick="moreComment(' + i + ')" role="button">More</a></p>\n' +
+                '      </div>\n' +
+                '    </div>\n' +
+                '    <hr>';
+        }
+        if (i === phone.reviews.length - 1) {
+            more.style.display = 'none';
+        }
     }
     reviews.innerHTML = str;
     for (let i = 0; i < reviewsLength; ++i) {
@@ -89,14 +107,28 @@ function moreReviews() {
 
     let str = '';
     for (let i = currentReviewsLength; i < currentReviewsLength + reviewsLength; ++i) {
-        str += '<div class="row bg-info">\n' +
-            '      <div class="container review">\n' +
-            '        <h3 id="reviewer' + i + '"></h3>\n' +
-            '        <p>Rating: ' + phone.reviews[i].rating + '</p>\n' +
-            '        <p>' + phone.reviews[i].comment + '</p>\n' +
-            '      </div>\n' +
-            '    </div>\n' +
-            '    <hr>';
+        let comment = phone.reviews[i].comment;
+        if (comment.length < 200) {
+            str += '<div class="row bg-info">\n' +
+                '      <div class="container review" id="review' + i + '">\n' +
+                '        <h3 id="reviewer' + i + '"></h3>\n' +
+                '        <p>Rating: ' + phone.reviews[i].rating + '</p>\n' +
+                '        <p id="comment' + i + '">' + comment + '</p>\n' +
+                '      </div>\n' +
+                '    </div>\n' +
+                '    <hr>';
+        }
+        else {
+            str += '<div class="row bg-info">\n' +
+                '      <div class="container review" id="review' + i + '">\n' +
+                '        <h3 id="reviewer' + i + '"></h3>\n' +
+                '        <p>Rating: ' + phone.reviews[i].rating + '</p>\n' +
+                '        <p id="comment' + i + '">' + comment.substr(0, 200) + '...' +
+                '        <a onclick="moreComment(' + i + ')" role="button">More</a></p>\n' +
+                '      </div>\n' +
+                '    </div>\n' +
+                '    <hr>';
+        }
         if (i === phone.reviews.length - 1) {
             more.style.display = 'none';
         }
@@ -105,6 +137,11 @@ function moreReviews() {
     for (let i = currentReviewsLength; i < currentReviewsLength + reviewsLength; ++i) {
         fillUsername(phone.reviews[i].reviewer, document.getElementById('reviewer' + i));
     }
+}
+
+function moreComment(index) {
+    let comment = document.getElementById('comment' + index);
+    comment.innerText = phone.reviews[index].comment;
 }
 
 function fillUsername(id, htmlElement) {
@@ -179,6 +216,28 @@ function addReview() {
 function addReviewSuccess() {
     window.alert('Success!');
     window.location.reload();
+}
+
+function login() {
+    $.ajax({
+        url: '/saveLastPage',
+        type: 'post',
+        data: {'lastPage': window.location.href},
+        dataType: 'json'
+    })
+
+    window.location.href = "/login"
+}
+
+function register() {
+    $.ajax({
+        url: '/saveLastPage',
+        type: 'post',
+        data: {'lastPage': window.location.href},
+        dataType: 'json'
+    })
+
+    window.location.href = "/register"
 }
 
 function getRequest(path, success, error) {

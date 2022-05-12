@@ -50,9 +50,10 @@
 		  </p>
        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
-
+	 
     </div> <!-- /container -->
-
+	<div id="lastUrl" style="display: none;">{{lastPageUrl}}</div>
+  
     <script src="../public/lib/jquery-3.4.1.min.js"></script>
     <script>
       $('#login_form').on('submit',function(e){
@@ -69,14 +70,14 @@
     			  if(err_code=== 0){
     				  window.alert('login success!')
 					  var prevLink = document.referrer
+					  console.log(prevLink)
 					  if($.trim(prevLink)==''){
 						   window.location.href='/'
 					  }else{
-						  if(prevLink.indexOf('activate')!=-1){
-							 console.log(prevLink.indexOf('activate'))
+						  if(prevLink.indexOf('reset')!=-1){
 							 window.location.href='/'
-						  }else if(prevLink.indexOf('reset')!=-1){
-							 window.location.href='/'
+						  }else if(prevLink.indexOf('register')!=-1){
+							 window.location.href=document.getElementById("lastUrl").innerText
 						  }else{
 							  window.location.href=prevLink
 						  }

@@ -4,8 +4,6 @@ function initialize() {
 
     title.innerText = 'Start to search your phone';
     hint.innerText = 'Please key in the key word and select the brand and the price filters';
-
-    //TODO
 }
 
 function getSearchResult() {
@@ -58,6 +56,28 @@ function loadPage(phones) {
         hint.innerText = 'We have found these phones for you!';
     }
     container.innerHTML = str;
+}
+
+function login() {
+    $.ajax({
+        url: '/saveLastPage',
+        type: 'post',
+        data: {'lastPage': window.location.href},
+        dataType: 'json'
+    })
+
+    window.location.href = "/login"
+}
+
+function register() {
+    $.ajax({
+        url: '/saveLastPage',
+        type: 'post',
+        data: {'lastPage': window.location.href},
+        dataType: 'json'
+    })
+
+    window.location.href = "/register"
 }
 
 function getRequest(path, success, error) {

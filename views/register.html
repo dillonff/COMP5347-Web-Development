@@ -44,9 +44,9 @@
         <input type="text" class="form-control" placeholder="Lastname" name="lastname" required autofocus>
 		<label for="inputEmail" class="sr-only">Email address</label>
 		<input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required autofocus>
-        <label for="inputPassword" class="sr-only"">Password</label>
+        <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
-       <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+       <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="goToLogin()">Register</button>
 	   <div>
 	   		  <p>Already register?<a href="/login">Login now!</a></p>
 	   </div>
@@ -78,6 +78,10 @@
 			  }
 		  })
 	  })
+
+    function goToLogin() {
+        window.location.href = '/login';
+    }
 	
 	</script>
 
