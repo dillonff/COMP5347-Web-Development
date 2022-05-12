@@ -2,7 +2,8 @@ var express = require('express');
 var sessionController=require('../controllers/sessionController');
 var router = express.Router();
 
-// router.get('/', sessionController.findIndex );
+router.get('/', sessionController.findIndex );
+router.get('/index1', sessionController.findIndex1 );
 
 router.get('/login', sessionController.loginPage);
 
@@ -13,6 +14,8 @@ router.get('/logout',sessionController.logout );
 router.get('/register',sessionController.registerPage);
 
 router.post('/register',sessionController.register);
+
+router.post('/saveLastPage',sessionController.saveLastPage);
 
 router.get('/activate',sessionController.activate);
 
