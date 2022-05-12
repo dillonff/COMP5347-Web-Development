@@ -149,5 +149,14 @@ module.exports.getCartItemByUserIdAndPhoneId = function (req, res) {
 };
 
 module.exports.insertReview = function (req, res) {
-    //TODO
+    let phoneId = req.body.phoneId;
+    let userId = req.session.user._id;
+    let rating = req.body.rating;
+    let comment = req.body.comment;
+
+    phones.insertReview(phoneId, userId, rating, comment, function (err, result) {
+        if (err) {
+            console.log(err);
+        }
+    });
 };

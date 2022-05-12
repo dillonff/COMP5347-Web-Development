@@ -112,19 +112,38 @@ function addToCart() {
             function (xhr) {
                 console.log(xhr);
             }
-        )
-        addSuccess();
+        );
+        addCartSuccess();
     }
 }
 
-function addSuccess() {
+function addCartSuccess() {
     $('#myModal').modal('toggle');
     window.alert('Success!');
     window.location.reload();
 }
 
 function addReview() {
+    let phoneId = getQueryString('id');
+    let rating = document.getElementById('rating').value;
+    let comment = document.getElementById('comment').value;
 
+    postRequest(
+        'http://localhost:3000/item/insertReview',
+        'phoneId=' + phoneId + '&rating=' + rating + '&comment=' + comment,
+        function () {
+            console.log('add item success!');
+        },
+        function (xhr) {
+            console.log(xhr);
+        }
+    );
+    addReviewSuccess();
+}
+
+function addReviewSuccess() {
+    window.alert('Success!');
+    window.location.reload();
 }
 
 function getRequest(path, success, error) {
