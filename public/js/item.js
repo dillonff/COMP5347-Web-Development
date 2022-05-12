@@ -123,6 +123,10 @@ function addSuccess() {
     window.location.reload();
 }
 
+function addReview() {
+
+}
+
 function getRequest(path, success, error) {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {

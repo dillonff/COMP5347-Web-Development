@@ -8,7 +8,7 @@ const phoneSchema = new mongoose.Schema(
     stock: Number,
     seller: String,
     price: Number,
-    disabled: String,
+    disabled: Boolean,
     reviews: {
       reviewer: String,
       rating: Number,

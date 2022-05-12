@@ -74,7 +74,7 @@ function getHighRatingPhones(phones) {
         let avgA = 0;
         let avgB = 0;
 
-        if (a.reviews.length >= 2) {
+        if (a.reviews && a.reviews.length >= 2) {
             for (let i = 0; i < a.reviews.length; ++i) {
                 if (a.reviews[i]) {
                     avgA += a.reviews[i].rating;
@@ -84,7 +84,7 @@ function getHighRatingPhones(phones) {
                 avgA /= a.reviews.length;
             }
         }
-        if (b.reviews.length >= 2) {
+        if (b.reviews && b.reviews.length >= 2) {
             for (let i = 0; i < b.reviews.length; ++i) {
                 if (b.reviews[i]) {
                     avgB += b.reviews[i].rating;
