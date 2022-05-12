@@ -8,7 +8,7 @@ const phoneSchema = new mongoose.Schema(
     stock: Number,
     seller: String,
     price: Number,
-    disabled: String,
+    disabled: Boolean,
     reviews: {
       reviewer: String,
       rating: Number,
@@ -112,7 +112,7 @@ phoneSchema.statics.disablePhoneListings = function (disableId, callback) {
   console.log("disableId:", disableId);
   return this.update(
     { _id: { $in: disableId } },
-    { $set: { disabled: "" } },
+    { $set: { disabled: true } },
     { multi: 1 }
   ).exec(callback);
 };
@@ -124,7 +124,7 @@ phoneSchema.statics.notDisablePhoneListings = function (
   console.log("notDisableId:", notDisableId);
   return this.update(
     { _id: { $in: notDisableId } },
-    { $unset: { disabled: "" } },
+    { $set: { disabled: false } },
     { multi: 1 }
   ).exec(callback);
 };

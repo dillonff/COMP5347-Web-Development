@@ -104,9 +104,9 @@ module.exports.addNewListing = function (req, res) {
 };
 
 module.exports.changeImageRoutes = function (req, res) {
-  helloinfo = req.params.info;
+  info = req.params.info;
 
-  PhoneListing.changeImageRoutes(helloinfo, function (err, result) {
+  PhoneListing.changeImageRoutes(info, function (err, result) {
     if (err) {
       console.log(err);
     } else {
@@ -129,7 +129,7 @@ module.exports.getRelatedPhoneListings = function (req, res) {
 
 module.exports.deletePhoneListings = function (req, res) {
   deleteId = req.body.deleteId;
-  console.log(deleteId);
+
   PhoneListing.deletePhoneListings(deleteId, function (err, result) {
     if (err) {
       console.log(err);
@@ -153,7 +153,7 @@ module.exports.disablePhoneListings = function (req, res) {
 };
 
 module.exports.notDisablePhoneListings = function (req, res) {
-  notdisableId = req.body.notdisableId;
+  notdisableId = req.body.notDisableId;
   PhoneListing.notDisablePhoneListings(notdisableId, function (err, result) {
     if (err) {
       console.log(err);
