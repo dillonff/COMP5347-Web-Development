@@ -35,9 +35,9 @@ function loadUserPage() {
     };
   }
 
-  const reqUrlone = 'http://localhost:3000/userPage/getUserInfo/' + userId;
+  const userReqUrl = 'http://localhost:3000/userPage/getUserInfo/' + userId;
   getRequest(
-    reqUrlone, //get basic user info
+    userReqUrl, //get basic user info
     function (data) {
       initialInfo = data;
       fillInfo();
@@ -58,9 +58,9 @@ function loadUserPage() {
     }
   );
 
-  let reqUrltwo = 'http://localhost:3000/userPage/phoneListings/' + userId; //get related phone listings
+  const phoneReqUrl = 'http://localhost:3000/userPage/phoneListings/' + userId; //get related phone listings
   axios
-    .get(reqUrltwo)
+    .get(phoneReqUrl)
     .then(function (response) {
       relatedPhoneListings = response.data;
       fillPhoneListings();
@@ -133,48 +133,52 @@ function fillPhoneListings() {
 function fillPhoneReviews() {
   let reviews = document.getElementById('reviews');
   let str = '';
-  console.log(relatedPhoneListings);
+
   for (let i = 0; i < relatedPhoneListings.length; i++) {
-    for (let k = 0; k < relatedPhoneListings[i].reviews.length; i++) {
-      str +=
-        '<div class="row bg-info">\n' +
-        '      <div class="container">\n' +
-        '        <h3 id="reviewer' +
-        i +
-        '"></h3>\n' +
-        '        <p>Rating: ' +
-        relatedPhoneListings[i].reviews[k].rating +
-        '</p>\n' +
-        '        <p>' +
-        relatedPhoneListings[i].reviews[k].comment +
-        '</p>\n' +
-        '      </div>\n' +
-        '    </div>\n' +
-        '    <hr>';
-    }
-    reviews.innerHTML = str;
-    for (let j = 0; j < relatedPhoneListings[i].reviews.length; i++) {
-      fillUsername(
-        relatedPhoneListings[i].reviews[j].reviewer,
-        document.getElementById('reviewer' + i)
-      );
+    let userReview = relatedPhoneListings[i].reviews;
+    console.log(userReview);
+    if (userReview != undefined) {
+      for (let k = 0; k < userReview.length; k++) {
+        str +=
+          '<div class="row bg-info">\n' +
+          '      <div class="container">\n' +
+          '        <h3 id="reviewer:' +
+          relatedPhoneListings[i].reviews[k].reviewer +
+          '"></h3>\n' +
+          '        <p>Phone Title: ' +
+          relatedPhoneListings[i].title +
+          '</p>\n' +
+          '        <p>Reviewer: ' +
+          relatedPhoneListings[i].reviews[k].reviewer +
+          '</p>\n' +
+          '        <p>Rating: ' +
+          relatedPhoneListings[i].reviews[k].rating +
+          '</p>\n' +
+          '        <p>' +
+          relatedPhoneListings[i].reviews[k].comment +
+          '</p>\n' +
+          '      </div>\n' +
+          '    </div>\n' +
+          '    <hr>';
+      }
     }
   }
-  console.log(reviews.innerHTML);
+  console.log('str', str);
+  reviews.innerHTML = str;
 }
 
-function fillUsername(id, htmlElement) {
-  getRequest(
-    'http://localhost:3000/item/getUsernameById?id=' + id,
-    function (data) {
-      let user = data;
-      htmlElement.innerText = user.firstname + ' ' + user.lastname;
-    },
-    function (xhr) {
-      console.log(xhr);
-    }
-  );
-}
+// function fillUsername(id, htmlElement) {
+//   getRequest(
+//     'http://localhost:3000/item/getUsernameById?id=' + id,
+//     function (data) {
+//       let user = data;
+//       htmlElement.innerText = user.firstname + ' ' + user.lastname;
+//     },
+//     function (xhr) {
+//       console.log(xhr);
+//     }
+//   );
+// }
 
 function updateProfile() {
   let firstName = document.getElementById('firstName').value;
