@@ -69,7 +69,19 @@
     			  var err_code = data.err_code
     			  if(err_code=== 0){
     				  window.alert('login success!')
-					  window.location.href='/'
+					  var prevLink = document.referrer
+					  if($.trim(prevLink)==''){
+						   window.location.href='/'
+					  }else{
+						  if(prevLink.indexOf('activate')!=-1){
+							 console.log(prevLink.indexOf('activate'))
+							 window.location.href='/'
+						  }else{
+							  window.location.href=prevLink
+						  }
+						  
+					  }
+						   
     			  }else if (err_code === 1){
     				  window.alert('email or password wrong!')
     			  }else if(err_code === 500){
