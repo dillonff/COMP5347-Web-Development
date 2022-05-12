@@ -18,9 +18,12 @@ const cart_item_schema = new schema({
         type: String,
         required: true
     },
-    title:{
+    phoneId: {
         type: String,
         required: true
+    },
+    title:{
+        type: String
     }
 
 });
