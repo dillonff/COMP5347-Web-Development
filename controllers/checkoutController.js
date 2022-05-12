@@ -11,24 +11,35 @@ module.exports ={
 
     load: function (req, res, next) {
         // console.log(req)
-        const uid= req.query.uid
+        // const uid= req.query.uid
+        console.log("test");
+        console.log(req)
 
-        // const user = req.session.user
-        // cartItems.find({'uid': user._id}, function (err, result)
-
-        cartItems.find({'uid': uid}, function (err, result) {
-            if (err) {
-                res.send(err);
-            } else {
-                console.log("Load successfully!!");
-                res.send({item: result});
+        const uid = req.session.user._id;
+        // console.log(user);
+        console.log(uid);
+        cartItems.find({'uid': uid}, function (err, result){
+            if (err){
+                res.send(null);
+            }else{
+                console.log("Load successfully!");
+                res.send({item:result});
             }
         })
+
+        // cartItems.find({'uid': uid}, function (err, result) {
+        //     if (err) {
+        //         res.send(null);
+        //     } else {
+        //         console.log("Load successfully!!");
+        //         res.send({item: result});
+        //     }
+        // })
     },
 
     changeQuantity: function (req, res, next) {
         console.log(req)
-        const uid= req.body.uid
+        const uid = req.session.user._id;
         const phoneId = req.body.phoneId
         const newQuantity = req.body.quantity
         console.log("backend receive uid: "+ uid);
@@ -48,7 +59,8 @@ module.exports ={
 
     deleteItems: function (req, res, next) {
         console.log(req);
-        const uid= req.body.uid;
+        const uid = req.session.user._id;
+        // const uid = req.body.uid;
         const phoneId = req.body.phoneId;
         console.log("backend received: ")
         console.log(uid);
@@ -81,7 +93,8 @@ module.exports ={
     },
 
     emptyCart:function(req,res,next){
-        const uid = req.body.uid;
+        const uid = req.session.user._id;
+        // const uid = req.body.uid;
         console.log(uid);
 
         cartItems.deleteMany({uid:uid},function(err,result){

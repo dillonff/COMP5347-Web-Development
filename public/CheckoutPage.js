@@ -1,6 +1,6 @@
 
 const refreshPage = function (defaultPhoneList) {
-    // console.log("Default: ", defaultPhoneList)
+    console.log("Default: ", defaultPhoneList)
 
     let elementsToBeRefreshed =document.getElementsByClassName("toBeRefreshed");
     for (let i = elementsToBeRefreshed.length - 1; i >= 0; i--) {
@@ -195,18 +195,52 @@ const refreshPage = function (defaultPhoneList) {
 
 };
 
+const emptyCart = function() {
+    const newLocation = document.getElementById("cartBody");
+
+    const emptyText = document.createTextNode("Your shopping cart is empty!");
+    const emptyNode = document.createElement("div")
+    emptyNode.appendChild(emptyText);
+    newLocation.appendChild(emptyNode);
+
+    const returnPart = document.createElement("div");
+    returnPart.setAttribute("class", "back-to-shop toBeRefreshed");
+
+    const returnSymbol = document.createElement("a");
+    returnSymbol.setAttribute("href", "#");
+    returnSymbol.setAttribute("onclick", "returnButton()")
+    const returnNode = document.createTextNode("⇦");
+    returnSymbol.appendChild(returnNode);
+    returnPart.appendChild(returnSymbol);
+
+    const textSpan = document.createElement("span");
+    textSpan.setAttribute("class", "text-muted");
+    const textNode = document.createTextNode("Back");
+    textSpan.appendChild(textNode);
+    returnPart.appendChild(textSpan);
+    newLocation.appendChild(returnPart);
+
+}
+
+
+
 window.onload = function () {
-
-    let data = {uid: "test"};
-
+    // let data = {uid: "test"};
     $.ajax({
         url: '/checkout/load',
         type: 'get',
-        data: data,
+        // data: data,
         dataType: 'json',
         success: function (res) {
-            console.log(res.item);
-            refreshPage(res.item);
+            if(res.item != ""){
+                console.log("your shopping cart is not empty!")
+                console.log(res.item);
+                refreshPage(res.item);
+            }
+            else{
+                console.log("your shopping cart is empty!");
+                emptyCart();
+            }
         }
     })
 }
@@ -236,7 +270,8 @@ async function increaseQuantity(sender){
 
                 let newQuantity = originalQuantity + 1;
 
-                let data = {uid: "test", phoneId: idName, quantity: newQuantity};
+                // let data = {uid: "test", phoneId: idName, quantity: newQuantity};
+                let data = {phoneId: idName, quantity: newQuantity};
                 console.log("frontend send data:");
                 console.log(data);
                 try {
@@ -244,18 +279,27 @@ async function increaseQuantity(sender){
                     phoneId.innerText = newQuantity.toString();
                 } catch (err) {}
 
-                let userdata = {uid: "test"};
-                console.log(userdata);
+                // let userdata = {uid: "test"};
+                // console.log(userdata);
 
                 $.ajax({
                     url: '/checkout/load',
                     type: 'get',
-                    data: userdata,
+                    // data: userdata,
                     dataType: 'json',
                     success: function (res) {
                         console.log("Reload successfully!")
-                        console.log(res.item);
-                        refreshPage(res.item);
+                        // console.log(res.item);
+                        // refreshPage(res.item);
+                        if(res.item != ""){
+                            console.log("your shopping cart is not empty!")
+                            console.log(res.item);
+                            refreshPage(res.item);
+                        }
+                        else{
+                            console.log("your shopping cart is empty!");
+                            emptyCart();
+                        }
                     }
                 })
             }else {
@@ -278,7 +322,8 @@ async function decreaseQuantity(sender){
         let newQuantity = originalQuantity - 1;
         console.log(newQuantity);
 
-        let data = {uid: "test",phoneId: idName, quantity: newQuantity};
+        // let data = {uid: "test",phoneId: idName, quantity: newQuantity};
+        let data = {phoneId: idName, quantity: newQuantity};
         console.log("frontend send to backend: ")
         console.log(data);
 
@@ -287,43 +332,62 @@ async function decreaseQuantity(sender){
             phoneId.innerText = newQuantity.toString();
         } catch (err){}
 
-        location.reload()
+        // location.reload()
 
         // let userdata = {uid: "test"};
-        //
-        // $.ajax({
-        //     url: '/checkout/load',
-        //     type: 'get',
-        //     data: userdata,
-        //     dataType: 'json',
-        //     success: function (res) {
-        //         console.log("Reload successfully!")
-        //         refreshPage(res.item);
-        //     }
-        // })
+
+        $.ajax({
+            url: '/checkout/load',
+            type: 'get',
+            // data: userdata,
+            dataType: 'json',
+            success: function (res) {
+                console.log("Reload successfully!")
+                // refreshPage(res.item);
+                if(res.item != ""){
+                    console.log("your shopping cart is not empty!")
+                    console.log(res.item);
+                    refreshPage(res.item);
+                }
+                else{
+                    console.log("your shopping cart is empty!");
+                    emptyCart();
+                }
+            }
+        })
     }
     else{
-        let deleteData = {uid: "test",phoneId: idName};
+        // let deleteData = {uid: "test",phoneId: idName};
+        let deleteData = {phoneId: idName};
 
         try {
             const res = deletePhone(deleteData);
             // const res = await deletePhone(deleteData);
         } catch (err){}
 
-        location.reload()
+        // location.reload()
 
         // let userdata = {uid: "test"};
-        //
-        // $.ajax({
-        //     url: '/checkout/load',
-        //     type: 'get',
-        //     data: userdata,
-        //     dataType: 'json',
-        //     success: function (res) {
-        //         console.log("Reload successfully!")
-        //         refreshPage(res.item);
-        //     }
-        // })
+
+        $.ajax({
+            url: '/checkout/load',
+            type: 'get',
+            // data: userdata,
+            dataType: 'json',
+            success: function (res) {
+                console.log("Reload successfully!")
+                // refreshPage(res.item);
+                if(res.item != ""){
+                    console.log("your shopping cart is not empty!")
+                    console.log(res.item);
+                    refreshPage(res.item);
+                }
+                else{
+                    console.log("your shopping cart is empty!");
+                    emptyCart();
+                }
+            }
+        })
     }
 
 }
@@ -345,7 +409,8 @@ function changeQuantity(data) {
 async function deleteItem(sender){
     let idName = (sender.target.markTag).slice(6);
 
-    let deleteData = {uid: "test", phoneId: idName};
+    // let deleteData = {uid: "test", phoneId: idName};
+    let deleteData = {phoneId: idName};
     console.log("frontend send to backend:")
     console.log(deleteData);
 
@@ -354,21 +419,32 @@ async function deleteItem(sender){
         const res = deletePhone(deleteData);
     } catch (err){}
 
-    location.reload()
+    // location.reload()
 
     // let userdata = {uid: "test"};
-    //
-    // $.ajax({
-    //     url: '/checkout/load',
-    //     type: 'get',
-    //     data: userdata,
-    //     dataType: 'json',
-    //     success: function (res) {
-    //         console.log("Reload successfully!")
-    //         console.log(res)
-    //         refreshPage(res.item);
-    //     }
-    // })
+
+    $.ajax({
+        url: '/checkout/load',
+        type: 'get',
+        // data: userdata,
+        dataType: 'json',
+        success: function (res) {
+            console.log("Reload successfully!")
+            // console.log(res)
+            // refreshPage(res.item);
+            if(res.item != ""){
+                console.log("your shopping cart is not empty!")
+                console.log(res.item);
+                refreshPage(res.item);
+            }
+            else{
+                console.log("your shopping cart is empty!");
+                emptyCart();
+            }
+        }
+    })
+
+
 }
 
 function deletePhone(deleteData){
@@ -386,8 +462,10 @@ function deletePhone(deleteData){
 
 function returnButton(){
     // window.location.href = "http://localhost:3000/";
-    // window.history.back();
-    window.location.replace(document.referrer)
+    window.history.back();
+    window.location.go(-1);
+    // window.location.reload();
+    // window.location.replace(document.referrer)
 }
 
 
@@ -397,11 +475,11 @@ async function checkoutButton(){
         // const res = checkout();
     } catch (err){}
 
-    let userdata = {uid: "test"};
+    // let userdata = {uid: "test"};
     $.ajax({
         url:'/checkout/empty',
         type:'post',
-        data:userdata,
+        // data:userdata,
         dataType:'json',
         success:function(){}
     })
@@ -409,11 +487,11 @@ async function checkoutButton(){
 }
 
 function checkout(){
-    let userdata = {uid: "test"};
+    // let userdata = {uid: "test"};
     $.ajax({
         url: '/checkout/load',
         type: 'get',
-        data: userdata,
+        // data: userdata,
         dataType: 'json',
         success: function (res) {
             console.log("Find user's items successfully!")
