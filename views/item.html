@@ -51,8 +51,8 @@
       {{ else }}
 
       <form class="navbar-form navbar-right">
-        <a class="btn btn-success" href="/register">Register</a>
-        <a class="btn btn-success" href="/login">Login</a>
+        <a class="btn btn-success" onclick="register()">Register</a>
+        <a class="btn btn-success" onclick="login()">Login</a>
       </form>
 
       {{ /if }}
@@ -129,7 +129,7 @@
 
         {{ else }}
 
-        <a class="btn btn-primary btn-lg" href="/login">
+        <a class="btn btn-primary btn-lg" onclick="login()">
           Add to cart <span class="badge">0</span>
         </a>
 

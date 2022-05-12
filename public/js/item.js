@@ -218,6 +218,28 @@ function addReviewSuccess() {
     window.location.reload();
 }
 
+function login() {
+    $.ajax({
+        url: '/saveLastPage',
+        type: 'post',
+        data: {'lastPage': window.location.href},
+        dataType: 'json'
+    })
+
+    window.location.href = "/login"
+}
+
+function register() {
+    $.ajax({
+        url: '/saveLastPage',
+        type: 'post',
+        data: {'lastPage': window.location.href},
+        dataType: 'json'
+    })
+
+    window.location.href = "/register"
+}
+
 function getRequest(path, success, error) {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {

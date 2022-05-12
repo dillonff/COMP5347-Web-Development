@@ -2,9 +2,6 @@ var express = require('express');
 var sessionController=require('../controllers/sessionController');
 var router = express.Router();
 
-router.get('/', sessionController.findIndex );
-router.get('/index1', sessionController.findIndex1 );
-
 router.get('/login', sessionController.loginPage);
 
 router.post('/login',sessionController.login);
