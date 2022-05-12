@@ -1,0 +1,98 @@
+[{
+  "_id": {
+    "$oid": "627ce2e76626c353baa6ad4d"
+  },
+  "title": "Cricket Samsung Galaxy Discover R740 Phone",
+  "brand": "Samsung",
+  "image": "imageurl",
+  "stock": 5,
+  "seller": "5f5237a4c1beb1523fa3dac4",
+  "price": 24.99,
+  "reviews": [
+    {
+      "reviewer": "5f5237a4c1beb1523fa3db1b",
+      "rating": 5,
+      "comment": "Good"
+    },
+    {
+      "reviewer": "5f5237a4c1beb1523fa3da8d",
+      "rating": 5,
+      "comment": "she liked it"
+    },
+    {
+      "reviewer": "5f5237a4c1beb1523fa3dafc",
+      "rating": 4,
+      "comment": "GREAT BUY!"
+    },
+    {
+      "reviewer": "5f5237a4c1beb1523fa3da0c",
+      "rating": 1,
+      "comment": "This product never worked I charged it all day an still it never came on"
+    }
+  ]
+}, {
+    "_id": {
+      "$oid": "627ce2e76626c353baa6ad61"
+    },
+    "title": "Google Nexus 6P 64gb Graphite (Black) US Warranty.",
+    "brand": "Huawei",
+    "image": "imageurl",
+    "stock": 8,
+    "seller": "5f5237a4c1beb1523fa3dabd",
+    "price": 161.06,
+    "reviews": []
+  },{
+  "_id": {
+    "$oid": "627ce2e76626c353baa6ad74"
+  },
+  "title": "Apple iPhone 3GS A1303 16GB GSM Unlocked SmartPhone - Black",
+  "brand": "Apple",
+  "image": "imageurl",
+  "stock": 1,
+  "seller": "5f5237a4c1beb1523fa3dbf0",
+  "price": 39,
+  "reviews": [
+    {
+      "reviewer": "5f5237a4c1beb1523fa3da75",
+      "rating": 1,
+      "comment": "I had purchased this as a replacement for a 3gs phone that I apparently used as a basketball too often. I had to return it because several features did not work. I subsequently ordered a 4s, an upgrade at a similar price which works fine."
+    },
+    {
+      "reviewer": "5f5237a4c1beb1523fa3db7b",
+      "rating": 4,
+      "comment": "I was skeptical about buying the unlock iPhone 3GS from Amazon after seeing the bad reviews, but I checked with the seller and went ahead and purchased it after he confirmed it. I gotta say, I'm very happy with this purchase. It wasn't hard to set up the sim's card into the device. It came in the mail like it was brand new with the original packaging and everything. I love texting and calling my friends and family with it. I have experienced the white screen of death, but I restarted it without a second thought and everything has been fine ever since. I haven't really experience any serious heating problems and I've played some high capacity games on it while being plugged in. It does get rather warm in the hands, but it wasn't enough to be uncomfortable for me. The main reason why I got this phone was because I wanted an easier and more convenient way to call and text my friends and family. The phone I had before was a flip phone without a proper keyboard. This does what I want and so much more. For $115, I got a really good deal and I'm happy to say that I'll be using this until my dad stops paying for the contract or it does die out on me. Just to let those who have flip phones know, the iPhone 3GS can PREVENT data being used when you're not on that plan. The flip phone that I had would take me onto the web without warning me first and that caused my phone to be charged a few extra dollars for just a few seconds of being on the internet. At least now, I don't have to worry about those slippages because I can only use data when i'm using wi-fi.I don't really have any complaints for this phone because it's more then what I want in an phone, but as an Apple product, I have to say that the screen really takes a miss. I'm so spoiled by Retina Display on my iPod Touch 5g, that it bugs me when everything is in low resolution. When comparing watching videos or pictures, it's just ain't the same. It's good when I'm bored at college, but for casual use, it's not that great from today's standards.It's a little bulky, but I kind of like it that way. It gives it a feel to it and it doesn't slip out of my hands unlike the new iPod Touch.Seeing that I got the white screen of death on the second day scared me. I'm hoping that wasn't the reason why the seller sold it to me.Summery:Pros:Great for a phone and great for texting.Has great cellular connection.Satisfying battery life.Can handle playing games without taking too much heat.Can prevent using data on cellular network unlike my old flip phone.Cons:Poor screen quality compared to today's standard for Apple products.Sort of bulky, but having some weight is a pro for me.White screen of death on the second day of using it."
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "627ce2e76626c353baa6ad76"
+  },
+  "title": "AT&T Motorola RAZR V3 No Contract Quad Band GSM Camera Cell Phone Pink",
+  "brand": "Motorola",
+  "image": "imageurl",
+  "stock": 6,
+  "seller": "5f5237a4c1beb1523fa3dbdd",
+  "price": 26.99,
+  "reviews": [
+    {
+      "reviewer": "5f5237a4c1beb1523fa3da67",
+      "rating": 1,
+      "comment": "Not good"
+    },
+    {
+      "reviewer": "5f5237a4c1beb1523fa3dbd9",
+      "rating": 1,
+      "comment": "junk did not work got a refund"
+    },
+    {
+      "reviewer": "5f5237a4c1beb1523fa3dab8",
+      "rating": 3,
+      "comment": "I love the looks of it but,it has no S.D.slot...and I wanted to change all my personal stand stuff to the phone and couldn't!!!"
+    },
+    {
+      "reviewer": "5f5237a4c1beb1523fa3db8f",
+      "rating": 4,
+      "comment": "Got phone it had no scratches but can't find where the micro ed card goes but it came in really fast my mom will love it and it came and day early for mother's day it was cheap and affordable"
+    }
+  ]
+}]
