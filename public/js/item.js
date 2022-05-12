@@ -1,3 +1,5 @@
+let phone;
+
 function getQueryString(name) {
     let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     let r = window.location.search.substr(1).match(reg);
@@ -18,15 +20,17 @@ function initialize() {
         }
     )
 
-    getRequest(
-        'http://localhost:3000/item/getCartItemByUserIdAndPhoneId?phoneId=' + getQueryString('id'),
-        function (data) {
-            fillAmountInCart(data);
-        },
-        function (xhr) {
-            console.log(xhr);
-        }
-    )
+    if (document.getElementById('amountInCart')) {
+        getRequest(
+            'http://localhost:3000/item/getCartItemByUserIdAndPhoneId?phoneId=' + getQueryString('id'),
+            function (data) {
+                fillAmountInCart(data);
+            },
+            function (xhr) {
+                console.log(xhr);
+            }
+        )
+    }
 }
 
 function fillAmountInCart(cartItem) {
@@ -39,7 +43,9 @@ function fillAmountInCart(cartItem) {
     }
 }
 
-function loadPage(phone) {
+function loadPage(data) {
+    phone = data;
+
     let image = document.getElementById('image');
     let title = document.getElementById('title');
     let brand = document.getElementById('brand');
@@ -56,9 +62,10 @@ function loadPage(phone) {
     price.innerText = '$' + phone.price;
 
     let str = '';
-    for (let i = 0; i < phone.reviews.length; ++i) {
+    let reviewsLength = phone.reviews.length > 3 ? 3 : phone.reviews.length;
+    for (let i = 0; i < reviewsLength; ++i) {
         str += '<div class="row bg-info">\n' +
-            '      <div class="container">\n' +
+            '      <div class="container review">\n' +
             '        <h3 id="reviewer' + i + '"></h3>\n' +
             '        <p>Rating: ' + phone.reviews[i].rating + '</p>\n' +
             '        <p>' + phone.reviews[i].comment + '</p>\n' +
@@ -67,7 +74,35 @@ function loadPage(phone) {
             '    <hr>';
     }
     reviews.innerHTML = str;
-    for (let i = 0; i < phone.reviews.length; ++i) {
+    for (let i = 0; i < reviewsLength; ++i) {
+        fillUsername(phone.reviews[i].reviewer, document.getElementById('reviewer' + i));
+    }
+}
+
+function moreReviews() {
+    let reviewElements = document.getElementsByClassName('container review');
+    let reviews = document.getElementById('reviews');
+    let more = document.getElementById('more');
+    let currentReviewsLength = reviewElements.length;
+    let reviewsLength =
+        phone.reviews.length - currentReviewsLength > 3 ? 3 : phone.reviews.length - currentReviewsLength;
+
+    let str = '';
+    for (let i = currentReviewsLength; i < currentReviewsLength + reviewsLength; ++i) {
+        str += '<div class="row bg-info">\n' +
+            '      <div class="container review">\n' +
+            '        <h3 id="reviewer' + i + '"></h3>\n' +
+            '        <p>Rating: ' + phone.reviews[i].rating + '</p>\n' +
+            '        <p>' + phone.reviews[i].comment + '</p>\n' +
+            '      </div>\n' +
+            '    </div>\n' +
+            '    <hr>';
+        if (i === phone.reviews.length - 1) {
+            more.style.display = 'none';
+        }
+    }
+    reviews.innerHTML += str;
+    for (let i = currentReviewsLength; i < currentReviewsLength + reviewsLength; ++i) {
         fillUsername(phone.reviews[i].reviewer, document.getElementById('reviewer' + i));
     }
 }
