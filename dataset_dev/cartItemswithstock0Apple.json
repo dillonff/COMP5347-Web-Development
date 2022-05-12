@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "626b40c13e6d2c15e846803f"
+  },
+  "image": "public/images/Samsung.jpeg",
+  "brand": "Samsung",
+  "price": 24.99,
+  "quantity": 3,
+  "uid": "test",
+  "title": "Cricket Samsung Galaxy Discover R740 Phone"
+},{
+  "_id": {
+    "$oid": "626b40c13e6d2c15e8468040"
+  },
+  "image": "public/images/Huawei.jpeg",
+  "brand": "Huawei",
+  "price": 161.06,
+  "quantity": 5,
+  "uid": "test",
+  "title": "Google Nexus 6P 64gb Graphite (Black) US Warranty.",
+},{
+  "_id": {
+    "$oid": "627b588defd20f6699e1e047"
+  },
+  "image": "public/images/Apple.jpeg",
+  "brand": "Apple",
+  "price": 39,
+  "quantity": 1,
+  "uid": "test",
+  "title": "Apple iPhone 3GS A1303 16GB GSM Unlocked SmartPhone - Black"
+},{
+  "_id": {
+    "$oid": "626b40c13e6d2c15e8468042"
+  },
+  "image": "public/images/Motorola.jpeg",
+  "brand": "Motorola",
+  "price": 26.99,
+  "quantity": 4,
+  "uid": "test",
+  "title": "AT&T Motorola RAZR V3 No Contract Quad Band GSM Camera Cell Phone Pink"
+}]

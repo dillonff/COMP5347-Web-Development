@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/favicon.ico">
+  <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/dashboard/">
+
+  <title>Index</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../public/css/search.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/index">SellPhone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+
+      {{ if user }}
+
+      <form class="navbar-form navbar-right">
+        <a class="btn btn-danger" id="logout" href="/logout">Log out</a>
+      </form>
+      <form class="navbar-form navbar-right">
+        <button type="submit" class="btn btn-default">Profile</button>
+      </form>
+      <form class="navbar-form navbar-right">
+        <button type="submit" class="btn btn-info">Checkout</button>
+      </form>
+
+      {{ else }}
+
+      <form class="navbar-form navbar-right">
+        <a class="btn btn-success" href="/register">Register</a>
+        <a class="btn btn-success" href="/login">Login</a>
+      </form>
+
+      {{ /if }}
+
+    </div>
+  </div>
+</nav>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <h1>Item Detail</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6" id="image">
+      <img src="/public/images/Samsung.jpeg" class="img-responsive img-thumbnail">
+    </div>
+    <div class="col-md-6">
+      <h3 id="title">Galaxy s III mini SM-G730V Verizon Cell Phone BLUE</h3>
+      <table class="table">
+        <tr>
+          <td>Brand</td>
+          <td id="brand">Samsung</td>
+        </tr>
+        <tr>
+          <td>Available Stock</td>
+          <td id="stock">9</td>
+        </tr>
+        <tr>
+          <td>Seller</td>
+          <td id="seller">Xinrui Chen</td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td id="price">$56.0</td>
+        </tr>
+      </table>
+
+      {{ if user }}
+
+      <div class="row">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Add to cart <span class="badge" id="amountInCart">0</span>
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Please enter the quantity</h4>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group" id="formGroup">
+                      <label for="quantity"></label>
+                      <input type="number" class="form-control" id="quantity">
+                      <span id="hint" class="help-block"></span>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" onclick="addToCart()">Add to cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {{ /if }}
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="container">
+  <h2>Reviews</h2>
+  <div class="container" id="reviews">
+  </div>
+</div>
+
+{{ if user }}
+
+<div class="container">
+  <h2>Make a review</h2>
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="rating" class="col-md-2 control-label">Rating</label>
+      <div class="col-md-10">
+        <select class="form-control" id="rating">
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+          <option value="0">0</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="comment" class="col-md-2 control-label">Comment</label>
+      <div class="col-md-10">
+        <textarea class="form-control" rows="3" id="comment"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-10 col-md-2">
+        <button type="button" class="btn btn-success" onclick="">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{{ /if }}
+
+<hr>
+
+<footer>
+  <p>&copy; dev-39-Assignment2</p>
+</footer>
+</div> <!-- /container -->
+
+<script src="../public/lib/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="./public/js/item.js"></script>
+<script>
+    $('#logout').on('click',function(e){
+        e.preventDefault()
+        var answer = confirm("Are you sure to logout?");
+        if (answer == true) {
+            window.location.href='/logout'
+        } else {
+            return;
+        }
+    })
+
+
+</script>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/dist/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

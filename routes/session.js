@@ -2,7 +2,7 @@ var express = require('express');
 var sessionController=require('../controllers/sessionController');
 var router = express.Router();
 
-router.get('/', sessionController.findIndex );
+// router.get('/', sessionController.findIndex );
 
 router.get('/login', sessionController.loginPage);
 
