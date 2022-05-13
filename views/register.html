@@ -46,7 +46,7 @@
 		<input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
-       <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="goToLogin()">Register</button>
+       <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 	   <div>
 	   		  <p>Already register?<a href="/login">Login now!</a></p>
 	   </div>
@@ -67,9 +67,9 @@
 			  dataType: 'json',
 			  success: function (data) {
 				  var err_code = data.err_code
-				  if(err_code=== 0){
+				  if(err_code === 0){
 					  window.alert('register success!Please activate it by email')
-					  
+            window.location.href = '/login';
 				  }else if (err_code === 1){
 					  window.alert('email already exists!')
 				  }else if(err_code === 500){
@@ -78,10 +78,6 @@
 			  }
 		  })
 	  })
-
-    function goToLogin() {
-        window.location.href = '/login';
-    }
 	
 	</script>
 

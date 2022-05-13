@@ -58,7 +58,7 @@
 			  dataType: 'json',
 			  success: function (data) {
 				  var err_code = data.err_code
-				  if(err_code=== 0){
+				  if(err_code === 0){
 					  var email=data.email
 					  window.alert('verification success!')
 					  window.location.href='/jump?email='+email
