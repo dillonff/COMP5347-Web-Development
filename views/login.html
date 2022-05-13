@@ -67,19 +67,19 @@
     		  dataType: 'json',
     		  success: function (data) {
     			  var err_code = data.err_code
-    			  if(err_code=== 0){
+    			  if(err_code === 0){
     				  window.alert('login success!')
 					  var prevLink = document.referrer
 					  console.log(prevLink)
-					  if($.trim(prevLink)==''){
+					  if($.trim(prevLink) ==''){
 						   window.location.href='/'
 					  }else{
 						  if(prevLink.indexOf('reset')!=-1){
-							 window.location.href='/'
+							 window.location.href = '/'
 						  }else if(prevLink.indexOf('register')!=-1){
-							 window.location.href=document.getElementById("lastUrl").innerText
+							 window.location.href = document.getElementById("lastUrl").innerText
 						  }else{
-							  window.location.href=prevLink
+							  window.location.href = prevLink
 						  }
 						  
 					  }
