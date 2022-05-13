@@ -143,14 +143,11 @@ function fillPhoneReviews() {
         str +=
           '<div class="row bg-info">\n' +
           '      <div class="box">\n' +
-          '        <h3 id="reviewer:' +
-          relatedPhoneListings[i].reviews[k].reviewer +
+          '        <h3 id="Reviewer' +
+          k +
           '"></h3>\n' +
           '        <p>Phone Title: ' +
           relatedPhoneListings[i].title +
-          '</p>\n' +
-          '        <p>Reviewer: ' +
-          relatedPhoneListings[i].reviews[k].reviewer +
           '</p>\n' +
           '        <p>Rating: ' +
           relatedPhoneListings[i].reviews[k].rating +
@@ -161,11 +158,34 @@ function fillPhoneReviews() {
           '      </div>\n' +
           '    </div>\n' +
           '    <hr>';
+        reviews.innerHTML = str;
+        fillUsername(
+          relatedPhoneListings[i].reviews[k].reviewer,
+          document.getElementById('Reviewer' + k)
+        );
       }
     }
   }
+}
 
-  reviews.innerHTML = str;
+function fillUsername(id, htmlElement) {
+  getRequest(
+    'http://localhost:3000/userPage/getUserInfo/' + id,
+    function (data) {
+      let user = data;
+      let reviewerName = '';
+      console.log(user);
+      console.log(user[0].firstname);
+      console.log(user[0].lastname);
+      console.log(data[0].firstname);
+      console.log(data[0].lastname);
+      reviewerName = user[0].firstname + ' ' + user[0].lastname;
+      htmlElement.innerText = reviewerName;
+    },
+    function (xhr) {
+      console.log(xhr);
+    }
+  );
 }
 
 function updateProfile() {
