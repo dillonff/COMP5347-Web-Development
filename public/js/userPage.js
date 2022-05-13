@@ -145,9 +145,12 @@ function fillPhoneReviews() {
           '      <div class="box">\n' +
           '        <h3 id="Reviewer' +
           k +
-          '"></h3>\n' +
+          '">Reviewer:</h3>\n' +
           '        <p>Phone Title: ' +
           relatedPhoneListings[i].title +
+          '</p>\n' +
+          '        <p>Brand: ' +
+          relatedPhoneListings[i].brand +
           '</p>\n' +
           '        <p>Rating: ' +
           relatedPhoneListings[i].reviews[k].rating +
@@ -158,7 +161,9 @@ function fillPhoneReviews() {
           '      </div>\n' +
           '    </div>\n' +
           '    <hr>';
-        reviews.innerHTML = str;
+      }
+      reviews.innerHTML = str;
+      for (let k = 0; k < userReview.length; k++) {
         fillUsername(
           relatedPhoneListings[i].reviews[k].reviewer,
           document.getElementById('Reviewer' + k)
@@ -174,12 +179,12 @@ function fillUsername(id, htmlElement) {
     function (data) {
       let user = data;
       let reviewerName = '';
-      console.log(user);
-      console.log(user[0].firstname);
-      console.log(user[0].lastname);
-      console.log(data[0].firstname);
-      console.log(data[0].lastname);
-      reviewerName = user[0].firstname + ' ' + user[0].lastname;
+      // console.log(user);
+      // console.log(user[0].firstname);
+      // console.log(user[0].lastname);
+      // console.log(data[0].firstname);
+      // console.log(data[0].lastname);
+      reviewerName = 'Reviewer: ' + user[0].firstname + ' ' + user[0].lastname;
       htmlElement.innerText = reviewerName;
     },
     function (xhr) {
