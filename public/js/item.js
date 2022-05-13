@@ -5,7 +5,7 @@ function getQueryString(name) {
     let r = window.location.search.substr(1).match(reg);
     if (r != null) {
         return decodeURIComponent(r[2]);
-    };
+    }
     return null;
 }
 
@@ -55,7 +55,7 @@ function loadPage(data) {
     let reviews = document.getElementById('reviews');
     let more = document.getElementById('more');
 
-    image.innerHTML = '<img src="/public/images/' + phone.brand + '.jpeg" class="img-responsive img-thumbnail">\n'
+    image.innerHTML = '<img src="/public/images/' + phone.brand + '.jpeg" class="img-responsive img-thumbnail" alt="">\n'
     title.innerText = phone.title;
     brand.innerText = phone.brand;
     stock.innerText = phone.stock;
@@ -224,9 +224,9 @@ function login() {
         type: 'post',
         data: {'lastPage': window.location.href},
         dataType: 'json'
-    })
+    });
 
-    window.location.href = "/login"
+    window.location.href = "/login";
 }
 
 function register() {
@@ -235,9 +235,9 @@ function register() {
         type: 'post',
         data: {'lastPage': window.location.href},
         dataType: 'json'
-    })
+    });
 
-    window.location.href = "/register"
+    window.location.href = "/register";
 }
 
 function getRequest(path, success, error) {
@@ -271,5 +271,13 @@ function postRequest(path, params, success, error) {
     xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     xhr.send(params);
 }
+
+$("#logout").on("click", function (e) {
+    e.preventDefault();
+    const answer = confirm("Are you sure to logout?");
+    if (answer === true) {
+        window.location.href = "/logout";
+    }
+});
 
 window.onload = initialize;

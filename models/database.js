@@ -1,10 +1,10 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 mongoose.connect("mongodb://localhost:27017/mydb", (err) => {
     if (err) {
-        console.log("user Connect failed!");
+        console.log("Database connect failed!");
     } else {
-        console.log("user Connect successfully!");
+        console.log("Database connect successfully!");
     }
 });
 

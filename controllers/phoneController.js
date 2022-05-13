@@ -80,7 +80,7 @@ module.exports.getHighRatingPhones = function (req, res) {
     });
 };
 
-module.exports.insertItem = function (req, res) {
+module.exports.insertItem = function (req) {
     let userId = req.session.user._id;
     let phoneId = req.body.phoneId;
     let quantity = req.body.quantity;
@@ -100,13 +100,13 @@ module.exports.insertItem = function (req, res) {
                             quantity: quantity,
                             uid: userId,
                             phoneId: phoneId,
-                            img_url: '/images/' + phone.brand + '.jpeg',
+                            img_url: '/public/images/' + phone.brand + '.jpeg',
                             brand: phone.brand,
                             price: phone.price,
                             title: phone.title
                         });
 
-                        item.save(function (err, res) {
+                        item.save(function (err) {
                             if (err) {
                                 console.log(err);
                             }
@@ -115,7 +115,7 @@ module.exports.insertItem = function (req, res) {
                 });
             }
             else {
-                cartItem.updateQuantity(userId, phoneId, quantity, function (err, result) {
+                cartItem.updateQuantity(userId, phoneId, quantity, function (err) {
                     if (err) {
                         console.log(err);
                     }
@@ -146,13 +146,13 @@ module.exports.getCartItemByUserIdAndPhoneId = function (req, res) {
     });
 };
 
-module.exports.insertReview = function (req, res) {
+module.exports.insertReview = function (req) {
     let phoneId = req.body.phoneId;
     let userId = req.session.user._id;
     let rating = req.body.rating;
     let comment = req.body.comment;
 
-    phones.insertReview(phoneId, userId, rating, comment, function (err, result) {
+    phones.insertReview(phoneId, userId, rating, comment, function (err) {
         if (err) {
             console.log(err);
         }

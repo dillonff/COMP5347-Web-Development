@@ -35,7 +35,7 @@ function loadPage(phones) {
         let id = phones[i]._id;
         str += '<div class="row">\n' +
             '        <div class="col-xs-2">\n' +
-            '            <img src="/public/images/' + brand + '.jpeg" class="img-responsive">\n' +
+            '            <img src="/public/images/' + brand + '.jpeg" class="img-responsive" alt="">\n' +
             '        </div>\n' +
             '        <div class="col-xs-7 center-block">\n' +
             '            <h4>'+ title +'</h4>\n' +
@@ -64,9 +64,9 @@ function login() {
         type: 'post',
         data: {'lastPage': window.location.href},
         dataType: 'json'
-    })
+    });
 
-    window.location.href = "/login"
+    window.location.href = "/login";
 }
 
 function register() {
@@ -75,9 +75,9 @@ function register() {
         type: 'post',
         data: {'lastPage': window.location.href},
         dataType: 'json'
-    })
+    });
 
-    window.location.href = "/register"
+    window.location.href = "/register";
 }
 
 function getRequest(path, success, error) {
@@ -94,5 +94,13 @@ function getRequest(path, success, error) {
     xhr.open('GET', path, true);
     xhr.send();
 }
+
+$("#logout").on("click", function (e) {
+    e.preventDefault();
+    const answer = confirm("Are you sure to logout?");
+    if (answer === true) {
+        window.location.href = "/logout";
+    }
+});
 
 window.onload = initialize;
