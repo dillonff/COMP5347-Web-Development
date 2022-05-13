@@ -1,34 +1,33 @@
 const express = require("express");
 const phoneController = require("../controllers/phoneController");
 const userController = require("../controllers/userController");
-const sessionController = require("../controllers/sessionController");
 
 const router = express.Router();
 
-router.get("/", function (req, res, next) {
+router.get("/", function (req, res) {
   res.render("index.html", {
     user: req.session.user,
   });
 });
 
-router.get("/index", function (req, res, next) {
+router.get("/index", function (req, res) {
   res.render("index.html", {
     user: req.session.user,
   });
 });
 
-router.get("/search", function (req, res, next) {
+router.get("/search", function (req, res) {
   res.render("search.html", {
     user: req.session.user,
   });
 });
-router.get("/item", function (req, res, next) {
+router.get("/item", function (req, res) {
   res.render("item.html", {
     user: req.session.user,
   });
 });
 
-router.get("/userPage", function (req, res, next) {
+router.get("/userPage", function (req, res) {
   res.render("userPage", {
     user: req.session.user,
   });

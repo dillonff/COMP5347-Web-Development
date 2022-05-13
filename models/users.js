@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
-
-// mongoose.connect('mongodb://localhost:27017/mydb')
+const mongoose = require('./database');
 
 const Schema = mongoose.Schema;
 
@@ -53,15 +51,6 @@ userSchema.statics.changePassword = function (data, callback) {
   ).exec(callback);
 };
 
-// module.exports = mongoose.model("User",userSchema)
 const userList = mongoose.model('userlist', userSchema, 'userlist');
-
-mongoose.connect('mongodb://localhost:27017/mydb', (err) => {
-  if (err) {
-    console.log('user Connect failed!');
-  } else {
-    console.log('user Connect successfully!');
-  }
-});
 
 module.exports = userList;

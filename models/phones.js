@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('./database');
 
 const phoneSchema = new mongoose.Schema(
   {
@@ -21,17 +21,12 @@ const phoneSchema = new mongoose.Schema(
 );
 
 phoneSchema.statics.getPhones = function (callback) {
-  return this.find({ disabled: { $ne: true }, stock: { $ne: 0 } }).exec(
-    callback
-  );
+  return this.find(
+      { disabled: { $ne: true }, stock: { $ne: 0 } }
+  ).exec(callback);
 };
 
-phoneSchema.statics.getFilteredPhones = function (
-  keyWord,
-  brand,
-  price,
-  callback
-) {
+phoneSchema.statics.getFilteredPhones = function (keyWord, brand, price, callback) {
   let predicate = { disabled: { $ne: true }, stock: { $ne: 0 } };
   if (keyWord !== '') {
     predicate['title'] = { $regex: keyWord, $options: '$i' };
@@ -49,19 +44,12 @@ phoneSchema.statics.getPhoneById = function (id, callback) {
   return this.findById(id).exec(callback);
 };
 
-phoneSchema.statics.insertReview = function (
-  phoneId,
-  userId,
-  rating,
-  comment,
-  callback
-) {
+phoneSchema.statics.insertReview = function (phoneId, userId, rating, comment, callback) {
   this.update(
     { _id: phoneId },
-    {
-      $push: {
-        reviews: { reviewer: userId, rating: rating, comment: comment },
-      },
+    { $push: {
+        reviews: { reviewer: userId, rating: rating, comment: comment }
+      }
     }
   ).exec(callback);
 };
@@ -131,10 +119,3 @@ phoneSchema.statics.notDisablePhoneListings = function (
 
 module.exports = mongoose.model('phones', phoneSchema, 'phonelist');
 
-mongoose.connect('mongodb://localhost:27017/mydb', (err) => {
-  if (err) {
-    console.log('phonelist Connect failed!');
-  } else {
-    console.log('phonelist Connect successfully!');
-  }
-});
