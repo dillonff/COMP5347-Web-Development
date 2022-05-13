@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 // mongoose.connect('mongodb://localhost:27017/mydb')
 
@@ -32,7 +32,7 @@ userSchema.statics.getUserInfo = function (id, callback) {
 };
 
 userSchema.statics.updateUserInfo = function (data, callback) {
-  return this.update(
+  return this.updateMany(
     { _id: data.id },
     {
       $set: {
@@ -46,7 +46,7 @@ userSchema.statics.updateUserInfo = function (data, callback) {
 };
 
 userSchema.statics.changePassword = function (data, callback) {
-  return this.update(
+  return this.updateMany(
     { _id: data.id },
     { $set: { password: data.password } },
     { multi: false }
@@ -54,13 +54,13 @@ userSchema.statics.changePassword = function (data, callback) {
 };
 
 // module.exports = mongoose.model("User",userSchema)
-const userList = mongoose.model("userlist", userSchema, "userlist");
+const userList = mongoose.model('userlist', userSchema, 'userlist');
 
-mongoose.connect("mongodb://localhost:27017/mydb", (err) => {
+mongoose.connect('mongodb://localhost:27017/mydb', (err) => {
   if (err) {
-    console.log("user Connect failed!");
+    console.log('user Connect failed!');
   } else {
-    console.log("user Connect successfully!");
+    console.log('user Connect successfully!');
   }
 });
 

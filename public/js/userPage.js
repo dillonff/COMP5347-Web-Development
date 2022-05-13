@@ -206,37 +206,43 @@ function updateProfile() {
     email +
     '&id=' +
     userId;
-  console.log('Sending server: ' + data);
-  let initialPwd = prompt('please input the your password: ');
-  if (initialPwd == null) {
-    console.log('cancel to input current password!');
+
+  if (!emailIsValid(email)) {
+    alert('Invalid email format!');
   } else {
-    let pwd2 = md5(initialPwd);
-    let pwd = { userPwd: pwd2 };
-    axios
-      .post('http://localhost:3000/userPage/checkPwd', pwd)
-      .then(function (response) {
-        if (response.data == 'correctpwd') {
-          axios
-            .post('http://localhost:3000/userPage/updateUserInfo', data)
-            .then(function (response) {
-              console.log(response);
-              if (response.status == 200) {
-                alert('Updated!');
-                loadUserPage();
-              }
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        } else {
-          alert('Incorrect password!');
-          loadUserPage();
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    let initialPwd = prompt('please input the your password: ');
+    // console.log('Sending server: ' + data);
+
+    if (initialPwd == null) {
+      console.log('cancel to input current password!');
+    } else {
+      let encodePwd = md5(initialPwd);
+      let pwd = 'userPwd=' + encodePwd;
+
+      axios
+        .post('http://localhost:3000/userPage/checkPwd', pwd)
+        .then(function (response) {
+          if (response.data == 'correctpwd') {
+            axios
+              .post('http://localhost:3000/userPage/updateUserInfo', data)
+              .then(function (response) {
+                if (response.status == 200) {
+                  alert('Updated!');
+                  loadUserPage();
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          } else {
+            alert('Incorrect password!');
+            loadUserPage();
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   }
 }
 
@@ -257,9 +263,11 @@ function changePassword() {
           axios
             .post('http://localhost:3000/userPage/userInfo/pwd', data)
             .then(function (response) {
-              console.log(response);
+              // console.log(response);
               if (response.status == 200) {
-                alert('Password changed successfully!');
+                alert(
+                  'Password changed successfully, Please relogin to update your password'
+                );
                 loadUserPage();
                 document.getElementById('cur-pwd').value = '';
                 document.getElementById('new-pwd').value = '';
@@ -313,7 +321,7 @@ function addNewListing() {
     axios
       .post('http://localhost:3000/userPage/userInfo/newlisting', data)
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         if (response.status == 200) {
           alert('Add new listing successfully!');
           loadUserPage();
@@ -397,4 +405,8 @@ function signOut() {
     .catch(function (error) {
       console.log(error);
     });
+}
+
+function emailIsValid(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }

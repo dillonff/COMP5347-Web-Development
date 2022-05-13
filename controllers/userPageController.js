@@ -18,7 +18,7 @@ module.exports.updateListingInfo = function (req, res) {
 
 module.exports.getUserId = function (req, res) {
   userId = req.session.user._id;
-  console.log('session', req.session.user._id);
+
   res.send(userId);
 };
 
@@ -31,7 +31,7 @@ module.exports.getUserStatus = function (req, res) {
 };
 
 module.exports.checkPwd = function (req, res) {
-  if (req.body.userPwd == req.session.password) {
+  if (req.body.userPwd == req.session.user.password) {
     res.send('correctpwd');
   } else {
     res.send('incorrectpwd');
@@ -56,7 +56,7 @@ module.exports.updateUserInfo = function (req, res) {
     lastname: req.body.lastname,
     email: req.body.email,
   };
-  console.log(newInfo);
+  // console.log(newInfo);
 
   UserInfo.updateUserInfo(newInfo, function (err, result) {
     if (err) {
@@ -92,7 +92,6 @@ module.exports.addNewListing = function (req, res) {
     seller: req.body.id,
     price: req.body.price,
   };
-  console.log(newListingInfo);
 
   PhoneListing.addNewListing(newListingInfo, function (err, result) {
     if (err) {
