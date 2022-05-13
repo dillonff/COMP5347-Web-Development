@@ -4,10 +4,33 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="/public/css/userPage.css" />
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="http://fonts.googleapis.com/css?family=Bitter"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- <link
       rel="stylesheet"
       type="text/css"
       src="/public/css/bootstrap-theme.css"
-    />
+    /> -->
     <script type="text/javascript" src="/public/js/userPage.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
@@ -15,19 +38,54 @@
   </head>
   <body>
     <div class="user-page">
-      <button type="button" class="btns" onclick="signOut()">Sign Out</button>
       <div class="user-page-tabs">
         <ul>
           <li class="tab selected">Edit Profile</li>
           <li class="tab">Change Password</li>
           <li class="tab">Manage Listings</li>
           <li class="tab">Check Reviews</li>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            onclick="signOut()"
+          >
+            Sign Out
+          </button>
         </ul>
       </div>
 
       <div class="tabs-contents">
         <div class="content show-contents">
-          <div class="top-inputs">
+          <div class="form-style-10">
+            <h1>Edit Profile!</h1>
+            <form>
+              <div class="section"><span>1</span>First Name & Last Name</div>
+              <div class="inner-wrap">
+                <label
+                  >Your First Name
+                  <input type="text" id="firstName" name="field1"
+                /></label>
+                <label
+                  >Your Last Name
+                  <input type="text" name="field1" id="lastName"
+                /></label>
+              </div>
+
+              <div class="section"><span>2</span>Email</div>
+              <div class="inner-wrap">
+                <label
+                  >Email Address <input type="email" id="email" name="field3"
+                /></label>
+              </div>
+
+              <div class="button-section">
+                <button type="button" class="btns" onclick="updateProfile()">
+                  Update Profile
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- <div class="top-inputs">
             <p>
               First Name:
               <input type="text" id="firstName" value="Loading..." />
@@ -46,12 +104,38 @@
             <button type="button" class="btns" onclick="updateProfile()">
               Update Profile
             </button>
-          </div>
+          </div> -->
         </div>
 
         <div class="content">
           <div class="top-inputs">
-            <p>
+            <div class="form-style-10">
+              <h1>Edit Profile!</h1>
+              <form>
+                <div class="section"><span>1</span>Current Password</div>
+                <div class="inner-wrap">
+                  <label
+                    >Your Current Password
+                    <input type="text" id="cur-pwd" name="field1"
+                  /></label>
+                </div>
+
+                <div class="section"><span>2</span>New Password</div>
+                <div class="inner-wrap">
+                  <label
+                    >New Password
+                    <input type="email" id="new-pwd" name="field3"
+                  /></label>
+                </div>
+
+                <div class="button-section">
+                  <button type="button" class="btns" onclick="changePassword()">
+                    Change Password
+                  </button>
+                </div>
+              </form>
+            </div>
+            <!-- <p>
               Current Password:
               <input
                 type="text"
@@ -69,13 +153,60 @@
             <br />
             <button type="button" class="btns" onclick="changePassword()">
               Change Password
-            </button>
+            </button> -->
           </div>
         </div>
 
         <div class="content">
           <div class="top-inputs">
-            <p>
+            <div class="form-style-10">
+              <h1>Manage Listing!</h1>
+              <form>
+                <div class="section"><span>1</span>Brand</div>
+                <div class="inner-wrap">
+                  <label> Brand:</label>
+                  <select id="create-brand">
+                    <option value="pendingBrand">-- Select a Brand --</option>
+                    <option value="Samsung">Samsung</option>
+                    <option value="Sony">Sony</option>
+                    <option value="Apple">Apple</option>
+                    <option value="BlackBerry">BlackBerry</option>
+                    <option value="HTC">HTC</option>
+                    <option value="Huawei">Huawei</option>
+                    <option value="LG">LG</option>
+                    <option value="Motorola">Motorola</option>
+                    <option value="Nokia">Nokia</option>
+                  </select>
+                </div>
+
+                <div class="section"><span>2</span>Title</div>
+                <div class="inner-wrap">
+                  <label
+                    >Title: <input type="text" id="create-title" name="field3"
+                  /></label>
+                </div>
+                <div class="section"><span>3</span>Stock</div>
+                <div class="inner-wrap">
+                  <label
+                    >Stock: <input type="text" id="create-stock" name="field3"
+                  /></label>
+                </div>
+                <div class="section"><span>4</span>Price</div>
+                <div class="inner-wrap">
+                  <label
+                    >Price: <input type="text" id="create-price" name="field3"
+                  /></label>
+                </div>
+
+                <div class="button-section">
+                  <button type="button" class="btns" onclick="addNewListing()">
+                    Add New Listing
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- <p>
               Brand:
               <select id="create-brand">
                 <option value="pendingBrand">-- Select a Brand --</option>
@@ -97,7 +228,7 @@
             <p>Price: &nbsp;&nbsp;<input type="text" id="create-price" /></p>
             <button type="button" class="btns" onclick="addNewListing()">
               Add New Listing
-            </button>
+            </button> -->
           </div>
           <div class="related-items">
             <table>
@@ -113,7 +244,6 @@
                   <th>Price</th>
                   <th>Disable</th>
                   <th>Delete</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -126,12 +256,15 @@
         </div>
         <div class="content">
           <div class="top-inputs">
-            <p>
-              <div class="container">
-                <h2>Reviews</h2>
-                <div class="container" id="reviews"></div>
-              </div>
-            </p>
+            <div class="container">
+              <table>
+                <caption>
+                  Reviews
+                </caption>
+              </table>
+
+              <div class="box" id="reviews"></div>
+            </div>
           </div>
         </div>
       </div>
