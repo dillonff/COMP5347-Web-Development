@@ -27,7 +27,7 @@ const refreshPage = function (defaultPhoneList) {
         const itemRow = document.createElement("div");
         itemRow.setAttribute("class", "row main align-items-center");
         const cartRow = document.createElement("div");
-        if (i == 0) {
+        if (i === 0) {
             cartRow.setAttribute("class", "row border-top border bottom toBeRefreshed");
         } else {
             cartRow.setAttribute("class", "row border bottom toBeRefreshed");
@@ -36,16 +36,16 @@ const refreshPage = function (defaultPhoneList) {
         location.appendChild(cartRow);
 
         for (let item of listTitle) {
-            if (item == "image") {
+            if (item === "img_url") {
                 const phoneImage = document.createElement("img");
                 phoneImage.setAttribute("class", "img-fluid");
-                const address = defaultPhoneList[i][item];
-                phoneImage.src = address;
+                phoneImage.src = defaultPhoneList[i][item];
+
                 const imageCol = document.createElement("div");
                 imageCol.setAttribute("class", "col-2");
                 imageCol.appendChild(phoneImage);
                 itemRow.appendChild(imageCol);
-            } else if (item == "brand") {
+            } else if (item === "brand") {
                 const brandValue = defaultPhoneList[i]["brand"];
                 const titleValue = defaultPhoneList[i]["title"];
                 const priceValue = defaultPhoneList[i]["price"];
@@ -79,7 +79,7 @@ const refreshPage = function (defaultPhoneList) {
                 textCol.appendChild(idName);
                 textCol.appendChild(priceName);
                 itemRow.appendChild(textCol);
-            } else if (item == "quantity") {
+            } else if (item === "quantity") {
                 const quantityCol = document.createElement("div");
                 quantityCol.setAttribute("class", "col quantity")
 
@@ -92,7 +92,6 @@ const refreshPage = function (defaultPhoneList) {
                 quantityCol.appendChild(decrease);
 
                 const quantity = document.createElement("a");
-                // quantity.setAttribute("href", "#");
                 quantity.setAttribute("id",defaultPhoneList[i]["phoneId"]);
                 quantity.setAttribute("class", "border");
 
@@ -127,7 +126,6 @@ const refreshPage = function (defaultPhoneList) {
                 totalPriceCol.appendChild(deleteButton);
 
                 const deleteSpan = document.createElement("span");
-                // deleteButton.setAttribute("aria-hidden","true");
                 const deleteNode = document.createTextNode("X");
                 deleteSpan.appendChild(deleteNode);
                 deleteButton.appendChild(deleteSpan);
@@ -196,6 +194,12 @@ const refreshPage = function (defaultPhoneList) {
 };
 
 const emptyCart = function() {
+
+    let elementsToBeRefreshed =document.getElementsByClassName("toBeRefreshed");
+    for (let i = elementsToBeRefreshed.length - 1; i >= 0; i--) {
+        elementsToBeRefreshed[i].parentNode.removeChild(elementsToBeRefreshed[i]);
+    }
+
     const newLocation = document.getElementById("cartBody");
 
     const emptyText = document.createTextNode("Your shopping cart is empty!");
@@ -225,14 +229,12 @@ const emptyCart = function() {
 
 
 window.onload = function () {
-    // let data = {uid: "test"};
     $.ajax({
         url: '/checkout/load',
         type: 'get',
-        // data: data,
         dataType: 'json',
         success: function (res) {
-            if(res.item != ""){
+            if(res.item !== ""){
                 console.log("your shopping cart is not empty!")
                 console.log(res.item);
                 refreshPage(res.item);
@@ -258,10 +260,8 @@ async function increaseQuantity(sender){
         data:phoneData,
         dataType:'json',
         success:async function (res) {
-            console.log("test successfully!");
-            // console.log(res.stock);
+
             const stock = res.stock;
-            console.log(stock);
 
             let phoneId = document.getElementById(idName);
             let originalQuantity = Number(phoneId.innerText);
@@ -270,30 +270,20 @@ async function increaseQuantity(sender){
 
                 let newQuantity = originalQuantity + 1;
 
-                // let data = {uid: "test", phoneId: idName, quantity: newQuantity};
                 let data = {phoneId: idName, quantity: newQuantity};
-                console.log("frontend send data:");
-                console.log(data);
                 try {
                     const res = await changeQuantity(data);
                     phoneId.innerText = newQuantity.toString();
                 } catch (err) {}
 
-                // let userdata = {uid: "test"};
-                // console.log(userdata);
 
                 $.ajax({
                     url: '/checkout/load',
                     type: 'get',
-                    // data: userdata,
                     dataType: 'json',
                     success: function (res) {
-                        console.log("Reload successfully!")
-                        // console.log(res.item);
-                        // refreshPage(res.item);
-                        if(res.item != ""){
+                        if(res.item !== ""){
                             console.log("your shopping cart is not empty!")
-                            console.log(res.item);
                             refreshPage(res.item);
                         }
                         else{
@@ -320,33 +310,20 @@ async function decreaseQuantity(sender){
     let originalQuantity = Number(phoneId.innerText);
     if (originalQuantity > 1){
         let newQuantity = originalQuantity - 1;
-        console.log(newQuantity);
-
-        // let data = {uid: "test",phoneId: idName, quantity: newQuantity};
         let data = {phoneId: idName, quantity: newQuantity};
-        console.log("frontend send to backend: ")
-        console.log(data);
-
         try {
             const res = await changeQuantity(data);
             phoneId.innerText = newQuantity.toString();
         } catch (err){}
 
-        // location.reload()
-
-        // let userdata = {uid: "test"};
-
         $.ajax({
             url: '/checkout/load',
             type: 'get',
-            // data: userdata,
             dataType: 'json',
             success: function (res) {
                 console.log("Reload successfully!")
-                // refreshPage(res.item);
-                if(res.item != ""){
+                if(res.item !== ""){
                     console.log("your shopping cart is not empty!")
-                    console.log(res.item);
                     refreshPage(res.item);
                 }
                 else{
@@ -357,29 +334,20 @@ async function decreaseQuantity(sender){
         })
     }
     else{
-        // let deleteData = {uid: "test",phoneId: idName};
         let deleteData = {phoneId: idName};
 
         try {
-            const res = deletePhone(deleteData);
-            // const res = await deletePhone(deleteData);
+            const res = await deletePhone(deleteData);
         } catch (err){}
 
-        // location.reload()
-
-        // let userdata = {uid: "test"};
 
         $.ajax({
             url: '/checkout/load',
             type: 'get',
-            // data: userdata,
             dataType: 'json',
             success: function (res) {
-                console.log("Reload successfully!")
-                // refreshPage(res.item);
-                if(res.item != ""){
+                if(res.item !== ""){
                     console.log("your shopping cart is not empty!")
-                    console.log(res.item);
                     refreshPage(res.item);
                 }
                 else{
@@ -409,30 +377,23 @@ function changeQuantity(data) {
 async function deleteItem(sender){
     let idName = (sender.target.markTag).slice(6);
 
-    // let deleteData = {uid: "test", phoneId: idName};
     let deleteData = {phoneId: idName};
-    console.log("frontend send to backend:")
-    console.log(deleteData);
 
     try {
-        // const res = await deletePhone(deleteData);
-        const res = deletePhone(deleteData);
+        const res = await deletePhone(deleteData);
+
     } catch (err){}
 
-    // location.reload()
 
-    // let userdata = {uid: "test"};
+    console.log("test1");
 
     $.ajax({
         url: '/checkout/load',
         type: 'get',
-        // data: userdata,
         dataType: 'json',
         success: function (res) {
             console.log("Reload successfully!")
-            // console.log(res)
-            // refreshPage(res.item);
-            if(res.item != ""){
+            if(res.item !== ""){
                 console.log("your shopping cart is not empty!")
                 console.log(res.item);
                 refreshPage(res.item);
@@ -444,6 +405,7 @@ async function deleteItem(sender){
         }
     })
 
+    console.log("test2");
 
 }
 
@@ -453,7 +415,7 @@ function deletePhone(deleteData){
         type: 'post',
         data: deleteData,
         dataType: 'json',
-        success: function () {
+        success: function (res) {
             console.log("delete successfully!")
         }
     })
@@ -461,75 +423,51 @@ function deletePhone(deleteData){
 
 
 function returnButton(){
-    // window.location.href = "http://localhost:3000/";
-    window.history.back();
-    window.location.go(-1);
-    // window.location.reload();
-    // window.location.replace(document.referrer)
+    window.location.replace(document.referrer);
 }
 
 
 async function checkoutButton(){
-    try {
-        const res = await checkout();
-        // const res = checkout();
-    } catch (err){}
 
-    // let userdata = {uid: "test"};
-    $.ajax({
-        url:'/checkout/empty',
-        type:'post',
-        // data:userdata,
-        dataType:'json',
-        success:function(){}
-    })
-    // window.location.href = "http://localhost:3000/";
-}
-
-function checkout(){
-    // let userdata = {uid: "test"};
-    $.ajax({
+    await $.ajax({
         url: '/checkout/load',
         type: 'get',
-        // data: userdata,
         dataType: 'json',
         success: function (res) {
-            console.log("Find user's items successfully!")
 
-            const cartLength = res.item.length
+            const cartLength = res.item.length;
+
+            let checkoutItems = {};
 
             for (let i = 0; i < cartLength; i++) {
-                // console.log(res.item[i]);
                 let currentQuantity = res.item[i].quantity;
                 let currentId = res.item[i].phoneId;
-                let phoneIdData = {id: currentId}
-                // console.log("frontend:")
-                // console.log(phoneIdData)
+                checkoutItems[currentId] = currentQuantity;
+            }
 
-                $.ajax({
-                    url:'/item/getPhoneById',
-                    type:'get',
-                    data: phoneIdData,
-                    dataType: 'json',
-                    success: function(res){
-                        // console.log(res);
-                        // console.log(res.stock);
-                        let databaseStock = res.stock
-                        let newStock = databaseStock - currentQuantity
-                        console.log(newStock);
-                        let changedStock = {phoneId: currentId, newStock:newStock}
-                        console.log(changedStock);
-                        $.ajax({
-                            url:'/checkout/finalCheckout',
-                            type: 'post',
-                            data: changedStock,
-                            dataType: 'json',
-                            success: function(){}
-                        })
-                    }
-                })
+            $.ajax({
+                url:'/checkout/finalCheckout',
+                type:'post',
+                data:checkoutItems,
+                dataType:'json',
+                success:function (res){}
+            })
+        }
+    })
+
+    await $.ajax({
+        url:'/checkout/empty',
+        type:'post',
+        dataType:'json',
+        success:function(res){
+            console.log(res);
+            if (res["code"] === 200){
+                window.location.href = "http://localhost:3000/";
             }
         }
     })
+
 }
+
+
 

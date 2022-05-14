@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "627f131f0003598ffc4a9be5"
+  },
+  "img_url": "/public/images/Motorola.jpeg",
+  "brand": "Motorola",
+  "price": 179.1,
+  "quantity": 3,
+  "uid": "627b21b96ea75cd7a9801e49",
+  "phoneId": "627ce2e76626c353baa6ad77",
+  "title": "AT&T Motorola RAZR V3xx No Contract Cell Phone 3G",
+  "__v": 0
+}]

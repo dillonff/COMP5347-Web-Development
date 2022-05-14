@@ -62,11 +62,11 @@
 
   <div class="jumbotron">
     <div class="container">
-      <h1>Item Detail</h1>
+      <h1 id="pageTitle">Item Detail</h1>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" id="detailContainer">
     <div class="row">
       <div class="col-md-6" id="image">
         <img src="/public/images/Samsung.jpeg" class="img-responsive img-thumbnail" alt="">
@@ -137,7 +137,7 @@
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="container" id="reviewsContainer">
     <h2>Reviews</h2>
     <div class="row">
       <div class="container" id="reviews">
@@ -150,7 +150,7 @@
 
   {{ if user }}
 
-  <div class="container">
+  <div class="container" id="makeReviewContainer">
     <h2>Make a review</h2>
     <form class="form-horizontal">
       <div class="form-group">
