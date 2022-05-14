@@ -28,9 +28,12 @@ router.get("/item", function (req, res) {
 });
 
 router.get("/userPage", function (req, res) {
-  res.render("userPage", {
-    user: req.session.user,
-  });
+  if (req.session.user) {
+    res.render('userPage.html');
+  }
+  else {
+    res.redirect('/');
+  }
 });
 
 router.get("/search/getPhones", phoneController.getPhones);

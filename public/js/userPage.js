@@ -193,52 +193,59 @@ function fillUsername(id, htmlElement) {
   );
 }
 
-function updateProfile() {
+function verifyEmail() {
+  let email = document.getElementById('email').value;
+
+  if (!emailIsValid(email)) {
+    alert('Invalid email format!');
+  }
+  else {
+    $('#myModal').modal('show');
+  }
+}
+
+function confirmUpdate() {
   let firstName = document.getElementById('firstName').value;
   let lastName = document.getElementById('lastName').value;
   let email = document.getElementById('email').value;
   let data =
-    'firstname=' +
-    firstName +
-    '&lastname=' +
-    lastName +
-    '&email=' +
-    email +
-    '&id=' +
-    userId;
+      'firstname=' +
+      firstName +
+      '&lastname=' +
+      lastName +
+      '&email=' +
+      email +
+      '&id=' +
+      userId;
 
-  if (!emailIsValid(email)) {
-    alert('Invalid email format!');
-  } else {
-    let initialPwd = prompt('please input the your password: ');
+  let initialPwd = document.getElementById('password').value;
+  let encodePwd = md5(initialPwd);
+  let pwd = 'userPwd=' + encodePwd;
 
-    let encodePwd = md5(initialPwd);
-    let pwd = 'userPwd=' + encodePwd;
-
-    axios
-      .post('http://localhost:3000/userPage/checkPwd', pwd)
-      .then(function (response) {
-        if (response.data == 'correctpwd') {
-          axios
-            .post('http://localhost:3000/userPage/updateUserInfo', data)
-            .then(function (response) {
-              if (response.status == 200) {
-                alert('Updated!');
-                loadUserPage();
-              }
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        } else {
-          alert('Incorrect password!');
-          loadUserPage();
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+  axios
+    .post('http://localhost:3000/userPage/checkPwd', pwd)
+    .then(function (response) {
+      if (response.data == 'correctpwd') {
+        axios
+          .post('http://localhost:3000/userPage/updateUserInfo', data)
+          .then(function (response) {
+            if (response.status == 200) {
+              alert('Updated!');
+              loadUserPage();
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        document.getElementById('formGroup').setAttribute('class', 'form-group has-error');
+        document.getElementById('hint').innerText = 'Incorrect password!';
+        loadUserPage();
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }
 
 function changePassword() {

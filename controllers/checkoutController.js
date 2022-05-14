@@ -6,7 +6,12 @@ const {reset} = require("./sessionController");
 
 module.exports ={
     preview: function (req, res, next) {
-        res.render('CheckoutPage.html');
+        if (req.session.user) {
+            res.render('CheckoutPage.html');
+        }
+        else {
+            res.redirect('/');
+        }
     },
 
     load: function (req, res, next) {
