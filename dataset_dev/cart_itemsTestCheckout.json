@@ -1,0 +1,37 @@
+[{
+  "_id": {
+    "$oid": "627f131f0003598ffc4a9be5"
+  },
+  "img_url": "/public/images/Motorola.jpeg",
+  "brand": "Motorola",
+  "price": 179.1,
+  "quantity": 3,
+  "uid": "627b21b96ea75cd7a9801e49",
+  "phoneId": "627ce2e76626c353baa6ad77",
+  "title": "AT&T Motorola RAZR V3xx No Contract Cell Phone 3G",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627f13460003598ffc4a9bf6"
+  },
+  "img_url": "/public/images/Samsung.jpeg",
+  "brand": "Samsung",
+  "price": 231,
+  "quantity": 1,
+  "uid": "627b21b96ea75cd7a9801e49",
+  "phoneId": "627ce2e76626c353baa6ad53",
+  "title": "Sam Galaxy J7(2016) Dual J7108 4G 16GB Gold",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627f14233b3a158876bb58a7"
+  },
+  "img_url": "/public/images/LG.jpeg",
+  "brand": "LG",
+  "price": 25.99,
+  "quantity": 3,
+  "uid": "627b21b96ea75cd7a9801e49",
+  "phoneId": "627ce2e76626c353baa6ad66",
+  "title": "'ATT Wireless LG CU720 Shine for in Red'",
+  "__v": 0
+}]

@@ -1,5 +1,5 @@
 [{
-  "image": "public/images/Samsung.jpeg",
+  "img_url": "/public/images/Samsung.jpeg",
   "brand": "Samsung",
   "price": 24.99,
   "quantity": 3,
@@ -9,7 +9,7 @@
 
 },
   {
-  "image": "public/images/Huawei.jpeg",
+  "img_url": "/public/images/Huawei.jpeg",
   "brand": "Huawei",
   "price": 161.06,
   "quantity": 5,
@@ -19,7 +19,7 @@
 
 },
   {
-  "image": "public/images/Apple.jpeg",
+  "img_url": "/public/images/Apple.jpeg",
   "brand": "Apple",
   "price": 39,
   "quantity": 1,
@@ -28,7 +28,7 @@
   "title": "Apple iPhone 3GS A1303 16GB GSM Unlocked SmartPhone - Black"
 },
   {
-  "image": "public/images/Motorola.jpeg",
+  "img_url": "/public/images/Motorola.jpeg",
   "brand": "Motorola",
   "price": 26.99,
   "quantity": 4,

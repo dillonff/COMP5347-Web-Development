@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cartItems = require('../models/cartItem');
 const phonesList = require('../models/phones')
+const {reset} = require("./sessionController");
 
 module.exports ={
     preview: function (req, res, next) {
@@ -66,31 +67,42 @@ module.exports ={
         console.log(uid);
         console.log(phoneId);
 
-        cartItems.deleteOne({'uid': uid,'phoneId':phoneId}, function (err) {
+        cartItems.deleteOne({'uid': uid,'phoneId':phoneId}, function (err,result) {
             if (err) {
                 res.send(err);
             }else{
-                console.log("backend delete successfully!")
+                console.log("backend delete successfully!");
+                res.send(result);
             }
         })
     },
 
-    finalCheckout: function(req, res, next){
-        // console.log(req.body);
-        const phoneId = req.body.phoneId;
-        const newStock = req.body.newStock;
-        // console.log(phoneId);
-        // console.log(newStock);
+    finalCheckout:async function(req, res, next){
+        console.log('test req');
+        console.log(req.body);
+        const checkoutItems = req.body;
 
-        phonesList.findOneAndUpdate({_id:phoneId},{stock:newStock}, function (err, result){
-            if(err){
-                res.send(err);
-            }else{
-                console.log(result);
-            }
-        })
+        for (let currentId in checkoutItems){
+            let currentQuantity = checkoutItems[currentId];
+            let newStock = 0;
 
+            await phonesList.find({_id: currentId})
+                .then(result => {
+                    let currentStock = result[0].stock;
+                    newStock = currentStock - currentQuantity;
+                    console.log(newStock);
+                })
+                .catch(error => {})
+            console.log(newStock);
+
+            await phonesList.updateOne({_id: currentId},{stock:newStock})
+                .then(result => {})
+                .catch(error => {})
+        }
+
+        res.send(200);
     },
+
 
     emptyCart:function(req,res,next){
         const uid = req.session.user._id;
@@ -102,7 +114,11 @@ module.exports ={
                 res.send(err);
             }else{
                 console.log(result);
+                // res.send(result);
+                // res.send(200);
+                res.send({'code': 200});
             }
+
         })
 
 
