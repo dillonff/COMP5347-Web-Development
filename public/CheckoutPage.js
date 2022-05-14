@@ -39,12 +39,7 @@ const refreshPage = function (defaultPhoneList) {
             if (item === "img_url") {
                 const phoneImage = document.createElement("img");
                 phoneImage.setAttribute("class", "img-fluid");
-                const address = defaultPhoneList[i][item];
-                phoneImage.src = address;
-
-                console.log("image test");
-                console.log(address);
-
+                phoneImage.src = defaultPhoneList[i][item];
 
                 const imageCol = document.createElement("div");
                 imageCol.setAttribute("class", "col-2");
@@ -239,7 +234,7 @@ window.onload = function () {
         type: 'get',
         dataType: 'json',
         success: function (res) {
-            if(res.item != ""){
+            if(res.item !== ""){
                 console.log("your shopping cart is not empty!")
                 console.log(res.item);
                 refreshPage(res.item);
@@ -287,7 +282,7 @@ async function increaseQuantity(sender){
                     type: 'get',
                     dataType: 'json',
                     success: function (res) {
-                        if(res.item != ""){
+                        if(res.item !== ""){
                             console.log("your shopping cart is not empty!")
                             refreshPage(res.item);
                         }
@@ -327,7 +322,7 @@ async function decreaseQuantity(sender){
             dataType: 'json',
             success: function (res) {
                 console.log("Reload successfully!")
-                if(res.item != ""){
+                if(res.item !== ""){
                     console.log("your shopping cart is not empty!")
                     refreshPage(res.item);
                 }
@@ -351,7 +346,7 @@ async function decreaseQuantity(sender){
             type: 'get',
             dataType: 'json',
             success: function (res) {
-                if(res.item != ""){
+                if(res.item !== ""){
                     console.log("your shopping cart is not empty!")
                     refreshPage(res.item);
                 }
@@ -398,7 +393,7 @@ async function deleteItem(sender){
         dataType: 'json',
         success: function (res) {
             console.log("Reload successfully!")
-            if(res.item != ""){
+            if(res.item !== ""){
                 console.log("your shopping cart is not empty!")
                 console.log(res.item);
                 refreshPage(res.item);
