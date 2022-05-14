@@ -18,8 +18,10 @@ router.post('/changeQuantity', checkoutController.changeQuantity);
 // delete items
 router.post('/deleteItems', checkoutController.deleteItems);
 
+// checkout all items
 router.post('/finalCheckout', checkoutController.finalCheckout);
 
+// empty cart
 router.post('/empty', checkoutController.emptyCart)
 
 module.exports = router;
