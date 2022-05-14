@@ -211,38 +211,33 @@ function updateProfile() {
     alert('Invalid email format!');
   } else {
     let initialPwd = prompt('please input the your password: ');
-    // console.log('Sending server: ' + data);
 
-    if (initialPwd == null) {
-      console.log('cancel to input current password!');
-    } else {
-      let encodePwd = md5(initialPwd);
-      let pwd = 'userPwd=' + encodePwd;
+    let encodePwd = md5(initialPwd);
+    let pwd = 'userPwd=' + encodePwd;
 
-      axios
-        .post('http://localhost:3000/userPage/checkPwd', pwd)
-        .then(function (response) {
-          if (response.data == 'correctpwd') {
-            axios
-              .post('http://localhost:3000/userPage/updateUserInfo', data)
-              .then(function (response) {
-                if (response.status == 200) {
-                  alert('Updated!');
-                  loadUserPage();
-                }
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-          } else {
-            alert('Incorrect password!');
-            loadUserPage();
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
+    axios
+      .post('http://localhost:3000/userPage/checkPwd', pwd)
+      .then(function (response) {
+        if (response.data == 'correctpwd') {
+          axios
+            .post('http://localhost:3000/userPage/updateUserInfo', data)
+            .then(function (response) {
+              if (response.status == 200) {
+                alert('Updated!');
+                loadUserPage();
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        } else {
+          alert('Incorrect password!');
+          loadUserPage();
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 }
 
@@ -252,8 +247,8 @@ function changePassword() {
   if (curPasswordInitial == '') {
     alert('please input your current password!');
   } else {
-    let curPassword2 = md5(curPasswordInitial);
-    let curPassword = { userPwd: curPassword2 };
+    let encodePwd = md5(curPasswordInitial);
+    let curPassword = 'userPwd=' + encodePwd;
     axios
       .post('http://localhost:3000/userPage/checkPwd', curPassword)
       .then(function (response) {
