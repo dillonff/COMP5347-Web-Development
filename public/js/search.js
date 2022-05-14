@@ -4,6 +4,8 @@ function initialize() {
 
     title.innerText = 'Start to search your phone';
     hint.innerText = 'Please key in the key word and select the brand and the price filters';
+
+    getSearchResult();
 }
 
 function getSearchResult() {
@@ -28,7 +30,6 @@ function loadPage(phones) {
     let container = document.getElementById('phoneList');
     let str = '';
     for (let i = 0; i < phones.length; ++i) {
-        console.log(i);
         let brand = phones[i].brand;
         let title = phones[i].title;
         let price = phones[i].price;

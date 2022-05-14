@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,41 +38,15 @@
 
       <form id='verify_form' class="form-signin" action="/verification" method="post">
         <h2 class="form-signin-heading">Please input your email address</h2>
-        <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" name="email" class="form-control" placeholder="Email Address" required autofocus>
-       <!-- <input class="btn btn-lg btn-primary btn-block" type="submit" value="前往邮箱验证"/> -->
-	   <button class="btn btn-lg btn-primary btn-block" type="submit">verify the email</button>
+        <label for="email" class="sr-only">Email</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="Email Address" required autofocus>
+	      <button class="btn btn-lg btn-primary btn-block" type="submit">verify the email</button>
       </form>
 
-    </div> <!-- /container -->
+    </div>
 	
-	<script src="../public/lib/jquery-3.4.1.min.js"></script>
-	<script>
-	  $('#verify_form').on('submit',function(e){
-		  e.preventDefault()
-		  var formData= $(this).serialize()
-		  $.ajax({
-			  url: '/verification',
-			  type: 'post',
-			  data: formData,
-			  dataType: 'json',
-			  success: function (data) {
-				  var err_code = data.err_code
-				  if(err_code === 0){
-					  var email=data.email
-					  window.alert('verification success!')
-					  window.location.href='/jump?email='+email
-				  }else if (err_code === 1){
-					  window.alert('email not exists!')
-				  }else if(err_code === 500){
-					  window.alert('server busy!')
-				  }
-			  }
-		  })
-	  })
-	
-	</script>
-
+	  <script src="../public/lib/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="./public/js/verification.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/ie10-viewport-bug-workaround.js"></script>

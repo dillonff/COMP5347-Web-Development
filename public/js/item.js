@@ -10,8 +10,21 @@ function getQueryString(name) {
 }
 
 function initialize() {
+    let detailContainer = document.getElementById('detailContainer');
+    let reviewsContainer = document.getElementById('reviewsContainer');
+    let makeReviewContainer = document.getElementById('makeReviewContainer');
+
+    detailContainer.style.display = 'none';
+    reviewsContainer.style.display = 'none';
+    if (makeReviewContainer) {
+        makeReviewContainer.style.display = 'none';
+    }
+
+    let pageTitle = document.getElementById('pageTitle');
+    pageTitle.innerText = 'Phone not find!';
+
     getRequest(
-        'http://localhost:3000/item/getPhoneById?id=' + getQueryString('id'),
+        '/item/getPhoneById?id=' + getQueryString('id'),
         function (data) {
             loadPage(data);
         },
@@ -21,19 +34,13 @@ function initialize() {
     )
 
     if (document.getElementById('amountInCart')) {
-        getRequest(
-            'http://localhost:3000/item/getCartItemByUserIdAndPhoneId?phoneId=' + getQueryString('id'),
-            function (data) {
+        $.ajax({
+            url: '/item/getCartItemByUserIdAndPhoneId?phoneId=' + getQueryString('id'),
+            type: 'get',
+            success: function (data) {
                 fillAmountInCart(data);
-            },
-            function (xhr) {
-                console.log(xhr);
             }
-        )
-    }
-
-    if (!phone) {
-        loadPage();
+        })
     }
 }
 
@@ -48,26 +55,38 @@ function fillAmountInCart(cartItem) {
 }
 
 function loadPage(data) {
-    if(data) {
-        phone = data;
+    phone = data;
 
-        let image = document.getElementById('image');
-        let title = document.getElementById('title');
-        let brand = document.getElementById('brand');
-        let stock = document.getElementById('stock');
-        let seller = document.getElementById('seller');
-        let price = document.getElementById('price');
-        let reviews = document.getElementById('reviews');
-        let more = document.getElementById('more');
+    let image = document.getElementById('image');
+    let title = document.getElementById('title');
+    let brand = document.getElementById('brand');
+    let stock = document.getElementById('stock');
+    let seller = document.getElementById('seller');
+    let price = document.getElementById('price');
+    let reviews = document.getElementById('reviews');
+    let more = document.getElementById('more');
+    let detailContainer = document.getElementById('detailContainer');
+    let reviewsContainer = document.getElementById('reviewsContainer');
+    let makeReviewContainer = document.getElementById('makeReviewContainer');
 
-        image.innerHTML = '<img src="/public/images/' + phone.brand + '.jpeg" class="img-responsive img-thumbnail" alt="">\n'
-        title.innerText = phone.title;
-        brand.innerText = phone.brand;
-        stock.innerText = phone.stock;
-        fillUsername(phone.seller, seller);
-        price.innerText = '$' + phone.price;
+    detailContainer.style.display = '';
+    reviewsContainer.style.display = '';
+    if (makeReviewContainer) {
+        makeReviewContainer.style.display = '';
+    }
 
-        let str = '';
+    let pageTitle = document.getElementById('pageTitle');
+    pageTitle.innerText = 'Item Detail';
+
+    image.innerHTML = '<img src="/public/images/' + phone.brand + '.jpeg" class="img-responsive img-thumbnail" alt="">\n'
+    title.innerText = phone.title;
+    brand.innerText = phone.brand;
+    stock.innerText = phone.stock;
+    fillUsername(phone.seller, seller);
+    price.innerText = '$' + phone.price;
+
+    let str = '';
+    if (phone.reviews && phone.reviews.length !== 0) {
         let reviewsLength = phone.reviews.length > 3 ? 3 : phone.reviews.length;
         for (let i = 0; i < reviewsLength; ++i) {
             let comment = phone.reviews[i].comment;
@@ -101,18 +120,7 @@ function loadPage(data) {
         }
     }
     else {
-        let detailContainer = document.getElementById('detailContainer');
-        let reviewsContainer = document.getElementById('reviewsContainer');
-        let makeReviewContainer = document.getElementById('makeReviewContainer');
-
-        detailContainer.style.display = 'none';
-        reviewsContainer.style.display = 'none';
-        if (makeReviewContainer) {
-            makeReviewContainer.style.display = 'none';
-        }
-
-        let pageTitle = document.getElementById('pageTitle');
-        pageTitle.innerText = 'Phone not find!';
+        more.style.display = 'none';
     }
 }
 
@@ -164,16 +172,14 @@ function moreComment(index) {
 }
 
 function fillUsername(id, htmlElement) {
-    getRequest(
-        'http://localhost:3000/item/getUsernameById?id=' + id,
-        function (data) {
+    $.ajax({
+        url: '/item/getUsernameById?id=' + id,
+        type: 'get',
+        success: function (data) {
             let user = data;
             htmlElement.innerText = user.firstname + ' ' + user.lastname;
-        },
-        function (xhr) {
-            console.log(xhr);
         }
-    )
+    })
 }
 
 function addToCart() {
@@ -204,6 +210,7 @@ function addToCart() {
                 console.log(xhr);
             }
         );
+
         addCartSuccess();
     }
 }
@@ -219,16 +226,15 @@ function addReview() {
     let rating = document.getElementById('rating').value;
     let comment = document.getElementById('comment').value;
 
-    postRequest(
-        'http://localhost:3000/item/insertReview',
-        'phoneId=' + phoneId + '&rating=' + rating + '&comment=' + comment,
-        function () {
-            console.log('add item success!');
-        },
-        function (xhr) {
-            console.log(xhr);
+    $.ajax({
+        url: '/item/insertReview',
+        type: 'post',
+        data: {'phoneId': phoneId, 'rating': rating, 'comment': comment},
+        success: function () {
+            console.log('add review success!');
         }
-    );
+    })
+
     addReviewSuccess();
 }
 

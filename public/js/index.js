@@ -1,16 +1,14 @@
 function initialize() {
-    getRequest(
-        'http://localhost:3000/index/getPhones',
-        function (data) {
-            loadHighRatingPhones(data);
-        },
-        function (xhr) {
-            console.log(xhr);
+    $.ajax({
+        url: '/index/getPhones',
+        type: 'get',
+        success: function (data) {
+            loadPhones(data);
         }
-    )
+    })
 }
 
-function loadHighRatingPhones(phones) {
+function loadPhones(phones) {
     let bestSellerContainer = document.getElementById('bestSeller');
 
     let bestSeller = getHighRatingPhones(phones);
@@ -124,21 +122,6 @@ function register() {
     });
 
     window.location.href = "/register";
-}
-
-function getRequest(path, success, error) {
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                if (success) success(JSON.parse(xhr.responseText));
-            } else {
-                if (error) error(xhr);
-            }
-        }
-    };
-    xhr.open('GET', path, true);
-    xhr.send();
 }
 
 $("#logout").on("click", function (e) {

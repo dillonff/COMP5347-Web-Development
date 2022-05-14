@@ -1,9 +1,9 @@
 const express = require("express");
 
-const router = require("./routes/session");
-const checkoutRouter = require("./routes/checkout");
+const router = require("./routes/sessionRoute");
+const checkoutRouter = require("./routes/checkoutRoute");
 const mainPageRoute = require("./routes/mainpageRoute");
-const userRoute = require("./routes/userRoutes");
+const userRoute = require("./routes/userRoute");
 const errorRoute = require("./routes/errorRoute");
 
 const bodyParser = require("body-parser");

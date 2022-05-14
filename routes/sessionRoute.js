@@ -1,6 +1,6 @@
-var express = require('express');
-var sessionController=require('../controllers/sessionController');
-var router = express.Router();
+const express = require('express');
+const sessionController = require('../controllers/sessionController');
+const router = express.Router();
 
 router.get('/login', sessionController.loginPage);
 

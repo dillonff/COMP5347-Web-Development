@@ -234,7 +234,7 @@ window.onload = function () {
         type: 'get',
         dataType: 'json',
         success: function (res) {
-            if(res.item !== ""){
+            if(res.item != ""){
                 console.log("your shopping cart is not empty!")
                 console.log(res.item);
                 refreshPage(res.item);
@@ -282,7 +282,7 @@ async function increaseQuantity(sender){
                     type: 'get',
                     dataType: 'json',
                     success: function (res) {
-                        if(res.item !== ""){
+                        if(res.item != ""){
                             console.log("your shopping cart is not empty!")
                             refreshPage(res.item);
                         }
@@ -322,7 +322,7 @@ async function decreaseQuantity(sender){
             dataType: 'json',
             success: function (res) {
                 console.log("Reload successfully!")
-                if(res.item !== ""){
+                if(res.item != ""){
                     console.log("your shopping cart is not empty!")
                     refreshPage(res.item);
                 }
@@ -346,7 +346,7 @@ async function decreaseQuantity(sender){
             type: 'get',
             dataType: 'json',
             success: function (res) {
-                if(res.item !== ""){
+                if(res.item != ""){
                     console.log("your shopping cart is not empty!")
                     refreshPage(res.item);
                 }
@@ -393,7 +393,7 @@ async function deleteItem(sender){
         dataType: 'json',
         success: function (res) {
             console.log("Reload successfully!")
-            if(res.item !== ""){
+            if(res.item != ""){
                 console.log("your shopping cart is not empty!")
                 console.log(res.item);
                 refreshPage(res.item);

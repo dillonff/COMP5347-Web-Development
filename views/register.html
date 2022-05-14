@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,53 +38,27 @@
 
       <form id="register_form" class="form-signin" method="post" action="/register" >
         <h2 class="form-signin-heading">Please register</h2>
-		<label class="sr-only">First name</label>
-		<input type="text" class="form-control" placeholder="Firstname" name="firstname" required autofocus>
+		    <label class="sr-only">First name</label>
+		    <input type="text" class="form-control" placeholder="Firstname" name="firstname" required autofocus>
         <label class="sr-only">Lastname</label>
         <input type="text" class="form-control" placeholder="Lastname" name="lastname" required autofocus>
-		<label for="inputEmail" class="sr-only">Email address</label>
-		<input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required autofocus>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
-       <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-	   <div>
-	   		  <p>Already register?<a href="/login">Login now!</a></p>
-	   </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+	      <div>
+	   	    <p>Already register?<a href="/login">Login now!</a></p>
+	      </div>
       </form>
 	  
-    </div> <!-- /container -->
-	  
+    </div>
 	
-	<script src="../public/lib/jquery-3.4.1.min.js"></script>
-	<script>
-	  $('#register_form').on('submit',function(e){
-		  e.preventDefault()
-		  var formData= $(this).serialize()
-		  $.ajax({
-			  url: '/register',
-			  type: 'post',
-			  data: formData,
-			  dataType: 'json',
-			  success: function (data) {
-				  var err_code = data.err_code
-				  if(err_code === 0){
-					  window.alert('register success!Please activate it by email')
-            window.location.href = '/login';
-				  }else if (err_code === 1){
-					  window.alert('email already exists!')
-				  }else if(err_code === 500){
-					  window.alert('server busy!')
-				  }
-			  }
-		  })
-	  })
-	
-	</script>
-
+	  <script src="../public/lib/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="./public/js/register.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/ie10-viewport-bug-workaround.js"></script>
-	
-	
+
   </body>
 </html>

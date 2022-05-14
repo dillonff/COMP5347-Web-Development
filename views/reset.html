@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,42 +38,17 @@
 
       <form id="reset_form" class="form-signin">
         <h2 class="form-signin-heading">Reset password</h2>
-        <label for="inputEmail" class="sr-only">new Password</label>
-        <input type="password" name="password" class="form-control" placeholder="New password" required autofocus>
-		<label for="inputEmail" class="sr-only">confirmation Password</label>
-		<input type="password" name="Cpassword" class="form-control" placeholder="New password" required autofocus>
-        </div>
+        <label for="password" class="sr-only">new Password</label>
+        <input type="password" name="password" id="password" class="form-control" placeholder="New password" required autofocus>
+		    <label for="Cpassword" class="sr-only">confirmation Password</label>
+		    <input type="password" name="Cpassword" id="Cpassword" class="form-control" placeholder="New password" required autofocus>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Reset Password</button>
       </form>
 
-    </div> <!-- /container -->
+    </div>
 	
-	<script src="../public/lib/jquery-3.4.1.min.js"></script>
-	<script>
-	  $('#reset_form').on('submit',function(e){
-		  e.preventDefault()
-		  var formData = $(this).serialize()
-		  $.ajax({
-			  url: '/reset',
-			  type: 'post',
-			  data: formData,
-			  dataType: 'json',
-			  success: function (data) {
-				  var err_code = data.err_code
-				  if(err_code === 0){
-					  window.alert('reset success!')
-					  window.location.href='/login'
-				  }else if(err_code === 1){
-					  window.alert('the two password should be same!')
-				  }else if(err_code === 500){
-					  window.alert('server busy!')
-				  }
-			  }
-		  })
-	  })
-	
-	</script>
-
+	  <script src="../public/lib/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="./public/js/reset.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="https://fastly.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.35/assets/js/ie10-viewport-bug-workaround.js"></script>
