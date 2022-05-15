@@ -297,6 +297,8 @@ function addNewListing() {
     alert('Stock and Price must be numbers!');
     document.getElementById('create-stock').value = '';
     document.getElementById('create-price').value = '';
+  } else if (newStock <= 0 || newPrice <= 0) {
+    alert('Stock and Price must be greater than 0!');
   } else if (
     newBrand != 'pendingBrand' &&
     newTitle != '' &&
@@ -382,11 +384,11 @@ function saveChanges() {
 
     .then(() => {
       alert('Changes Saved!');
+      loadUserPage();
     })
     .catch(function (error) {
       console.log(error);
     });
-  loadUserPage();
 }
 
 function signOut() {
