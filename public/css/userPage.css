@@ -88,17 +88,7 @@
 .bg-info {
   background-color: green;
 }
-/* .top-inputs{
-    margin:20px auto;
-    padding:10px;
-    width:90%;
-    background:#ffffff;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-} */
+
 
 #create-brand {
   width: 178px;
@@ -107,7 +97,6 @@
 table {
   caption-side: top !important;
   width: 100%;
-  /* border: collapse;  */
   border-spacing: 0;
   margin: 20px auto;
 }

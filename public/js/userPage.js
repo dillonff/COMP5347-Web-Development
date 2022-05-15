@@ -1,6 +1,6 @@
 window.onload = initialize;
 
-let initialInfo = [];
+let userDetail = [];
 let relatedPhoneListings = [];
 let userId = '';
 
@@ -39,8 +39,8 @@ function loadUserPage() {
   getRequest(
     userReqUrl,
     function (data) {
-      initialInfo = data;
-      fillInfo();
+      userDetail = data;
+      fillUserInfo();
     },
     function (xhr) {
       console.error(xhr);
@@ -49,10 +49,7 @@ function loadUserPage() {
   //change phone image routes
   getRequest(
     'http://localhost:3000/userPage/changeImageRoutes/changeimage',
-    function (data) {
-      console.log('change image routes successed');
-      // console.log(data);
-    },
+    function (data) {},
     function (xhr) {
       console.error(xhr);
     }
@@ -71,7 +68,7 @@ function loadUserPage() {
       console.log(error);
     });
 }
-
+// Get http request
 function getRequest(path, success, error) {
   let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
@@ -87,19 +84,21 @@ function getRequest(path, success, error) {
   xhr.send();
 }
 
-function fillInfo() {
-  document.getElementById('firstName').value = initialInfo[0].firstname;
-  document.getElementById('lastName').value = initialInfo[0].lastname;
-  document.getElementById('email').value = initialInfo[0].email;
+// Fill users info.
+function fillUserInfo() {
+  document.getElementById('firstName').value = userDetail[0].firstname;
+  document.getElementById('lastName').value = userDetail[0].lastname;
+  document.getElementById('email').value = userDetail[0].email;
 }
 
+// Fill phone listing
 function fillPhoneListings() {
-  let tbody_tag = document.querySelector('tbody');
-  tbody_tag.innerHTML = '';
+  let tbody = document.querySelector('tbody');
+  tbody.innerHTML = '';
   for (let i = 0; i < relatedPhoneListings.length; i++) {
-    let create_phoneinfo_row = document.createElement('tr');
-    create_phoneinfo_row.setAttribute('id', 'phone' + i);
-    create_phoneinfo_row.innerHTML =
+    let Phones_row = document.createElement('tr');
+    Phones_row.setAttribute('id', 'phone' + i);
+    Phones_row.innerHTML =
       '<td class="phone-title">' +
       relatedPhoneListings[i].title +
       '</td>' +
@@ -115,13 +114,13 @@ function fillPhoneListings() {
       '<td>' +
       relatedPhoneListings[i].price +
       '</td>' +
-      '<td><input type="checkbox" name="disableCBName" id="disableCheckbox' +
+      '<td><input type="checkbox" name="disableBox" id="disableCheckbox' +
       i +
       '"/></td>' +
-      '<td><input type="checkbox" name="deleteCBName" id="deleteCheckbox' +
+      '<td><input type="checkbox" name="deleteBox" id="deleteCheckbox' +
       i +
       '"/></td>';
-    tbody_tag.appendChild(create_phoneinfo_row);
+    tbody.appendChild(Phones_row);
 
     if (relatedPhoneListings[i].disabled == true) {
       let disCheckboxId = 'disableCheckbox' + i;
@@ -131,6 +130,7 @@ function fillPhoneListings() {
   }
 }
 
+// Fill related phone reviews
 function fillPhoneReviews() {
   let reviews = document.getElementById('reviews');
   let str = '';
@@ -179,11 +179,6 @@ function fillUsername(id, htmlElement) {
     function (data) {
       let user = data;
       let reviewerName = '';
-      // console.log(user);
-      // console.log(user[0].firstname);
-      // console.log(user[0].lastname);
-      // console.log(data[0].firstname);
-      // console.log(data[0].lastname);
       reviewerName = 'Reviewer: ' + user[0].firstname + ' ' + user[0].lastname;
       htmlElement.innerText = reviewerName;
     },
@@ -198,8 +193,7 @@ function verifyEmail() {
 
   if (!emailIsValid(email)) {
     alert('Invalid email format!');
-  }
-  else {
+  } else {
     $('#myModal').modal('show');
   }
 }
@@ -209,14 +203,14 @@ function confirmUpdate() {
   let lastName = document.getElementById('lastName').value;
   let email = document.getElementById('email').value;
   let data =
-      'firstname=' +
-      firstName +
-      '&lastname=' +
-      lastName +
-      '&email=' +
-      email +
-      '&id=' +
-      userId;
+    'firstname=' +
+    firstName +
+    '&lastname=' +
+    lastName +
+    '&email=' +
+    email +
+    '&id=' +
+    userId;
 
   let initialPwd = document.getElementById('password').value;
   let encodePwd = md5(initialPwd);
@@ -238,7 +232,9 @@ function confirmUpdate() {
             console.log(error);
           });
       } else {
-        document.getElementById('formGroup').setAttribute('class', 'form-group has-error');
+        document
+          .getElementById('formGroup')
+          .setAttribute('class', 'form-group has-error');
         document.getElementById('hint').innerText = 'Incorrect password!';
         loadUserPage();
       }
@@ -248,31 +244,29 @@ function confirmUpdate() {
     });
 }
 
+// Change password
 function changePassword() {
-  let curPasswordInitial = document.getElementById('cur-pwd').value;
+  let initialPassword = document.getElementById('cur-pwd').value;
   let newPassword = document.getElementById('new-pwd').value;
-  if (curPasswordInitial == '') {
-    alert('please input your current password!');
+  if (initialPassword == '') {
+    alert('Please enter your current password.');
   } else {
-    let encodePwd = md5(curPasswordInitial);
+    let encodePwd = md5(initialPassword);
     let curPassword = 'userPwd=' + encodePwd;
     axios
       .post('http://localhost:3000/userPage/checkPwd', curPassword)
       .then(function (response) {
         if (response.data == 'correctpwd') {
-          let newPassword2 = md5(newPassword);
-          let data = 'password=' + newPassword2 + '&id=' + userId;
+          let newPwd = md5(newPassword);
+          let data = 'password=' + newPwd + '&id=' + userId;
           axios
             .post('http://localhost:3000/userPage/userInfo/pwd', data)
             .then(function (response) {
-              // console.log(response);
               if (response.status == 200) {
-                alert(
-                  'Password changed successfully, Please relogin to update your password'
-                );
+                alert('Password change saved, Please relogin.');
                 loadUserPage();
-                document.getElementById('cur-pwd').value = '';
-                document.getElementById('new-pwd').value = '';
+                initialPassword = '';
+                newPassword = '';
               } else {
                 alert(response);
               }
@@ -294,13 +288,13 @@ function changePassword() {
 }
 
 function addNewListing() {
-  const newBrand = document.getElementById('create-brand').value;
-  const newTitle = document.getElementById('create-title').value;
-  const newStock = document.getElementById('create-stock').value;
-  const newPrice = document.getElementById('create-price').value;
+  let newBrand = document.getElementById('create-brand').value;
+  let newTitle = document.getElementById('create-title').value;
+  let newStock = document.getElementById('create-stock').value;
+  let newPrice = document.getElementById('create-price').value;
 
   if (isNaN(newStock) || isNaN(newPrice)) {
-    alert('The stock and price must be a number!');
+    alert('Stock and Price must be numbers!');
     document.getElementById('create-stock').value = '';
     document.getElementById('create-price').value = '';
   } else if (
@@ -309,7 +303,7 @@ function addNewListing() {
     newStock != '' &&
     newPrice != ''
   ) {
-    const data =
+    let data =
       'title=' +
       newTitle +
       '&brand=' +
@@ -323,9 +317,12 @@ function addNewListing() {
     axios
       .post('http://localhost:3000/userPage/userInfo/newlisting', data)
       .then(function (response) {
-        // console.log(response);
         if (response.status == 200) {
           alert('Add new listing successfully!');
+          newBrand = 'pendingBrand';
+          newTitle = '';
+          newStock = '';
+          newPrice = '';
           loadUserPage();
           fillPhoneListings();
           document.getElementById('create-brand').value = 'pendingBrand';
@@ -338,7 +335,7 @@ function addNewListing() {
         console.log(error);
       });
   } else {
-    alert('You have to input all the information above');
+    alert('Please input all the information needed!');
   }
 }
 
@@ -346,17 +343,16 @@ function saveChanges() {
   let disableInfo = '';
   let notDis = '';
   let deleteInfo = '';
-  let disableCB_tags = document.getElementsByName('disableCBName');
-  let deleteCB_tags = document.getElementsByName('deleteCBName');
+  let disableBoxs = document.getElementsByName('disableBox');
+  let deleteBoxs = document.getElementsByName('deleteBox');
 
   for (let i = 0; i < relatedPhoneListings.length; i++) {
-    if (disableCB_tags[i].checked == true) {
+    if (disableBoxs[i].checked == true) {
       disableInfo = 'disableId=' + relatedPhoneListings[i]._id;
     } else {
       notDis = 'notDisableId=' + relatedPhoneListings[i]._id;
-      // console.log(notDis);
     }
-    if (deleteCB_tags[i].checked == true) {
+    if (deleteBoxs[i].checked == true) {
       deleteInfo = 'deleteId=' + relatedPhoneListings[i]._id;
     }
   }

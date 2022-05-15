@@ -22,14 +22,6 @@ module.exports.getUserId = function (req, res) {
   res.send(userId);
 };
 
-module.exports.getUserStatus = function (req, res) {
-  if (req.session.isLogin) {
-    res.send('loged');
-  } else {
-    res.send('unloged');
-  }
-};
-
 module.exports.checkPwd = function (req, res) {
   if (req.body.userPwd == req.session.user.password) {
     res.send('correctpwd');
@@ -56,7 +48,6 @@ module.exports.updateUserInfo = function (req, res) {
     lastname: req.body.lastname,
     email: req.body.email,
   };
-  // console.log(newInfo);
 
   UserInfo.updateUserInfo(newInfo, function (err, result) {
     if (err) {
@@ -134,7 +125,6 @@ module.exports.deletePhoneListings = function (req, res) {
       console.log(err);
     } else {
       res.json(result);
-      // res.send('successDelete');
     }
   });
 };
@@ -146,8 +136,6 @@ module.exports.disablePhoneListings = function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      // console.log('disabled!!');
-
       res.json(result);
     }
   });
@@ -159,8 +147,6 @@ module.exports.notDisablePhoneListings = function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      // console.log('not disabled!!');
-
       res.json(result);
     }
   });
