@@ -6,10 +6,6 @@ This project is made by Dev-39 team. This project is for an online shopping webs
 
 Please following below instruction to get start.
 
-### Prerequisites
-
-
-
 ## How to Use
 
 ### Running the project
