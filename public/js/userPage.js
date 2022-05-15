@@ -225,6 +225,12 @@ function confirmUpdate() {
           .then(function (response) {
             if (response.status == 200) {
               alert('Updated!');
+              document
+                  .getElementById('formGroup')
+                  .setAttribute('class', 'form-group');
+              document.getElementById('hint').innerText = '';
+              document.getElementById('password').value = '';
+              $('#myModal').modal('toggle');
               loadUserPage();
             }
           })
