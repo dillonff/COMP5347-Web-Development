@@ -91,7 +91,6 @@ phoneSchema.statics.addNewListing = function (data, callback) {
 };
 
 phoneSchema.statics.changeImageRoutes = function (data, callback) {
-  // console.log('change image route', data);
   return this.updateMany(
     {},
     [{ $set: { image: { $concat: ['public/images/', '$brand', '.jpeg'] } } }],
