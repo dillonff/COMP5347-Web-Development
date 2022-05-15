@@ -21,12 +21,17 @@ const phoneSchema = new mongoose.Schema(
 );
 
 phoneSchema.statics.getPhones = function (callback) {
-  return this.find(
-      { disabled: { $ne: true }, stock: { $ne: 0 } }
-  ).exec(callback);
+  return this.find({ disabled: { $ne: true }, stock: { $ne: 0 } }).exec(
+    callback
+  );
 };
 
-phoneSchema.statics.getFilteredPhones = function (keyWord, brand, price, callback) {
+phoneSchema.statics.getFilteredPhones = function (
+  keyWord,
+  brand,
+  price,
+  callback
+) {
   let predicate = { disabled: { $ne: true }, stock: { $ne: 0 } };
   if (keyWord !== '') {
     predicate['title'] = { $regex: keyWord, $options: '$i' };
@@ -44,12 +49,19 @@ phoneSchema.statics.getPhoneById = function (id, callback) {
   return this.findById(id).exec(callback);
 };
 
-phoneSchema.statics.insertReview = function (phoneId, userId, rating, comment, callback) {
+phoneSchema.statics.insertReview = function (
+  phoneId,
+  userId,
+  rating,
+  comment,
+  callback
+) {
   this.update(
     { _id: phoneId },
-    { $push: {
-        reviews: { reviewer: userId, rating: rating, comment: comment }
-      }
+    {
+      $push: {
+        reviews: { reviewer: userId, rating: rating, comment: comment },
+      },
     }
   ).exec(callback);
 };
@@ -97,8 +109,7 @@ phoneSchema.statics.deletePhoneListings = function (deleteId, callback) {
 };
 
 phoneSchema.statics.disablePhoneListings = function (disableId, callback) {
-  // console.log("disableId:", disableId);
-  return this.update(
+  return this.updateMany(
     { _id: { $in: disableId } },
     { $set: { disabled: true } },
     { multi: 1 }
@@ -109,8 +120,7 @@ phoneSchema.statics.notDisablePhoneListings = function (
   notDisableId,
   callback
 ) {
-  // console.log('notDisableId:', notDisableId);
-  return this.update(
+  return this.updateMany(
     { _id: { $in: notDisableId } },
     { $set: { disabled: false } },
     { multi: 1 }
@@ -118,4 +128,3 @@ phoneSchema.statics.notDisablePhoneListings = function (
 };
 
 module.exports = mongoose.model('phones', phoneSchema, 'phonelist');
-
